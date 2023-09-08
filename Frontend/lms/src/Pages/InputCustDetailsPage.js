@@ -30,7 +30,7 @@ const InputCustDetailsPage=()=>{
             <div>
                 <div>Gender:</div>
                 <div>
-                    <select name="gender" id="designation"> 
+                    <select name="gender" id="gender"> 
                         <option value="male">Male</option> 
                         <option value="female">Female</option>
                     </select>    
