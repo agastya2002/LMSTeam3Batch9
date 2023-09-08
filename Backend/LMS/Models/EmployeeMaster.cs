@@ -20,4 +20,6 @@ public partial class EmployeeMaster
     public DateTime? DateOfJoining { get; set; }
 
     public virtual EmployeeCredential Employee { get; set; } = null!;
+
+    public virtual ICollection<EmployeeIssueDetail> EmployeeIssueDetails { get; set; } = new List<EmployeeIssueDetail>();
 }
