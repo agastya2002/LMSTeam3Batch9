@@ -39,7 +39,7 @@ public partial class GisdbContext : DbContext
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Category1).HasName("PK__categori__F7F53CC374150DA1");
+            entity.HasKey(e => e.Category1).HasName("PK__categori__F7F53CC32283412D");
 
             entity.ToTable("categories");
 
@@ -69,16 +69,18 @@ public partial class GisdbContext : DbContext
 
             entity.HasOne(d => d.Employee).WithMany()
                 .HasForeignKey(d => d.EmployeeId)
-                .HasConstraintName("FK__employee___emplo__35BCFE0A");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__employee___emplo__36B12243");
 
             entity.HasOne(d => d.Loan).WithMany()
                 .HasForeignKey(d => d.LoanId)
-                .HasConstraintName("FK__employee___loan___36B12243");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__employee___loan___37A5467C");
         });
 
         modelBuilder.Entity<EmployeeCredential>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA85DDFAFFC");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA81219AEB5");
 
             entity.ToTable("employee_credentials");
 
@@ -98,10 +100,14 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<EmployeeIssueDetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("employee_issue_details");
+            entity.HasKey(e => e.IssueId).HasName("PK__employee__D6185C399F8FAB55");
 
+            entity.ToTable("employee_issue_details");
+
+            entity.Property(e => e.IssueId)
+                .HasMaxLength(6)
+                .IsUnicode(false)
+                .HasColumnName("issue_id");
             entity.Property(e => e.EmployeeId)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -109,10 +115,6 @@ public partial class GisdbContext : DbContext
             entity.Property(e => e.IssueDate)
                 .HasColumnType("date")
                 .HasColumnName("issue_date");
-            entity.Property(e => e.IssueId)
-                .HasMaxLength(6)
-                .IsUnicode(false)
-                .HasColumnName("issue_id");
             entity.Property(e => e.ItemId)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -121,18 +123,20 @@ public partial class GisdbContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("return_date");
 
-            entity.HasOne(d => d.Employee).WithMany()
+            entity.HasOne(d => d.Employee).WithMany(p => p.EmployeeIssueDetails)
                 .HasForeignKey(d => d.EmployeeId)
-                .HasConstraintName("FK__employee___emplo__300424B4");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__employee___emplo__30F848ED");
 
-            entity.HasOne(d => d.Item).WithMany()
+            entity.HasOne(d => d.Item).WithMany(p => p.EmployeeIssueDetails)
                 .HasForeignKey(d => d.ItemId)
-                .HasConstraintName("FK__employee___item___30F848ED");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__employee___item___31EC6D26");
         });
 
         modelBuilder.Entity<EmployeeMaster>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA8713532D0");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA85902816A");
 
             entity.ToTable("employee_master");
 
@@ -165,13 +169,12 @@ public partial class GisdbContext : DbContext
 
             entity.HasOne(d => d.Employee).WithOne(p => p.EmployeeMaster)
                 .HasForeignKey<EmployeeMaster>(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__employee___emplo__2E1BDC42");
         });
 
         modelBuilder.Entity<ItemMaster>(entity =>
         {
-            entity.HasKey(e => e.ItemId).HasName("PK__item_mas__52020FDD4675DA88");
+            entity.HasKey(e => e.ItemId).HasName("PK__item_mas__52020FDDC6230B42");
 
             entity.ToTable("item_master");
 
@@ -208,7 +211,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<LoanCardMaster>(entity =>
         {
-            entity.HasKey(e => e.LoanId).HasName("PK__loan_car__A1F79554A980A9CC");
+            entity.HasKey(e => e.LoanId).HasName("PK__loan_car__A1F795544CC612E3");
 
             entity.ToTable("loan_card_master");
 
@@ -224,12 +227,13 @@ public partial class GisdbContext : DbContext
 
             entity.HasOne(d => d.LoanTypeNavigation).WithMany(p => p.LoanCardMasters)
                 .HasForeignKey(d => d.LoanType)
-                .HasConstraintName("FK__loan_card__loan___33D4B598");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__loan_card__loan___34C8D9D1");
         });
 
         modelBuilder.Entity<Material>(entity =>
         {
-            entity.HasKey(e => e.Material1).HasName("PK__material__DEDA4344C8D93FBA");
+            entity.HasKey(e => e.Material1).HasName("PK__material__DEDA434422D99B03");
 
             entity.ToTable("materials");
 
