@@ -22,7 +22,7 @@ employee_role varchar(100) not null
 );
 
 create table employee_master(
-employee_id varchar(100) primary key references employee_credentials(employee_id),
+employee_id varchar(100) primary key references employee_credentials(employee_id)  ON DELETE CASCADE,
 employee_name varchar(20) not null,
 designation varchar(20),
 department varchar(25),
@@ -32,23 +32,23 @@ date_of_joining date
 );
 
 create table employee_issue_details(
-issue_id varchar(6),
-employee_id varchar(100) references employee_master(employee_id),
-item_id varchar(100) references item_master(item_id),
+issue_id varchar(6) primary key,
+employee_id varchar(100) references employee_master(employee_id) ON DELETE CASCADE,
+item_id varchar(100) references item_master(item_id) ON DELETE CASCADE,
 issue_date date,
 return_date date
 );
 
 create table loan_card_master(
 loan_id varchar(100) primary key,
-loan_type varchar(100) references categories(category),
+loan_type varchar(100) references categories(category) ON DELETE CASCADE,
 duration_in_years int
 );
 
 
 create table employee_card_details(
-employee_id varchar(100) references employee_master(employee_id),
-loan_id varchar(100) references loan_card_master(loan_id),
+employee_id varchar(100) references employee_master(employee_id) ON DELETE CASCADE,
+loan_id varchar(100) references loan_card_master(loan_id) ON DELETE CASCADE,
 card_issue_date date
 );
 
