@@ -5,7 +5,7 @@ namespace LMS.Models;
 
 public partial class EmployeeIssueDetail
 {
-    public string? IssueId { get; set; }
+    public string IssueId { get; set; } = null!;
 
     public string? EmployeeId { get; set; }
 
