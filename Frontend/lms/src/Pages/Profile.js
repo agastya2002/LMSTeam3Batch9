@@ -1,11 +1,16 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
 
 const Profile=()=>{
 
-    const logout=()=>{
-        
+    const {logout} = useAuth();
+    const navigate = useNavigate();
+
+    const userLogout=()=>{
+        logout();
+        navigate("/");
     }
     return (
         <div>
@@ -14,7 +19,7 @@ const Profile=()=>{
                 <h2>Login</h2>
             </div>
             <div>
-                    <button type="submit" onClick={()=>logout()}>Logout</button>
+                    <button type="submit" onClick={()=>userLogout()}>Logout</button>
                 </div>
         </div>
     )

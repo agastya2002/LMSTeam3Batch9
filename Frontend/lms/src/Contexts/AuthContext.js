@@ -42,7 +42,9 @@ export const AuthProvider =  ({ children }) => {
           }
         })
         if(resp.status==200){
-          setUser(resp.data.user_.Id);
+          setUser(resp.data.user_Id);
+        } else {
+            alert("Invalid credentials")
         }
       }
       catch(err){

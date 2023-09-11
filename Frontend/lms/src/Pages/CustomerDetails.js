@@ -2,11 +2,12 @@ import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CustomerDetails=()=>{
 
-    const {register}  = useAuth();
+    const navigate = useNavigate();
+    const {user, register}  = useAuth();
     const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
@@ -84,6 +85,10 @@ const CustomerDetails=()=>{
             }
         }
         register(userData);
+        if(user) {
+            navigate("/profile")
+        }
+        
     }
     return (
         <div>

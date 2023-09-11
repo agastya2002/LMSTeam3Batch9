@@ -1,32 +1,17 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import {useAuth} from '../Contexts/AuthContext'
 
 const Login=()=>{
 
+    const navigate = useNavigate();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    const {user, login, logout} = useAuth();
+    const {user, login} = useAuth();
     let isDataValid=true;
 
-    // Example JSON object for registering employee
-    // {
-    //     "employeeId": "E0006",
-    //     "employeeName": "John Doe",
-    //     "designation": "Manager",
-    //     "department": "IT",
-    //     "gender": "M",
-    //     "dateOfBirth": "2023-09-11T03:49:32.942Z",
-    //     "dateOfJoining": "2023-09-11T03:49:32.942Z",
-    //     "employee": {
-    //       "employeeId": "E0006",
-    //       "employeePassword": "25efd29860a4f83a7c971bdcfb3eb771c95dab9356b7dec0aa165eb80bfd817f",
-    //       "employeeRole": "customer"
-    //     }
-    //   }'
 
     const validateEntries=()=>{
         //check employee ID
@@ -38,9 +23,12 @@ const Login=()=>{
             alert("Please enter password");
             isDataValid=false;
         }
-        console.log(isDataValid);
         if(isDataValid) {
             login(eID, ePass);
+            console.log(user);
+            if(user) {
+                navigate("profile");
+            }
         }
     }
     return (
