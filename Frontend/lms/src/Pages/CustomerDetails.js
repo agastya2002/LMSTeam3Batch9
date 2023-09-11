@@ -10,7 +10,7 @@ const CustomerDetails=()=>{
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
     const [eName,setEName]=useState("");
-    const [eRole,setERole]=useState("");
+    const [eRole,setERole]=useState('customer');
     const [department,setDepartment]=useState("");
     const [gender,setGender]=useState("");
     const [designation,setDesignation]=useState("");
@@ -60,7 +60,7 @@ const CustomerDetails=()=>{
             alert("Please enter date of joining!");
             isDataValid=false;
         }
-        if(eRole != 'customer' || eRole!= 'admin'){
+        if(eRole.length===0){
             alert("Please mention the role of employee");
             isDataValid = false;
         }
@@ -151,7 +151,7 @@ const CustomerDetails=()=>{
                     <div className='employee_detail'>
                     <span className='employee_field'>Role</span>
                         <div>
-                            <select name="role" id="erole" onChange={(e) => setERole(e.target.value)}> 
+                            <select name="erole" id="erole" onChange={(e) => setERole(e.target.value)}> 
                                 <option value="customer">Customer</option> 
                                 <option value="admin">Admin</option>
                             </select>    

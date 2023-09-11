@@ -10,22 +10,25 @@ export const useAuth = () => {
 export const AuthProvider =  ({ children }) => {
     const [user, setUser] = useState(null);
 
-    const baseURL = "http//localhost:7223"
+    const baseURL = "https://localhost:7223/api"
 
-    const  register = (userData) => {
-        axios({
-            method: 'post',
-            url:`${baseURL}/register`,
-            data: userData,
-            headers:{
-                "Content-Type":'application/json'
-            }
-          }).then((response) => {
-            console.log(response);
-            setUser(userData.eID);
-          }, (error) => {
-            console.log(error);
-          });
+    const  register = async (userData) => {
+      try{
+        const resp = await axios.post(`${baseURL}/register`,{
+          data: userData
+      },{
+          headers:{
+              "Content-Type":'application/json'
+          }
+        })
+        console.log(resp)
+        setUser(userData.eID);
+      }
+      catch(err){
+        console.log(err)
+      }
+       
+         
     }
     const login = (eID, ePass) => {
         axios({
