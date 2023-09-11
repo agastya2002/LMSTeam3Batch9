@@ -15,7 +15,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Diagnostics;
 
 namespace LMS.Controllers
 {
@@ -33,6 +33,7 @@ namespace LMS.Controllers
         [HttpPost]
         public async Task<ActionResult> RegisterEmployee(EmployeeMaster e)
         {
+            Debug.WriteLine(e);
             await _db.EmployeeCredentials.AddAsync(e.Employee);
             await _db.SaveChangesAsync();
             await _db.EmployeeMasters.AddAsync(e);

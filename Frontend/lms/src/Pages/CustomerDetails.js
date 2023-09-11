@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 const CustomerDetails=()=>{
 
     const {register}  = useAuth();
-    const [eID,setEID]=useState("");
-    const [ePass, setEPass] = useState("");
-    const [eName,setEName]=useState("");
+    const [eID,setEID]=useState("E0001");
+    const [ePass, setEPass] = useState("****");
+    const [eName,setEName]=useState("John Doe");
     const [eRole,setERole]=useState('customer');
-    const [department,setDepartment]=useState("");
-    const [gender,setGender]=useState("");
-    const [designation,setDesignation]=useState("");
+    const [department,setDepartment]=useState("it");
+    const [gender,setGender]=useState("M");
+    const [designation,setDesignation]=useState("manager");
     const [dob,setDob]=useState("");
     const [doj,setDoj]=useState("");
     let isDataValid=true;
@@ -70,17 +70,17 @@ const CustomerDetails=()=>{
         }
 
         const userData = {
-            employeeId: eID,
-            employeeName: eName,
-            designation,
-            department,
-            gender,
-            dateOfBirth: dob,
-            dateOfJoining: doj,
-            employee: {
-            employeeId: eID,
-            employeePassword: ePass,
-            employeeRole: eRole
+            EmployeeId: eID,
+            EmployeeName: eName,
+            Designation:designation,
+            Department:department,
+            Gender:gender,
+            DateOfBirth: dob,
+            DateOfJoining: doj,
+            Employee: {
+                EmployeeId: eID,
+                EmployeePassword: ePass,
+                EmployeeRole: eRole
             }
         }
         register(userData);
@@ -95,22 +95,22 @@ const CustomerDetails=()=>{
                 <div className='employee_details'>
                     <div className='employee_detail'>
                         <span className='employee_field'>Employee id</span>
-                        <input type="text" id="eid" onChange={(e) => setEID(e.target.value)} />
+                        <input type="text" id="eid" value={eID} onChange={(e) => setEID(e.target.value)} />
                     </div>
                     <div className='employee_detail'>
                         <span className='employee_field'>Employee Name</span>
-                        <input type="text" id="ename" onChange={(e) => setEName(e.target.value)}/>
+                        <input type="text" id="ename" value={eName} onChange={(e) => setEName(e.target.value)}/>
                     </div>
                     <div className='employee_detail'>
                         <span className='employee_field'>Password</span>
-                        <input type="password" id="pass" onChange={(p) => setEPass(p.target.value)} />
+                        <input type="password" id="pass" value={ePass} onChange={(p) => setEPass(p.target.value)} />
                     </div>
                 </div>
                 <div className='employee_details'>
                     <div className='employee_detail'>
                     <span className='employee_field'>Department</span>
                         <div>
-                            <select name="department" id="department" onChange={(e) => setDepartment(e.target.value)}> 
+                            <select name="department" id="department" value={department} onChange={(e) => setDepartment(e.target.value)}> 
                                 <option value="it">IT</option> 
                                 <option value="finance">Finance</option> 
                                 <option value="sales">Sales</option> 
@@ -121,16 +121,16 @@ const CustomerDetails=()=>{
                     <div className='employee_detail'>
                     <span className='employee_field'>Gender</span>
                         <div>
-                            <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)}> 
-                                <option value="male">Male</option> 
-                                <option value="female">Female</option>
+                            <select name="gender" id="gender" value={gender} onChange={(e) => setGender(e.target.value)}> 
+                                <option value="M">Male</option> 
+                                <option value="F">Female</option>
                             </select>    
                         </div>
                     </div>
                     <div className='employee_detail'>
                         <span className='employee_field'>Designation</span>
                         <div>
-                            <select name="designation" id="designation" onChange={(e) => setDesignation(e.target.value)}> 
+                            <select name="designation" id="designation" value={designation} onChange={(e) => setDesignation(e.target.value)}> 
                                 <option value="manager">Manager</option> 
                                 <option value="ca">CA</option> 
                                 <option value="dgm">DGM</option> 
@@ -142,16 +142,16 @@ const CustomerDetails=()=>{
                 <div className='employee_details'>
                     <div className='employee_detail'>
                     <span className='employee_field'>Date Of Birth</span>
-                        <div><input type="date" id="dob" onChange={(e) => setDob(e.target.value)}/></div>
+                        <div><input type="date" id="dob" value={dob} onChange={(e) => setDob(e.target.value)}/></div>
                     </div>
                     <div className='employee_detail'>
                     <span className='employee_field'>Date Of Joining</span>
-                        <div><input type="date" id="doj" onChange={(e) => setDoj(e.target.value)} /></div>
+                        <div><input type="date" id="doj" value={doj} onChange={(e) => setDoj(e.target.value)} /></div>
                     </div>
                     <div className='employee_detail'>
                     <span className='employee_field'>Role</span>
                         <div>
-                            <select name="erole" id="erole" onChange={(e) => setERole(e.target.value)}> 
+                            <select name="erole" id="erole" value={eRole} onChange={(e) => setERole(e.target.value)}> 
                                 <option value="customer">Customer</option> 
                                 <option value="admin">Admin</option>
                             </select>    

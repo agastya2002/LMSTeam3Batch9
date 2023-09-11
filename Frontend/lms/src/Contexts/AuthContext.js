@@ -1,6 +1,5 @@
 import React, {createContext, useContext, useState } from 'react';
 import axios from 'axios';
-
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -14,15 +13,16 @@ export const AuthProvider =  ({ children }) => {
 
     const  register = async (userData) => {
       try{
-        const resp = await axios.post(`${baseURL}/register`,{
-          data: userData
-      },{
+        const resp = await axios.post(`${baseURL}/register`,
+          userData,{
           headers:{
               "Content-Type":'application/json'
           }
         })
         console.log(resp)
-        setUser(userData.eID);
+        if(resp.status==200){
+          setUser(userData.eID);
+        }
       }
       catch(err){
         console.log(err)
@@ -30,20 +30,24 @@ export const AuthProvider =  ({ children }) => {
        
          
     }
-    const login = (eID, ePass) => {
-        axios({
-            method: 'post',
-            url: 'https://localhost:7223/api/login',
-            data: {
-              employeeId: eID,
-              employeePassword: ePass
-            }
-          }).then((response) => {
-            console.log(response);
-            setUser(eID);
-          }, (error) => {
-            console.log(error);
-          });
+    const login = async(eID, ePass) => {
+      try{
+        const resp = await axios.post(`${baseURL}/login`,
+        {
+          Username: eID,
+          Password: ePass
+        },{
+          headers:{
+              "Content-Type":'application/json'
+          }
+        })
+        if(resp.status==200){
+          setUser(resp.data.user_.Id);
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
     }
 
     const logout = () => {

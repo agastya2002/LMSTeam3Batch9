@@ -26,7 +26,7 @@ const Login=()=>{
     //       "employeePassword": "25efd29860a4f83a7c971bdcfb3eb771c95dab9356b7dec0aa165eb80bfd817f",
     //       "employeeRole": "customer"
     //     }
-    //   }
+    //   }'
 
     const validateEntries=()=>{
         //check employee ID
