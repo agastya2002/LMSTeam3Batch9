@@ -2,12 +2,15 @@ import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import {useAuth} from '../Contexts/AuthContext'
 
 const Login=()=>{
 
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    let isDataValid=false;
+    const {user, login, logout} = useAuth();
+    let isDataValid=true;
 
     // Example JSON object for registering employee
     // {
@@ -25,10 +28,6 @@ const Login=()=>{
     //     }
     //   }
 
-    const login=()=>{
-
-    }
-
     const validateEntries=()=>{
         //check employee ID
         if (!eID.match(/[A-Z]{1}[0-9]/)){
@@ -41,7 +40,7 @@ const Login=()=>{
         }
         console.log(isDataValid);
         if(isDataValid) {
-            login();
+            login(eID, ePass);
         }
     }
     return (
