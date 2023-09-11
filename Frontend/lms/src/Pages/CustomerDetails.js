@@ -2,18 +2,22 @@ import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 const CustomerDetails=()=>{
 
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
     const [eName,setEName]=useState("");
+    const [eRole,setERole]=useState("");
     const [department,setDepartment]=useState("");
     const [gender,setGender]=useState("");
     const [designation,setDesignation]=useState("");
     const [dob,setDob]=useState("");
     const [doj,setDoj]=useState("");
     let isDataValid=true;
+
+    const baseURL = "http//localhost:7223"
 
     // Example JSON object for registering employee
     // {
@@ -31,7 +35,7 @@ const CustomerDetails=()=>{
     //     }
     //   }
 
-    const validateEntries=()=>{
+    const validateEntries=async ()=>{
         //check employee ID
         if (!eID.match(/[A-Z]{1}[0-9]/)){
             alert("Invalid employee ID format!");
@@ -57,7 +61,35 @@ const CustomerDetails=()=>{
             alert("Please enter date of joining!");
             isDataValid=false;
         }
-        console.log(isDataValid);
+        if(eRole != 'customer' || eRole!= 'admin'){
+            alert("Please mention the role of employee");
+            isDataValid = false;
+        }
+
+        if(isDataValid===false){
+            return;
+        }
+
+        const resp = await axios.post(`${baseURL}/resgister`,{
+            employeeId: eID,
+            employeeName: eName,
+            designation,
+            department,
+            gender,
+            dateOfBirth: dob,
+            dateOfJoining: doj,
+            employee: {
+            employeeId: eID,
+            employeePassword: ePass,
+            employeeRole: eRole
+            }
+        },{
+            headers:{
+                "Content-Type":'application/json'
+            }
+        })
+
+        console.log(resp)
     }
     return (
         <div>
@@ -121,6 +153,15 @@ const CustomerDetails=()=>{
                     <div className='employee_detail'>
                     <span className='employee_field'>Date Of Joining</span>
                         <div><input type="date" id="doj" onChange={(e) => setDoj(e.target.value)} /></div>
+                    </div>
+                    <div className='employee_detail'>
+                    <span className='employee_field'>Role</span>
+                        <div>
+                            <select name="role" id="erole" onChange={(e) => setERole(e.target.value)}> 
+                                <option value="customer">Customer</option> 
+                                <option value="admin">Admin</option>
+                            </select>    
+                        </div>
                     </div>
                 </div>
                 <div>
