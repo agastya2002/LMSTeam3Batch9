@@ -16,24 +16,10 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegisterEmployee(string employeeId, string employeeName, string designation, string department, string gender, DateTime dob, DateTime doj, string password, String employeeRole)
+        public async Task<ActionResult> RegisterEmployee(EmployeeMaster e)
         {
-            EmployeeCredential c = new EmployeeCredential();
-            c.EmployeeId = employeeId;
-            c.EmployeePassword = password;
-            c.EmployeeRole = employeeRole;
-            await _db.EmployeeCredentials.AddAsync(c);
+            await _db.EmployeeCredentials.AddAsync(e.Employee);
             await _db.SaveChangesAsync();
-
-            EmployeeMaster e = new EmployeeMaster();
-            e.EmployeeId = employeeId;
-            e.EmployeeName = employeeName;
-            e.Designation = designation;
-            e.Department = department;  
-            e.Gender = gender;
-            e.DateOfBirth = dob;
-            e.DateOfJoining = doj;
-            e.Employee = c;
             await _db.EmployeeMasters.AddAsync(e);
             await _db.SaveChangesAsync();
             return Ok();

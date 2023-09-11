@@ -13,6 +13,22 @@ const CustomerDetails=()=>{
     const [doj,setDoj]=useState("");
     let isDataValid=true;
 
+    // Example JSON object for registering employee
+    // {
+    //     "employeeId": "E0006",
+    //     "employeeName": "John Doe",
+    //     "designation": "Manager",
+    //     "department": "IT",
+    //     "gender": "M",
+    //     "dateOfBirth": "2023-09-11T03:49:32.942Z",
+    //     "dateOfJoining": "2023-09-11T03:49:32.942Z",
+    //     "employee": {
+    //       "employeeId": "E0006",
+    //       "employeePassword": "25efd29860a4f83a7c971bdcfb3eb771c95dab9356b7dec0aa165eb80bfd817f",
+    //       "employeeRole": "customer"
+    //     }
+    //   }
+
     const validateEntries=()=>{
         //check employee ID
         if (!eID.match(/[A-Z]{1}[0-9]/)){
