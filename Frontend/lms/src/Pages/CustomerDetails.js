@@ -1,10 +1,12 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CustomerDetails=()=>{
 
     const [eID,setEID]=useState("");
+    const [ePass, setEPass] = useState("");
     const [eName,setEName]=useState("");
     const [department,setDepartment]=useState("");
     const [gender,setGender]=useState("");
@@ -39,6 +41,10 @@ const CustomerDetails=()=>{
             alert("Please enter employee name!");
             isDataValid=false;
         }
+        if(ePass.length===0){
+            alert("Please enter password");
+            isDataValid=false;
+        }
         if(!eName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)){
             alert("Employee name is invalid!\nUse of special characters and numbers is not allowed")
             isDataValid=false;
@@ -68,6 +74,10 @@ const CustomerDetails=()=>{
                     <div className='employee_detail'>
                         <span className='employee_field'>Employee Name</span>
                         <input type="text" id="ename" onChange={(e) => setEName(e.target.value)}/>
+                    </div>
+                    <div className='employee_detail'>
+                        <span className='employee_field'>Password</span>
+                        <input type="password" id="pass" onChange={(p) => setEPass(p.target.value)} />
                     </div>
                 </div>
                 <div className='employee_details'>
@@ -116,8 +126,8 @@ const CustomerDetails=()=>{
                 <div>
                     <button type="submit" onClick={()=>validateEntries()}>Add Data</button>
                 </div>
-            
             </div>
+            <div>Already an user? <Link to="/">Login</Link></div>
         </div>
     )
 }
