@@ -10,6 +10,23 @@ export const useAuth = () => {
 export const AuthProvider =  ({ children }) => {
     const [user, setUser] = useState(null);
 
+    const baseURL = "http//localhost:7223"
+
+    const  register = (userData) => {
+        axios({
+            method: 'post',
+            url:`${baseURL}/register`,
+            data: userData,
+            headers:{
+                "Content-Type":'application/json'
+            }
+          }).then((response) => {
+            console.log(response);
+            setUser(userData.eID);
+          }, (error) => {
+            console.log(error);
+          });
+    }
     const login = (eID, ePass) => {
         axios({
             method: 'post',
@@ -31,7 +48,7 @@ export const AuthProvider =  ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, register, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

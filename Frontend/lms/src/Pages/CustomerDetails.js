@@ -1,11 +1,12 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
+import { useAuth } from '../Contexts/AuthContext';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
 
 const CustomerDetails=()=>{
 
+    const {register}  = useAuth();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
     const [eName,setEName]=useState("");
@@ -16,8 +17,6 @@ const CustomerDetails=()=>{
     const [dob,setDob]=useState("");
     const [doj,setDoj]=useState("");
     let isDataValid=true;
-
-    const baseURL = "http//localhost:7223"
 
     // Example JSON object for registering employee
     // {
@@ -70,7 +69,7 @@ const CustomerDetails=()=>{
             return;
         }
 
-        const resp = await axios.post(`${baseURL}/resgister`,{
+        const userData = {
             employeeId: eID,
             employeeName: eName,
             designation,
@@ -83,13 +82,8 @@ const CustomerDetails=()=>{
             employeePassword: ePass,
             employeeRole: eRole
             }
-        },{
-            headers:{
-                "Content-Type":'application/json'
-            }
-        })
-
-        console.log(resp)
+        }
+        register(userData);
     }
     return (
         <div>
