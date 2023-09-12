@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LMS.Data
 {
-    public class EmployeeDataProvider : IEmployeeDataProvider
+    public class EmployeeProvider : IEmployeeProvider
     {
         private readonly GisdbContext _db;
 
-        public EmployeeDataProvider(GisdbContext db)
+        public EmployeeProvider(GisdbContext db)
         {
             _db = db;
         }
@@ -19,6 +19,22 @@ namespace LMS.Data
         {
             //return users.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
             return _db.EmployeeCredentials.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
+        }
+
+        public Boolean RegisterEmployee(EmployeeMaster e)
+        {
+            try
+            {
+                _db.EmployeeCredentials.Add(e.Employee);
+                _db.SaveChanges();
+                _db.EmployeeMasters.Add(e);
+                _db.SaveChanges();
+                return true;
+            } 
+            catch
+            {
+                return false;
+            }
         }
     }
 }

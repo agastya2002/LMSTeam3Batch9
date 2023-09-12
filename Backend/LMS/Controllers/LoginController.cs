@@ -6,7 +6,6 @@ using LMS.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -22,65 +21,27 @@ namespace LMS.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _config;
-        private readonly EmployeeDataProvider _employeeDataProvider;
+        private readonly IAuthService _authService;
 
-
-        public LoginController(IConfiguration config, EmployeeDataProvider employeeDataProvider)
+        public LoginController(IAuthService authService)
         {
-            _config = config;
-            _employeeDataProvider = employeeDataProvider;
+            _authService=authService;
         }
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(EmployeeViewModel login)
         {
             IActionResult response = Unauthorized();
-            var employee = AuthenticateEmployee(login);
+            var employee = _authService.AuthenticateEmployee(login);
 
             if (employee != null)
             {
-                var tokenString = GenerateJSONWebToken(employee);
+                var tokenString = _authService.GenerateJSONWebToken(employee);
 
                 response = Ok(new LoginResponse { token = tokenString, User_Id = login.Username, Role=employee.EmployeeRole });
             }
 
             return response;
-        }
-
-        private string GenerateJSONWebToken(EmployeeCredential employeeInfo)
-        {
-
-            if (employeeInfo is null)
-            {
-                throw new ArgumentNullException(nameof(employeeInfo));
-            }
-            List<Claim> claims = new List<Claim>();
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            claims.Add(new Claim("Username", employeeInfo.EmployeeId));
-            if (employeeInfo.EmployeeRole.Equals("admin"))
-            {
-                claims.Add(new Claim("role", "admin"));
-            }
-            else
-            {
-                claims.Add(new Claim("role", "customer"));
-
-            }
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
-              claims,
-              expires: DateTime.Now.AddMinutes(2),
-              signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        private EmployeeCredential AuthenticateEmployee(EmployeeViewModel login)
-        {
-            EmployeeCredential employee = _employeeDataProvider.GetEmployeeDetail(login);
-            return employee;
-        }
+        }  
     }
 }

@@ -14,7 +14,7 @@ builder.Services.AddDbContext<GisdbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(); 
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<EmployeeDataProvider>();
+builder.Services.AddScoped<EmployeeProvider>();
 
 var app = builder.Build();
 

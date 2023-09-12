@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LMS.Data
 {
-    public interface IEmployeeDataProvider
+    public interface IEmployeeProvider
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
+        public Boolean RegisterEmployee(EmployeeMaster e);
     }
 }
