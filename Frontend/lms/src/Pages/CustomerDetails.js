@@ -84,9 +84,12 @@ const CustomerDetails=()=>{
                 EmployeeRole: eRole
             }
         }
-        register(userData);
-        if(user) {
-            navigate("/profile")
+        const res = register(userData);
+        if(res) {
+            while(!user) {}
+            if(user) {
+                navigate("/profile")
+            }
         }
         
     }

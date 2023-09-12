@@ -24,10 +24,12 @@ const Login=()=>{
             isDataValid=false;
         }
         if(isDataValid) {
-            login(eID, ePass);
-            console.log(user);
-            if(user) {
-                navigate("profile");
+            const res = login(eID, ePass);
+            if(res) {
+                while(!user) {}
+                if(user) {
+                    navigate("profile");
+                }
             }
         }
     }

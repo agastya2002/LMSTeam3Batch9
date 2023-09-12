@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { sha256 } from 'js-sha256';
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -22,16 +23,19 @@ export const AuthProvider =  ({ children }) => {
         console.log(resp)
         if(resp.status==200){
           setUser(userData.eID);
+          return true;
         }
       }
       catch(err){
         console.log(err)
+        return false;
       }
        
          
     }
     const login = async(eID, ePass) => {
       try{
+        ePass = sha256(ePass)
         const resp = await axios.post(`${baseURL}/login`,
         {
           Username: eID,
@@ -43,12 +47,15 @@ export const AuthProvider =  ({ children }) => {
         })
         if(resp.status==200){
           setUser(resp.data.user_Id);
+          return true;
         } else {
             alert("Invalid credentials")
+            return false;
         }
       }
       catch(err){
         console.log(err)
+        return true;
       }
     }
 
