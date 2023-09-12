@@ -36,5 +36,24 @@ namespace LMS.Data
                 return false;
             }
         }
+
+        public List<ItemMaster> GetItemDetails(String id)
+        {
+            try
+            {
+                var query1 = from item in _db.ItemMasters
+                              join issue in _db.EmployeeIssueDetails
+                              on item.ItemId equals issue.ItemId
+                              where issue.EmployeeId == id
+                              select item;
+
+                List<ItemMaster> _items = query1.ToList();
+                return _items;
+            }
+            catch
+            {
+                return new List<ItemMaster>();
+            }
+        }
     }
 }
