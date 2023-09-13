@@ -32,13 +32,13 @@ namespace LMS.Controllers
         public IActionResult RegisterEmployee(EmployeeMaster e)
         {
             var res = _authService.RegisterEmployee(e);
-            if (res)
+            if (res=="Ok")
             {
                 return Ok();
             }
             else
             {
-                return BadRequest();
+                return BadRequest(res);
             }
         }
     }

@@ -9,6 +9,6 @@ namespace LMS.Data
     public interface IEmployeeProvider
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
-        public Boolean RegisterEmployee(EmployeeMaster e);
+        public string RegisterEmployee(EmployeeMaster e);
     }
 }

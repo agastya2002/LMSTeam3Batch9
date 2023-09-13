@@ -9,7 +9,6 @@ namespace LMS.Data
     public class EmployeeProvider : IEmployeeProvider
     {
         private readonly GisdbContext _db;
-
         public EmployeeProvider(GisdbContext db)
         {
             _db = db;
@@ -21,7 +20,7 @@ namespace LMS.Data
             return _db.EmployeeCredentials.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
         }
 
-        public Boolean RegisterEmployee(EmployeeMaster e)
+        public string RegisterEmployee(EmployeeMaster e)
         {
             try
             {
@@ -29,11 +28,11 @@ namespace LMS.Data
                 _db.SaveChanges();
                 _db.EmployeeMasters.Add(e);
                 _db.SaveChanges();
-                return true;
+                return "Ok";
             } 
-            catch
+            catch (Exception exp)
             {
-                return false;
+                return exp.Message;
             }
         }
 

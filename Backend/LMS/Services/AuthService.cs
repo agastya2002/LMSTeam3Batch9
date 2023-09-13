@@ -65,7 +65,7 @@ namespace LMS.Services
             return employee;
         }
 
-        public Boolean RegisterEmployee(EmployeeMaster e)
+        public string RegisterEmployee(EmployeeMaster e)
         {
             return _employeeDataProvider.RegisterEmployee(e); 
         }
