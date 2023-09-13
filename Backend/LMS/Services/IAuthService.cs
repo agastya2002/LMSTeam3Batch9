@@ -1,4 +1,5 @@
 ﻿using LMS.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LMS.Services
     public interface IAuthService
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
-        public Boolean RegisterEmployee(EmployeeMaster e);
+        public string RegisterEmployee(EmployeeMaster e);
         public string GenerateJSONWebToken(EmployeeCredential employeeInfo);
         public EmployeeCredential AuthenticateEmployee(EmployeeViewModel login);
     }
