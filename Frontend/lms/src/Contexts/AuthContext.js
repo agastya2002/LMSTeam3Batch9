@@ -76,6 +76,27 @@ export const AuthProvider =  ({ children }) => {
         setUser(null);
     };
 
+    const  applyForLoan = async (loanData) => {
+      try{
+        const resp = await axios.post(`${baseURL}/applyForLoan`,
+        loanData,{
+          headers:{
+              "Content-Type":'application/json'
+          }
+        })
+        console.log(resp)
+        if(resp.status===200){
+          return true;
+        }
+      }
+      catch(err){
+        console.log(err)
+        return false;
+      }
+       
+         
+    };
+
     return (
         <AuthContext.Provider value={{user, register, login, logout}}>
             {children}
