@@ -9,6 +9,7 @@ import Profile from './Pages/Profile';
 import UserDashboard from './Pages/UserDashboard';
 import AdminDashboard from './Pages/AdminDashboard';
 import ApplyForLoan from './Pages/ApplyForLoan';
+import AdminEditLoan from './Pages/AdminEditLoan';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
           <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />*/}
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
           {/*<Route path="/ItemsMasterData" element={<ProtectedRoute><ItemsMasterData/></ProtectedRoute>} /> */}
+          <Route path="/adminEditLoan" element={<AdminEditLoan/>} />
+          
         </Routes>
         </BrowserRouter>
       </AuthProvider>
