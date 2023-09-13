@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,8 +9,12 @@ const Login=()=>{
     const navigate = useNavigate();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    const {user, login} = useAuth();
+    const {user, setUser, login} = useAuth();
     let isDataValid=true;
+
+    useEffect(() => {
+        setUser(null);
+    });
 
 
     const validateEntries=()=>{
@@ -27,8 +31,12 @@ const Login=()=>{
             const res = login(eID, ePass);
             if(res) {
                 while(!user) {}
-                if(user) {
-                    navigate("profile");
+                console.log(user.userRole);
+                if(user.userRole==="admin") {
+                    navigate("AdminDashboard");
+                }
+                else{
+                    navigate("UserDashboard");
                 }
             }
         }

@@ -8,7 +8,19 @@ export const useAuth = () => {
 };
 
 export const AuthProvider =  ({ children }) => {
-    const [user, setUser] = useState(null);
+    
+    const [user, setUser] = useState({
+      userId: '',
+      userRole:'',
+    });
+
+    const updateUserId = (uId) =>{
+      setUser({...user,userId: uId});
+    };
+
+    const updateUserRole = (uRole) =>{
+      setUser({...user,userRole: uRole});
+    };
 
     const baseURL = "https://localhost:7223/api"
 
@@ -21,8 +33,9 @@ export const AuthProvider =  ({ children }) => {
           }
         })
         console.log(resp)
-        if(resp.status==200){
-          setUser(userData.eID);
+        if(resp.status===200){
+          updateUserId(userData.EmployeeId);
+          updateUserRole(userData.Employee.EmployeeRole);
           return true;
         }
       }
@@ -45,8 +58,10 @@ export const AuthProvider =  ({ children }) => {
               "Content-Type":'application/json'
           }
         })
-        if(resp.status==200){
-          setUser(resp.data.user_Id);
+        if(resp.status===200){
+          updateUserId(resp.data.user_Id);
+          console.log(resp.data.role);
+          updateUserRole(resp.data.role);
           return true;
         } else {
             alert("Invalid credentials")
@@ -64,7 +79,7 @@ export const AuthProvider =  ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, register, login, logout}}>
+        <AuthContext.Provider value={{user, setUser, register, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

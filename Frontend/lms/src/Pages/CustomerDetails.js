@@ -1,13 +1,13 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 const CustomerDetails=()=>{
 
     const navigate = useNavigate();
-    const {user, register}  = useAuth();
+    const {user, setUser, register}  = useAuth();
     const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
@@ -34,6 +34,10 @@ const CustomerDetails=()=>{
     //       "employeeRole": "customer"
     //     }
     //   }
+
+    useEffect(() => {
+        setUser(null);
+    });
 
     const validateEntries=async ()=>{
         //check employee ID
