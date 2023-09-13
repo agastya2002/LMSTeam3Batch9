@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const CustomerDetails=()=>{
 
     const navigate = useNavigate();
-    const {user, setUser, register}  = useAuth();
+    const {user, register}  = useAuth();
     const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
@@ -34,10 +34,6 @@ const CustomerDetails=()=>{
     //       "employeeRole": "customer"
     //     }
     //   }
-
-    useEffect(() => {
-        setUser(null);
-    });
 
     const validateEntries=async ()=>{
         //check employee ID

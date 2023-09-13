@@ -62,15 +62,13 @@ export const AuthProvider =  ({ children }) => {
           updateUserId(resp.data.user_Id);
           console.log(resp.data.role);
           updateUserRole(resp.data.role);
-          return true;
-        } else {
-            alert("Invalid credentials")
-            return false;
+          return resp.data.role;
         }
       }
       catch(err){
-        console.log(err)
-        return true;
+        alert("Invalid credentials")
+        console.log("Invalid Creadentials")
+        return false;
       }
     }
 
@@ -79,7 +77,7 @@ export const AuthProvider =  ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, setUser, register, login, logout}}>
+        <AuthContext.Provider value={{user, register, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

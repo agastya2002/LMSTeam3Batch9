@@ -7,6 +7,15 @@ import {useAuth} from '../Contexts/AuthContext'
 
 const UserDashboard =()=>{
 
+    const navigate = useNavigate();
+    const {logout} = useAuth();
+
+
+    const userLogout=()=>{
+        logout();
+        navigate("/");
+    }
+
     return (
         <div>
             <h1>Loan Management Application</h1>
@@ -24,6 +33,7 @@ const UserDashboard =()=>{
                 <button>Items Master Data</button>
                 </Link>
             </div>
+            <button type="submit" onClick={()=>userLogout()}>Logout</button>
         </div>
     )
 }
