@@ -37,7 +37,7 @@ namespace LMS.Data
             }
         }
 
-        public List<ItemMaster> GetItemDetails(String id)
+        public List<ItemMaster> GetItemDetailsById(String id)
         {
             try
             {
@@ -53,6 +53,25 @@ namespace LMS.Data
             catch
             {
                 return new List<ItemMaster>();
+            }
+        }
+
+        public List<LoanViewModel> GetLoanDeatilsById(String id)
+        {
+            try
+            {
+                var query1 = from loan in _db.LoanCardMasters
+                             join issue in _db.EmployeeCardDetails
+                             on loan.LoanId equals issue.LoanId
+                             where issue.EmployeeId == id
+                             select new LoanViewModel(){ LoanId = loan.LoanId, LoanType = loan.LoanType, DurationInYears = loan.DurationInYears, CardIssueDate = issue.CardIssueDate };
+
+                List<LoanViewModel> _items = query1.ToList();
+                return _items;
+            }
+            catch
+            {
+                return new List<LoanViewModel>();
             }
         }
     }

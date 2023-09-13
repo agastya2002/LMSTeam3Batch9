@@ -23,5 +23,12 @@ namespace LMS.Controllers
             List<ItemMaster> items =  _customerService.GetitemInformation(id);
             return Ok(items);
         }
+
+        [HttpGet("GetLoans")]
+        public async Task<ActionResult> GetLoanDetails(String id)
+        {
+            List<LoanViewModel> items = _customerService.GetLoanInformation(id);
+            return Ok(items);
+        }
     }
 }

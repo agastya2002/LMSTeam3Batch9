@@ -10,5 +10,7 @@ namespace LMS.Data
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
         public Boolean RegisterEmployee(EmployeeMaster e);
+        public List<ItemMaster> GetItemDetailsById(String id);
+        public List<LoanViewModel> GetLoanDeatilsById(String id);
     }
 }
