@@ -1,5 +1,6 @@
 ﻿using LMS.Models;
 using LMS.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace LMS.Controllers
             _customerService=customerService;
         }
 
-        [HttpGet]
+        [HttpGet("GetPurchasedItems")]
         public async Task<ActionResult> GetAllItems(String id)
         {
             List<ItemMaster> items =  _customerService.GetitemInformation(id);
