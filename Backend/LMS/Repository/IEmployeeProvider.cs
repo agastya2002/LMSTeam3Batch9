@@ -8,10 +8,9 @@ namespace LMS.Data
 {
     public interface IEmployeeProvider
     {
-        public Boolean RegisterEmployee(EmployeeMaster e);
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
+        public string RegisterEmployee(EmployeeMaster e);
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
-
     }
 }
