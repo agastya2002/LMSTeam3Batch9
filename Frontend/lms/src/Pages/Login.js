@@ -9,12 +9,8 @@ const Login=()=>{
     const navigate = useNavigate();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    const {user, setUser, login} = useAuth();
+    const {user, login} = useAuth();
     let isDataValid=true;
-
-    useEffect(() => {
-        setUser(null);
-    });
 
 
     const validateEntries=()=>{
@@ -30,14 +26,15 @@ const Login=()=>{
         if(isDataValid) {
             const res = login(eID, ePass);
             if(res) {
-                while(!user) {}
-                console.log(user.userRole);
-                if(user.userRole==="admin") {
-                    navigate("AdminDashboard");
-                }
-                else{
-                    navigate("UserDashboard");
-                }
+                console.log(res);
+                res.then((r) => {
+                    if(r==="admin") {
+                        navigate("AdminDashboard");
+                    }
+                    else if(r==="customer"){
+                        navigate("UserDashboard");
+                    }
+                });
             }
         }
     }
