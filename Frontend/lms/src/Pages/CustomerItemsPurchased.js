@@ -3,8 +3,6 @@ import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-
-
 export const CustomerItemsPurchased = () => {
 
     const navigate = useNavigate();

@@ -11,6 +11,7 @@ import AdminDashboard from './Pages/AdminDashboard';
 import ApplyForLoan from './Pages/ApplyForLoan';
 import AdminEditLoan from './Pages/AdminEditLoan';
 import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
+import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/UserDashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
           <Route path="/AdminDashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          {/* <Route path="/ViewLoan" element={<ProtectedRoute><ViewLoans/></ProtectedRoute>} />*/}
+          <Route path="/ViewLoan" element={<ProtectedRoute><CustomerLoanCards/></ProtectedRoute>} />
           <Route path="/ApplyLoan" element={<ApplyForLoan/>} />
           <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased/></ProtectedRoute>} />
           {/*<Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />*/}

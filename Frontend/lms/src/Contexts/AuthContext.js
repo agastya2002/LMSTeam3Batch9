@@ -55,8 +55,6 @@ export const AuthProvider =  ({ children }) => {
         console.log(err)
         return false;
       }
-       
-         
     }
     const login = async(eID, ePass) => {
       try{
