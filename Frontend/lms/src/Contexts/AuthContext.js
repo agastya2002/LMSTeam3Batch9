@@ -34,7 +34,8 @@ export const AuthProvider =  ({ children }) => {
         })
         console.log(resp)
         if(resp.status===200){
-          updateUserId(userData.EmployeeId);
+          console.log(resp.data)
+          updateUserId(resp.data);
           updateUserRole(userData.Employee.EmployeeRole);
           return true;
         }
