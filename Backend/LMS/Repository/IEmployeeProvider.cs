@@ -9,7 +9,7 @@ namespace LMS.Data
     public interface IEmployeeProvider
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
-        public string RegisterEmployee(EmployeeMaster e);
+        public string RegisterEmployee(RegisterViewModel e);
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
     }
