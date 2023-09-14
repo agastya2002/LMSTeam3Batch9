@@ -50,10 +50,13 @@ namespace LMS.Services
                 claims.Add(new Claim("role", "customer"));
 
             }
+            Debug.WriteLine(claims[0]);
+            Debug.WriteLine(claims[claims.Count-1]);
+            Debug.WriteLine("No of claims are ", claims.Count);
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
               claims,
-              expires: DateTime.Now.AddMinutes(2),
+              expires: DateTime.Now.AddHours(2),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

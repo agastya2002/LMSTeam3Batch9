@@ -8,6 +8,7 @@ namespace LMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "customer")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
