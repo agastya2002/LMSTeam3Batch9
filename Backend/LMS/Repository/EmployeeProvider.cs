@@ -20,15 +20,39 @@ namespace LMS.Data
             return _db.EmployeeCredentials.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
         }
 
-        public string RegisterEmployee(EmployeeMaster e)
+        public string RegisterEmployee(RegisterViewModel e)
         {
             try
             {
-                _db.EmployeeCredentials.Add(e.Employee);
+                var query1 = from emp in _db.EmployeeMasters
+                             select emp.EmployeeId;
+                List<String> _items = query1.ToList();
+                int min = 1000;
+                int max = 9999;
+                Random _rdm = new Random();
+                String empId = "E" + _rdm.Next(min, max);
+                while(_items.Contains(empId)) {
+                    empId = "E" + _rdm.Next(min, max);
+                }
+
+                EmployeeCredential c = new EmployeeCredential() {EmployeeId = empId, EmployeePassword = e.Employee.EmployeePassword, EmployeeRole = e.Employee.EmployeeRole};
+                EmployeeMaster newEmp = new EmployeeMaster()
+                {
+                    EmployeeId = empId,
+                    EmployeeName = e.EmployeeName,
+                    Designation = e.Designation,
+                    Department = e.Department,
+                    Gender = e.Gender,
+                    DateOfBirth = e.DateOfBirth,
+                    DateOfJoining = e.DateOfJoining,
+                    Employee = c
+                };
+
+                _db.EmployeeCredentials.Add(c);
                 _db.SaveChanges();
-                _db.EmployeeMasters.Add(e);
+                _db.EmployeeMasters.Add(newEmp);
                 _db.SaveChanges();
-                return "Ok";
+                return empId;
             } 
             catch (Exception exp)
             {

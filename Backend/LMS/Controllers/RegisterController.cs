@@ -29,12 +29,12 @@ namespace LMS.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult RegisterEmployee(EmployeeMaster e)
+        public IActionResult RegisterEmployee(RegisterViewModel e)
         {
             var res = _authService.RegisterEmployee(e);
-            if (res=="Ok")
+            if (res[0]=='E')
             {
-                return Ok();
+                return Ok(res);
             }
             else
             {

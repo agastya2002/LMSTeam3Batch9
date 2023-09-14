@@ -47,7 +47,7 @@ export const AuthProvider =  ({ children }) => {
         if(resp.status===200){
           // updateUserId(userData.EmployeeId);
           // updateUserRole(userData.Employee.EmployeeRole);
-          updateUser({userId:userData.EmployeeId,userRole:userData.EmployeeRole})
+          updateUser({userId:resp.data,userRole:userData.EmployeeRole})
           return true;
         }
       }

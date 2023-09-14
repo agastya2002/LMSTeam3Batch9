@@ -68,7 +68,7 @@ namespace LMS.Services
             return employee;
         }
 
-        public string RegisterEmployee(EmployeeMaster e)
+        public string RegisterEmployee(RegisterViewModel e)
         {
             return _employeeDataProvider.RegisterEmployee(e); 
         }
