@@ -4,17 +4,19 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {useAuth} from '../Contexts/AuthContext'
+import axios from 'axios';
 
 const UserDashboard =()=>{
 
     const navigate = useNavigate();
-    const {logout} = useAuth();
+    const {logout, user, token} = useAuth();
 
     const userLogout=()=>{
         logout();
         navigate("/");
     }
 
+   
     return (
         <div>
             <h1>Loan Management Application</h1>

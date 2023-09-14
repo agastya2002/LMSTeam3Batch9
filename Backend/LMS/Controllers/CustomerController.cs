@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+public record User(string id);
+
 namespace LMS.Controllers
 {
     [Route("api/[controller]")]
@@ -18,17 +20,18 @@ namespace LMS.Controllers
             _customerService=customerService;
         }
 
+
         [HttpGet("GetPurchasedItems")]
-        public async Task<ActionResult> GetAllItems(String id)
+        public async Task<ActionResult> GetAllItems([FromQuery] User userParameters)
         {
-            List<ItemMaster> items =  _customerService.GetitemInformation(id);
+            List<ItemMaster> items =  _customerService.GetitemInformation(userParameters.id);
             return Ok(items);
         }
 
         [HttpGet("GetLoans")]
-        public async Task<ActionResult> GetLoanDetails(String id)
+        public async Task<ActionResult> GetLoanDetails([FromQuery] User userParameters)
         {
-            List<LoanViewModel> items = _customerService.GetLoanInformation(id);
+            List<LoanViewModel> items = _customerService.GetLoanInformation(userParameters.id);
             return Ok(items);
         }
     }

@@ -10,6 +10,7 @@ import UserDashboard from './Pages/UserDashboard';
 import AdminDashboard from './Pages/AdminDashboard';
 import ApplyForLoan from './Pages/ApplyForLoan';
 import AdminEditLoan from './Pages/AdminEditLoan';
+import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
           <Route path="/AdminDashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           {/* <Route path="/ViewLoan" element={<ProtectedRoute><ViewLoans/></ProtectedRoute>} />*/}
           <Route path="/ApplyLoan" element={<ApplyForLoan/>} />
-          {/*<Route path="/ViewItem" element={<ProtectedRoute><ViewItemsPurchased/></ProtectedRoute>} />
-          <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />*/}
+          <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased/></ProtectedRoute>} />
+          {/*<Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />*/}
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
           {/*<Route path="/ItemsMasterData" element={<ProtectedRoute><ItemsMasterData/></ProtectedRoute>} /> */}
           <Route path="/adminEditLoan" element={<AdminEditLoan/>} />

@@ -14,13 +14,24 @@ export const AuthProvider =  ({ children }) => {
       userRole:'',
     });
 
-    const updateUserId = (uId) =>{
-      setUser({...user,userId: uId});
-    };
+    const [token,setToken] = useState(null)
 
-    const updateUserRole = (uRole) =>{
-      setUser({...user,userRole: uRole});
-    };
+    // const updateUserId = (uId) =>{
+    //   setUser({...user,userId: uId});
+    // };
+
+    // const updateUserRole = (uRole) =>{
+    //   setUser({...user,userRole: uRole});
+    // };
+
+    const updateUser = (user) => {
+      setUser(user)
+    }
+
+    const updateToken = (token) => {
+      setToken(token)
+    }
+
 
     const baseURL = "https://localhost:7223/api"
 
@@ -34,8 +45,9 @@ export const AuthProvider =  ({ children }) => {
         })
         console.log(resp)
         if(resp.status===200){
-          updateUserId(userData.EmployeeId);
-          updateUserRole(userData.Employee.EmployeeRole);
+          // updateUserId(userData.EmployeeId);
+          // updateUserRole(userData.Employee.EmployeeRole);
+          updateUser({userId:userData.EmployeeId,userRole:userData.EmployeeRole})
           return true;
         }
       }
@@ -58,10 +70,12 @@ export const AuthProvider =  ({ children }) => {
               "Content-Type":'application/json'
           }
         })
+        console.log(resp)
         if(resp.status===200){
-          updateUserId(resp.data.user_Id);
-          console.log(resp.data.role);
-          updateUserRole(resp.data.role);
+          // updateUserId(resp.data.user_Id);
+          updateToken (resp.data.token);
+        //  updateUserRole(resp.data.role);
+         updateUser({userId:resp.data.user_Id,userRole:resp.data.role})
           return resp.data.role;
         }
       }
@@ -74,6 +88,7 @@ export const AuthProvider =  ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        setToken(null)
     };
 
     const  applyForLoan = async (loanData) => {
@@ -98,7 +113,7 @@ export const AuthProvider =  ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, register, login, logout}}>
+        <AuthContext.Provider value={{user, register, login, logout, token}}>
             {children}
         </AuthContext.Provider>
     )
