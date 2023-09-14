@@ -6,5 +6,6 @@ namespace LMS.Services
     {
         public List<ItemMaster> GetitemInformation(String id);
         public List<LoanViewModel> GetLoanInformation(string id);
+        public string ApplyForLoan(EmployeeIssueViewModel e);
     }
 }

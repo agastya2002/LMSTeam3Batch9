@@ -34,5 +34,19 @@ namespace LMS.Controllers
             List<LoanViewModel> items = _customerService.GetLoanInformation(userParameters.id);
             return Ok(items);
         }
+
+        [HttpPost("ApplyForLoan")]
+        public IActionResult RegisterEmployee(EmployeeIssueViewModel e)
+        {
+            var res = _customerService.ApplyForLoan(e);
+            if (res[0]=='I')
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest(res);
+            }
+        }
     }
 }
