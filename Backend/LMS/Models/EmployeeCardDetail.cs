@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace LMS.Models;
-
+[Keyless]
 public partial class EmployeeCardDetail
 {
     public string? EmployeeId { get; set; }
