@@ -1,6 +1,8 @@
 ﻿using LMS.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +20,27 @@ namespace LMS.Data
         {
             //return users.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
             return _db.EmployeeCredentials.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
+        }
+
+        public void EditEmpolyee(EditEmployeeViewModel e, String id)
+        {
+            EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
+
+            EmployeeMaster newEmp = new EmployeeMaster()
+            {
+                EmployeeId = e.EmployeeId,
+                EmployeeName = e.EmployeeName,
+                Designation = e.Designation,
+                Department = e.Department,
+                Gender = e.Gender,
+                DateOfBirth = e.DateOfBirth,
+                DateOfJoining = e.DateOfJoining,
+                Employee = ec
+            };
+
+            _db.EmployeeMasters.Update(newEmp);
+            _db.SaveChanges();
+            
         }
 
         public string RegisterEmployee(RegisterViewModel e)
