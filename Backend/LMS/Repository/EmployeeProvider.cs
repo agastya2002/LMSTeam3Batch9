@@ -117,20 +117,21 @@ namespace LMS.Data
                 int min = 1000;
                 int max = 9999;
                 Random _rdm = new Random();
-                String _loanId;
+                string _loanId;
                 
                 DateTime _returnDate;
                 if (_categories.Contains(e.ItemCategory))
                 {
                     var query3 = (from loan in _db.LoanCardMasters
-                                    where loan.LoanType==e.ItemCategory
+                                    where (_items.Contains(loan.LoanId) && loan.LoanType==e.ItemCategory)
                                     select new {duration= loan.DurationInYears,loanId= loan.LoanId}).ToList();
                     _loanId=query3[0].loanId;
                     var query4 = (from loan in _db.EmployeeCardDetails
                                  where loan.LoanId==_loanId
                                  select loan.CardIssueDate).ToArray();
                     int _duration = (int)query3[0].duration;
-                    _returnDate = ((DateTime)query4[0]).AddYears(_duration);
+                    DateTime _cardIssueDate = (DateTime)query4[0];                    
+                    _returnDate = _cardIssueDate.AddYears(_duration);
                 }
                 else
                 {
@@ -148,7 +149,7 @@ namespace LMS.Data
                     _db.LoanCardMasters.Add(newLoan);
                     _db.SaveChanges();
 
-                    EmployeeCardDetail newCard = new EmployeeCardDetail() { EmployeeId=e.EmployeeID, LoanId=_loanId, CardIssueDate=new DateTime() };
+                    EmployeeCardDetail newCard = new EmployeeCardDetail() { EmployeeId=e.EmployeeID, LoanId=_loanId, CardIssueDate=DateTime.Now };
                     _db.EmployeeCardDetails.Add(newCard);
                     _db.SaveChanges();
                     _returnDate = new DateTime().AddYears(1);
@@ -177,11 +178,11 @@ namespace LMS.Data
                 }
 
 
-                ItemMaster newItem=new ItemMaster() { ItemId=itemId, IssueStatus="active", ItemDescription=e.ItemDescription, ItemMake=e.ItemMake, ItemCategory=e.ItemCategory, ItemValuation=e.ItemValue };
+                ItemMaster newItem=new ItemMaster() { ItemId=itemId, IssueStatus="Y", ItemDescription=e.ItemDescription, ItemMake=e.ItemMake, ItemCategory=e.ItemCategory, ItemValuation=e.ItemValue };
                 _db.ItemMasters.Add(newItem);
                 _db.SaveChanges();
 
-                EmployeeIssueDetail newIssue=new EmployeeIssueDetail() { IssueId=issueId,EmployeeId=e.EmployeeID,ItemId=itemId,IssueDate=new DateTime(),ReturnDate=_returnDate };
+                EmployeeIssueDetail newIssue=new EmployeeIssueDetail() { IssueId=issueId,EmployeeId=e.EmployeeID,ItemId=itemId,IssueDate= DateTime.Now,ReturnDate=_returnDate };
                 _db.EmployeeIssueDetails.Add(newIssue);
                 _db.SaveChanges();
 
