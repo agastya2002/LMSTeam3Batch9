@@ -97,5 +97,101 @@ namespace LMS.Data
                 return new List<LoanViewModel>();
             }
         }
+
+        public string ApplyForLoan(EmployeeIssueViewModel e)
+        {
+            try
+            {
+                var query1 = from emp in _db.EmployeeCardDetails
+                             where emp.EmployeeId==e.EmployeeID
+                             select emp.LoanId;
+                             
+                List<String> _items = query1.ToList();
+
+                var query2=from loan in _db.LoanCardMasters
+                           where _items.Contains(loan.LoanId)
+                           select loan.LoanType;
+
+                List<String> _categories = query2.ToList();
+                
+                int min = 1000;
+                int max = 9999;
+                Random _rdm = new Random();
+                string _loanId;
+                
+                DateTime _returnDate;
+                if (_categories.Contains(e.ItemCategory))
+                {
+                    var query3 = (from loan in _db.LoanCardMasters
+                                    where (_items.Contains(loan.LoanId) && loan.LoanType==e.ItemCategory)
+                                    select new {duration= loan.DurationInYears,loanId= loan.LoanId}).ToList();
+                    _loanId=query3[0].loanId;
+                    var query4 = (from loan in _db.EmployeeCardDetails
+                                 where loan.LoanId==_loanId
+                                 select loan.CardIssueDate).ToArray();
+                    int _duration = (int)query3[0].duration;
+                    DateTime _cardIssueDate = (DateTime)query4[0];                    
+                    _returnDate = _cardIssueDate.AddYears(_duration);
+                }
+                else
+                {
+                    var query5 = from loan in _db.LoanCardMasters
+                                 select loan.LoanId;
+                    List<String> _loanIDS = query5.ToList();
+
+                    _loanId="L"+_rdm.Next(min, max);
+                    
+                    while (_loanIDS.Contains(_loanId))
+                    {
+                        _loanId = "L" + _rdm.Next(min, max);
+                    }
+                    LoanCardMaster newLoan = new LoanCardMaster() { LoanId=_loanId, LoanType=e.ItemCategory, DurationInYears=1 };
+                    _db.LoanCardMasters.Add(newLoan);
+                    _db.SaveChanges();
+
+                    EmployeeCardDetail newCard = new EmployeeCardDetail() { EmployeeId=e.EmployeeID, LoanId=_loanId, CardIssueDate=DateTime.Now };
+                    _db.EmployeeCardDetails.Add(newCard);
+                    _db.SaveChanges();
+                    _returnDate = new DateTime().AddYears(1);
+
+                }
+
+                //inserting into item_master
+                var query6 = from item in _db.ItemMasters
+                             select item.ItemId;
+                List<String> _itemIDS = query6.ToList();
+                String itemId = "I"+_rdm.Next(min, max);
+
+                while (_itemIDS.Contains(itemId))
+                {
+                    itemId = "I" + _rdm.Next(min, max);
+                }
+
+                var query7 = from item in _db.EmployeeIssueDetails
+                             select item.IssueId;
+                List<String> _issueIDS = query7.ToList();
+                String issueId = "IS"+_rdm.Next(min, max);
+
+                while (_issueIDS.Contains(issueId))
+                {
+                    issueId = "IS"+_rdm.Next(min, max);
+                }
+
+
+                ItemMaster newItem=new ItemMaster() { ItemId=itemId, IssueStatus="Y", ItemDescription=e.ItemDescription, ItemMake=e.ItemMake, ItemCategory=e.ItemCategory, ItemValuation=e.ItemValue };
+                _db.ItemMasters.Add(newItem);
+                _db.SaveChanges();
+
+                EmployeeIssueDetail newIssue=new EmployeeIssueDetail() { IssueId=issueId,EmployeeId=e.EmployeeID,ItemId=itemId,IssueDate= DateTime.Now,ReturnDate=_returnDate };
+                _db.EmployeeIssueDetails.Add(newIssue);
+                _db.SaveChanges();
+
+                return itemId;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
+            }
+        }
     }
 }

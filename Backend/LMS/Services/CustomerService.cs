@@ -20,5 +20,11 @@ namespace LMS.Services
             List<LoanViewModel> items = _employeeDataProvider.GetLoanDeatilsById(id);
             return items;
         }
+
+        public string ApplyForLoan(EmployeeIssueViewModel e)
+        {
+            return _employeeDataProvider.ApplyForLoan(e);
+        }
+
     }
 }
