@@ -1,36 +1,48 @@
-import React from "react";
-
+import React, { useCallback } from "react";
+import TableComponent from "../Components/TableComponent";
 export const AdminEditLoan = () => {
-    // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
-    const loanCards = [
-      {
-        loan_id: "L1001",
-        loan_type: "Furniture",
-        duration: 5
-      },
-      {
-        loan_id: "L1002",
-        loan_type: "Stationery",
-        duration: 1
-      },
-      {
-        loan_id: "L1003",
-        loan_type: "Crockery",
-        duration: 2
-      },
-    ];
-    return (
-      <div>
-        <h1>Loan Management Application</h1>
-        <h2>Customer Master Data Details</h2>
-        <div
-          style={{ width: "100%", display: "flex", justifyContent: "space-between"}}
-        >
-          {/* <span>Employee ID: {user?.emp_id}</span>
+  // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
+  const loanCards = [
+    {
+      loan_id: "L1001",
+      loan_type: "Furniture",
+      duration: 5
+    },
+    {
+      loan_id: "L1002",
+      loan_type: "Stationery",
+      duration: 1
+    },
+    {
+      loan_id: "L1003",
+      loan_type: "Crockery",
+      duration: 2
+    },
+  ];
+  const editLoan = (e) => {
+    const { entryObj } = e.currentTarget.dataset;
+    console.log(entryObj);
+    //editLoan code here
+  }
+  const deleteLoan = (e) => {
+    const { entryObj } = e.currentTarget.dataset;
+    console.log(entryObj);
+    //editLoan code here
+  }
+  return (
+    <div>
+      <h1>Loan Management Application</h1>
+      <h2>Customer Master Data Details</h2>
+      <div
+        style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
+      >
+
+        {/* <span>Employee ID: {user?.emp_id}</span>
           <span>Designation: {user?.designation}</span>
           <span>Department: {user?.department}</span> */}
-        </div>
-        <table>
+      </div>
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={loanCards} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
+      {/*         <table>
           <thead>
             <tr>
               <th>loan_id</th>
@@ -52,9 +64,9 @@ export const AdminEditLoan = () => {
                 </tr>
               ))}
           </tbody>
-        </table>
-      </div>
-    );
+        </table> */}
+    </div>
+  );
 };
 
 

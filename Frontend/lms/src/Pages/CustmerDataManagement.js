@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import TableComponent from '../Components/TableComponent';
 
 const CustomerDataManagement=()=>{
 
@@ -93,8 +94,11 @@ const CustomerDataManagement=()=>{
     }
 
 
-const editEmployee = (e,val) => {
-    e.preventDefault()
+const editEmployee = (e) => {
+
+    e.preventDefault();
+    const val=JSON.parse(e.currentTarget.dataset.entryObj);
+    console.log(val)
     setEID(val.employeeId)
     setEName(val.employeeName)
     setGender(val.gender)
@@ -105,6 +109,9 @@ const editEmployee = (e,val) => {
     setEdit(true)
 }
 
+const deleteEmployee=(e)=>{
+    const {entryId}=e.currentTarget.dataset;
+}
 const handleCancel = () =>{
     setEID("")
     setEName("")
@@ -185,7 +192,8 @@ const handleCancel = () =>{
             </div>
               :null
             }
-             {
+            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={emps} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (e) => deleteEmployee(e) }]} />
+             {/* {
           emps.length!=0?<table>
           <thead>
             <tr>
@@ -215,7 +223,7 @@ const handleCancel = () =>{
               ))}
           </tbody>
         </table>:null
-        }
+        } */}
         </div>
     )
 }

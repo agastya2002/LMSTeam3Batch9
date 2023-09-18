@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import TableComponent from "../Components/TableComponent";
 
 export const CustomerItemsPurchased = () => {
 
@@ -25,28 +26,30 @@ export const CustomerItemsPurchased = () => {
     }
     useEffect(()=>{
       getItems()
-    },[])
-    // const items = [
-    //   {
-    //     issue_id: "I1001",
-    //     item_description: "Tea Table",
-    //     item_make: "Wooden",
-    //     item_category: "Furniture",
-    //     item_valuation: "5000",
-    //   },
-    //   {
-    //     issue_id: "I1002",
-    //     item_description: "Tea Set",
-    //     item_make: "Glass",
-    //     item_category: "Crockery",
-    //     item_valuation: "2000",
-    //   },
-    // ];
+    },[]); 
+     const iitems = [
+       {
+         issue_id: "I1001",
+         item_description: "Tea Table",
+         item_make: "Wooden",
+         item_category: "Furniture",
+         item_valuation: "5000",
+       },
+       {
+         issue_id: "I1002",
+         item_description: "Tea Set",
+         item_make: "Glass",
+         item_category: "Crockery",
+         item_valuation: "2000",
+       },
+     ];
     console.log(items)
+
     return (
       <div>
         <h1>Loan Management Application</h1>
         <h2>Items Purchased</h2>
+        <TableComponent headerData={["Issue ID","Issued","Item Description","Item Make","Item Category","Item Valuation"]} tableData={items}/>
         {/* <div
           style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
         >
@@ -54,7 +57,7 @@ export const CustomerItemsPurchased = () => {
           <span>Designation: {user?.designation}</span>
           <span>Department: {user?.department}</span>
         </div> */}
-        {
+        {/* {
           items.length!=0?<table>
           <thead>
             <tr>
@@ -78,8 +81,7 @@ export const CustomerItemsPurchased = () => {
               ))}
           </tbody>
         </table>:null
-        }
-        
+        } */}        
       </div>
     );
 };

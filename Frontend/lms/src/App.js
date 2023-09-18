@@ -32,6 +32,7 @@ function App() {
           <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased/></ProtectedRoute>} />
           <Route path="/ItemMaster" element={<ProtectedRoute><ItemMaster/></ProtectedRoute>} />
           <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />
+          <Route path="/LoanCardManagement" element={<ProtectedRoute><AdminEditLoan/></ProtectedRoute>} />
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
           {/*<Route path="/ItemsMasterData" element={<ProtectedRoute><ItemsMasterData/></ProtectedRoute>} /> */}
           <Route path="/adminEditLoan" element={<AdminEditLoan/>} />
