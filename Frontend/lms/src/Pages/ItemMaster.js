@@ -34,6 +34,8 @@ const ItemMaster =()=>{
         alert(inputs);
     }
 
+    const handleAdd = () => {}
+
     return(
         <div>
             <h1>Loan Management Application</h1>
