@@ -4,6 +4,7 @@ namespace LMS.Services
 {
     public interface IAdminService
     {
-        public void UpdateEmplyee(EditEmployeeViewModel employee);
+        public void UpdateEmployee(EditEmployeeViewModel employee);
+        public List<EditEmployeeViewModel> GetEmployees();
     }
 }

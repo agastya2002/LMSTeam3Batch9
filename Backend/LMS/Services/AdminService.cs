@@ -11,9 +11,14 @@ namespace LMS.Services
             _employeeDataProvider = employeeDataProvider;
         }
 
-        public void UpdateEmplyee(EditEmployeeViewModel employee)
+        public List<EditEmployeeViewModel> GetEmployees()
+        {
+            return _employeeDataProvider.GetEmployees();
+        }
+
+        public void UpdateEmployee(EditEmployeeViewModel employee)
        {
-            _employeeDataProvider.EditEmpolyee(employee, employee.EmployeeId);
+            _employeeDataProvider.EditEmployee(employee, employee.EmployeeId);
         }
     }
 }

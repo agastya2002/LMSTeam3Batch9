@@ -22,7 +22,16 @@ namespace LMS.Data
             return _db.EmployeeCredentials.SingleOrDefault(x => x.EmployeeId == login.Username && x.EmployeePassword == login.Password);
         }
 
-        public void EditEmpolyee(EditEmployeeViewModel e, String id)
+        public List<EditEmployeeViewModel> GetEmployees()
+        {
+            var query = from emp in _db.EmployeeMasters
+                        select new EditEmployeeViewModel() { EmployeeId = emp.EmployeeId, EmployeeName = emp.EmployeeName, Designation = emp.Designation, Gender = emp.Gender, Department = emp.Department, DateOfBirth = emp.DateOfBirth, DateOfJoining = emp.DateOfJoining};
+        
+            List<EditEmployeeViewModel> list = query.ToList();
+            return list;
+        }
+
+        public void EditEmployee(EditEmployeeViewModel e, String id)
         {
             EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
 

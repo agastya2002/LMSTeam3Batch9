@@ -17,10 +17,17 @@ namespace LMS.Controllers
         }
 
         [HttpPut("UpdateEmployee")]
-        public async Task<ActionResult> updateEmployee(EditEmployeeViewModel e)
+        public async Task<ActionResult> UpdateEmployee(EditEmployeeViewModel e)
         {
-            _adminService.UpdateEmplyee(e);
+            _adminService.UpdateEmployee(e);
             return Ok();
+        }
+
+        [HttpGet("GetEmployees")]
+        public async Task<ActionResult> GetEmployees()
+        {
+            List<EditEmployeeViewModel> list = _adminService.GetEmployees();
+            return Ok(list);
         }
     }
 }
