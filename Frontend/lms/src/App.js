@@ -12,6 +12,7 @@ import ApplyForLoan from './Pages/ApplyForLoan';
 import AdminEditLoan from './Pages/AdminEditLoan';
 import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 import { CustomerLoanCards } from './Pages/CustomerLoanCards';
+import ItemMaster from './Pages/ItemMaster';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/ViewLoan" element={<ProtectedRoute><CustomerLoanCards/></ProtectedRoute>} />
           <Route path="/ApplyLoan" element={<ApplyForLoan/>} />
           <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased/></ProtectedRoute>} />
+          <Route path="/ItemMaster" element={<ProtectedRoute><ItemMaster/></ProtectedRoute>} />
           {/*<Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />*/}
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
           {/*<Route path="/ItemsMasterData" element={<ProtectedRoute><ItemsMasterData/></ProtectedRoute>} /> */}
