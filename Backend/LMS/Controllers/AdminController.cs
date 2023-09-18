@@ -29,5 +29,12 @@ namespace LMS.Controllers
             List<EditEmployeeViewModel> list = _adminService.GetEmployees();
             return Ok(list);
         }
+
+        [HttpGet("GetEmployeeById")]
+        public async Task<ActionResult> GetEmployeeById(string id)
+        {
+            EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
+            return Ok(employee);
+        }
     }
 }

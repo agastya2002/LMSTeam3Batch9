@@ -31,6 +31,23 @@ namespace LMS.Data
             return list;
         }
 
+        public EditEmployeeViewModel GetEmployeeById(string id)
+        {
+            try
+            {
+                var query1 = from emp in _db.EmployeeMasters
+                             where emp.EmployeeId == id
+                             select new EditEmployeeViewModel() { EmployeeId = emp.EmployeeId, EmployeeName = emp.EmployeeName, Designation = emp.Designation, Gender = emp.Gender, Department = emp.Department, DateOfBirth = emp.DateOfBirth, DateOfJoining = emp.DateOfJoining };
+
+                List<EditEmployeeViewModel> employee = query1.ToList();
+                return employee[0];
+            }
+            catch
+            {
+                return new EditEmployeeViewModel();
+            }
+        }
+
         public void EditEmployee(EditEmployeeViewModel e, String id)
         {
             EmployeeCredential ec = _db.EmployeeCredentials.Find(id);

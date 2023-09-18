@@ -20,5 +20,10 @@ namespace LMS.Services
        {
             _employeeDataProvider.EditEmployee(employee, employee.EmployeeId);
         }
+
+        public EditEmployeeViewModel GetEmployeeById(string id)
+        {
+            return _employeeDataProvider.GetEmployeeById(id);
+        }
     }
 }
