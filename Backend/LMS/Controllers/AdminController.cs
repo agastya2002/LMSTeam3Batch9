@@ -38,6 +38,15 @@ namespace LMS.Controllers
             else return BadRequest(res);
         }
 
+        [HttpPut("UpdateItem")]
+        public async Task<ActionResult> UpdateItem(ItemMaster e)
+        {
+            string res = _adminService.UpdateItem(e);
+            if (res[0]=='I')
+                return Ok(res);
+            else return BadRequest(res);
+        }
+
         [HttpGet("GetEmployees")]
         public async Task<ActionResult> GetEmployees()
         {

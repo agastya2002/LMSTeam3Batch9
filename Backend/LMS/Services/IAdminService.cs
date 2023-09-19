@@ -7,6 +7,7 @@ namespace LMS.Services
     {
         public void UpdateEmployee(EditEmployeeViewModel employee);
         public string UpdateLoan(LoanCardMaster l);
+        public string UpdateItem(ItemMaster i);
         public List<EditEmployeeViewModel> GetEmployees();
         public EditEmployeeViewModel GetEmployeeById(string id);
         public Boolean DeleteLoanById(string id);

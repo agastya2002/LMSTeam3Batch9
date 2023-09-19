@@ -13,6 +13,7 @@ namespace LMS.Data
         public string RegisterEmployee(RegisterViewModel e);
         public string ApplyForLoan(EmployeeIssueViewModel e);
         public string EditLoan(LoanCardMaster e);
+        public string EditItem(ItemMaster e);
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
         public Boolean DeleteLoanById(String id);

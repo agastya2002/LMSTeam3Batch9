@@ -281,6 +281,31 @@ namespace LMS.Data
                 return exp.Message;
             }
         }
+
+        public string EditItem(ItemMaster e)
+        {
+            try
+            {
+                ItemMaster newItem = new ItemMaster()
+                {
+                    ItemId=e.ItemId,
+                    ItemCategory=e.ItemCategory,
+                    ItemDescription=e.ItemDescription,
+                    ItemValuation=e.ItemValuation,
+                    IssueStatus=e.IssueStatus,
+                    ItemMake=e.ItemMake
+                };
+
+                _db.ItemMasters.Update(newItem);
+                _db.SaveChanges();
+
+                return e.ItemId;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
+            }
+        }
         public Boolean DeleteLoanById(String id)
         {
             try

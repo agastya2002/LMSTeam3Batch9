@@ -26,6 +26,11 @@ namespace LMS.Services
             return _employeeDataProvider.EditLoan(l);
         }
 
+        public string UpdateItem(ItemMaster i)
+        {
+            return _employeeDataProvider.EditItem(i);
+        }
+
         public EditEmployeeViewModel GetEmployeeById(string id)
         {
             return _employeeDataProvider.GetEmployeeById(id);
