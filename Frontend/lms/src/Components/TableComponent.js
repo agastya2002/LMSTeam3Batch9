@@ -5,8 +5,8 @@ const TableComponent = ({ headerData, tableData, tableActions }) => {
     console.log(tableData.length)
     console.log(tableActions??"HELLO")
     return (
-        <table>
-            <thead>
+        <table className="table table-responsive table-striped table-bordered table-hover">
+            <thead className="table-dark">
                 <tr>
                     {
                         headerData.map((val, idx) => <th key={`heading${idx}`}>{val}</th>)
@@ -18,7 +18,22 @@ const TableComponent = ({ headerData, tableData, tableActions }) => {
                 {tableData.length!==0?tableData?.map((val, idx) => (
                     <tr key={`row${idx}`}>
                         {Object.values(val).map((data, idx_data) => <td key={`data${idx_data}`}>{data}</td>)}
-                        {tableActions?.length !== 0 ? <td>{tableActions?.map((data, idx_data) => <button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>{data?.actionName}</button>)}</td> : null}
+                        
+                        
+                        {tableActions?.length !== 0 ? <td><ul class="list-inline m-0">{tableActions?.map((data, idx_data) => 
+                            <li class="list-inline-item">
+                                
+                            {(data?.actionName==="Edit")?
+                                <button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)} className="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil-square"></i></button>:
+                                ((data?.actionName==="Delete")?
+                                    (<button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)} className="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash3-fill"></i></button>):
+                                    (<button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>{data?.actionName}</button>)
+                                    )}
+                                    
+                            </li>
+                        )}</ul></td> : null}
                     </tr>
                 )):null}
                 <tr></tr>
