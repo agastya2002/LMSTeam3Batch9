@@ -94,10 +94,8 @@ const CustomerDataManagement=()=>{
     }
 
 
-const editEmployee = (e) => {
+const editEmployee = (val) => {
 
-    e.preventDefault();
-    const val=JSON.parse(e.currentTarget.dataset.entryObj);
     console.log(val)
     setEID(val.employeeId)
     setEName(val.employeeName)
@@ -109,8 +107,8 @@ const editEmployee = (e) => {
     setEdit(true)
 }
 
-const deleteEmployee=(e)=>{
-    const {entryId}=e.currentTarget.dataset;
+const deleteEmployee=(val)=>{
+   console.log(val);
 }
 const handleCancel = () =>{
     setEID("")
@@ -192,7 +190,7 @@ const handleCancel = () =>{
             </div>
               :null
             }
-            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={emps} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (e) => deleteEmployee(e) }]} />
+            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={emps} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} />
              {/* {
           emps.length!=0?<table>
           <thead>

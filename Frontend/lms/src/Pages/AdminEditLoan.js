@@ -20,13 +20,13 @@ export const AdminEditLoan = () => {
     },
   ];
   const editLoan = (e) => {
-    const { entryObj } = e.currentTarget.dataset;
-    console.log(entryObj);
+    const loanDetails=e;
+    console.log(loanDetails);
     //editLoan code here
   }
   const deleteLoan = (e) => {
-    const { entryObj } = e.currentTarget.dataset;
-    console.log(entryObj);
+    const loanDetails=e;
+    console.log(loanDetails);
     //editLoan code here
   }
   return (
