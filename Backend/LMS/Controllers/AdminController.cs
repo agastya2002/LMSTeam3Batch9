@@ -61,6 +61,20 @@ namespace LMS.Controllers
             return Ok(employee);
         }
 
+        [HttpGet("GetItems")]
+        public async Task<ActionResult> GetItems()
+        {
+            List<ItemMaster> list = _adminService.GetItems();
+            return Ok(list);
+        }
+
+        [HttpGet("GetLoans")]
+        public async Task<ActionResult> GetLoans()
+        {
+            List<LoanCardMaster> list = _adminService.GetLoanCards();
+            return Ok(list);
+        }
+
         [HttpDelete("DeleteLoanById")]
         public IActionResult DeleteLoan(string id) {
             Boolean res = _adminService.DeleteLoanById(id);

@@ -260,6 +260,20 @@ namespace LMS.Data
             }
         }
 
+        public List<ItemMaster> GetItemsList() {
+            var query = from item in _db.ItemMasters select item;
+
+            List<ItemMaster> list = query.ToList();
+            return list;
+        }
+
+        public List<LoanCardMaster> GetLoansList()
+        {
+            var query = from loan in _db.LoanCardMasters select loan;
+
+            List<LoanCardMaster> list = query.ToList();
+            return list;
+        }
         public string EditLoan(LoanCardMaster e)
         {
             try

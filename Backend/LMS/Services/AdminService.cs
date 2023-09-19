@@ -45,5 +45,15 @@ namespace LMS.Services
         {
             return _employeeDataProvider.DeleteEmployee(id);
         }
+
+        public List<ItemMaster> GetItems() 
+        { 
+            return _employeeDataProvider.GetItemsList();
+        }
+
+        public List<LoanCardMaster> GetLoanCards()
+        {
+            return _employeeDataProvider.GetLoansList();
+        }
     }
 }

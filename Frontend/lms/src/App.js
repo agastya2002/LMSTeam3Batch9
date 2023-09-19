@@ -14,6 +14,7 @@ import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 import ItemMaster from './Pages/ItemMaster';
 import CustomerDataManagement from './Pages/CustmerDataManagement';
+import AdminItemMaster from './Pages/AdminItemMaster';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
           <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />
           <Route path="/LoanCardManagement" element={<ProtectedRoute><AdminEditLoan/></ProtectedRoute>} />
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
-          {/*<Route path="/ItemsMasterData" element={<ProtectedRoute><ItemsMasterData/></ProtectedRoute>} /> */}
+          <Route path="/AdminItemsMaster" element={<ProtectedRoute><AdminItemMaster/></ProtectedRoute>} />
           <Route path="/adminEditLoan" element={<AdminEditLoan/>} />
           
         </Routes>

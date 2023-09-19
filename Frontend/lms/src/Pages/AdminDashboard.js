@@ -29,7 +29,7 @@ const UserDashboard =()=>{
                 <button>Loan Card Management</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
-                <Link to="/ItemMasterData">
+                <Link to="/AdminItemsMaster">
                 <button>Items Master Data</button>
                 </Link>
             </div>
