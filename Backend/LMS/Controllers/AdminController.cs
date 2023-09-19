@@ -29,6 +29,15 @@ namespace LMS.Controllers
             return Ok();
         }
 
+        [HttpPut("UpdateLoan")]
+        public async Task<ActionResult> UpdateLoan(LoanCardMaster e)
+        {
+            string res= _adminService.UpdateLoan(e);
+            if (res[0]=='L')
+                return Ok(res);
+            else return BadRequest(res);
+        }
+
         [HttpGet("GetEmployees")]
         public async Task<ActionResult> GetEmployees()
         {

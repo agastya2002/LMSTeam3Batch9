@@ -260,6 +260,27 @@ namespace LMS.Data
             }
         }
 
+        public string EditLoan(LoanCardMaster e)
+        {
+            try
+            {
+                    LoanCardMaster newLoan = new LoanCardMaster()
+                    {
+                        LoanId=e.LoanId,
+                        LoanType=e.LoanType,
+                        DurationInYears=e.DurationInYears
+                    };
+
+                    _db.LoanCardMasters.Update(newLoan);
+                    _db.SaveChanges();
+
+                return e.LoanId;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
+            }
+        }
         public Boolean DeleteLoanById(String id)
         {
             try
