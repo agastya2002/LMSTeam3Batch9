@@ -1,4 +1,5 @@
 ﻿using LMS.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace LMS.Data
         public string ApplyForLoan(EmployeeIssueViewModel e);
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
+        public Boolean DeleteLoanById(String id);
     }
 }

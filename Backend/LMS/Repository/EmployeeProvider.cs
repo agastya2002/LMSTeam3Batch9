@@ -1,5 +1,8 @@
 ﻿using LMS.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,6 +32,23 @@ namespace LMS.Data
         
             List<EditEmployeeViewModel> list = query.ToList();
             return list;
+        }
+
+        public EditEmployeeViewModel GetEmployeeById(string id)
+        {
+            try
+            {
+                var query1 = from emp in _db.EmployeeMasters
+                             where emp.EmployeeId == id
+                             select new EditEmployeeViewModel() { EmployeeId = emp.EmployeeId, EmployeeName = emp.EmployeeName, Designation = emp.Designation, Gender = emp.Gender, Department = emp.Department, DateOfBirth = emp.DateOfBirth, DateOfJoining = emp.DateOfJoining };
+
+                List<EditEmployeeViewModel> employee = query1.ToList();
+                return employee[0];
+            }
+            catch
+            {
+                return new EditEmployeeViewModel();
+            }
         }
 
         public void EditEmployee(EditEmployeeViewModel e, String id)
@@ -223,6 +243,20 @@ namespace LMS.Data
             catch (Exception exp)
             {
                 return exp.Message;
+            }
+        }
+
+        public Boolean DeleteLoanById(String id)
+        {
+            try
+            {
+                _db.LoanCardMasters.Where(e => e.LoanId == id).ExecuteDelete();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                return false;
             }
         }
     }
