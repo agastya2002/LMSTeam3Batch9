@@ -3,6 +3,7 @@ import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import TableComponent from "../Components/TableComponent";
+import responseFilter from "../Helpers/responseFilter";
 
 export const CustomerItemsPurchased = () => {
 
@@ -49,7 +50,7 @@ export const CustomerItemsPurchased = () => {
       <div>
         <h1>Loan Management Application</h1>
         <h2>Items Purchased</h2>
-        <TableComponent headerData={["Issue ID","Issued","Item Description","Item Make","Item Category","Item Valuation"]} tableData={items}/>
+        <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation"])}/>
         {/* <div
           style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
         >

@@ -3,6 +3,7 @@ import React from "react";
 
 const TableComponent = ({ headerData, tableData, tableActions }) => {
     console.log(tableData.length)
+    console.log(tableActions??"HELLO")
     return (
         <table>
             <thead>
@@ -10,7 +11,7 @@ const TableComponent = ({ headerData, tableData, tableActions }) => {
                     {
                         headerData.map((val, idx) => <th key={`heading${idx}`}>{val}</th>)
                     }
-                    <th>Actions</th>
+                    {!tableActions??<th>Actions</th>}
                 </tr>
             </thead>
             <tbody>

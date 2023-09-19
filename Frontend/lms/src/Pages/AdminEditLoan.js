@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import TableComponent from "../Components/TableComponent";
+import responseFilter from "../Helpers/responseFilter";
 export const AdminEditLoan = () => {
   // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
   const loanCards = [
@@ -41,7 +42,7 @@ export const AdminEditLoan = () => {
           <span>Designation: {user?.designation}</span>
           <span>Department: {user?.department}</span> */}
       </div>
-      <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={loanCards} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={responseFilter(loanCards,["loan_id","loan_type","duration"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
       {/*         <table>
           <thead>
             <tr>

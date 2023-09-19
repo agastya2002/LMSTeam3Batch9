@@ -5,6 +5,7 @@ import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TableComponent from '../Components/TableComponent';
+import responseFilter from '../Helpers/responseFilter';
 
 const CustomerDataManagement=()=>{
 
@@ -97,8 +98,8 @@ const CustomerDataManagement=()=>{
 const editEmployee = (val) => {
 
     console.log(val)
-    setEID(val.employeeId)
     setEName(val.employeeName)
+    setEID(val.employeeId)
     setGender(val.gender)
     setDepartment(val.department)
     setDesignation(val.designation)
@@ -190,7 +191,7 @@ const handleCancel = () =>{
             </div>
               :null
             }
-            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={emps} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} />
+            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={responseFilter(emps,["employeeId","employeeName","gender","department","designation","dateOfBirth","dateOfJoining"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} />
              {/* {
           emps.length!=0?<table>
           <thead>

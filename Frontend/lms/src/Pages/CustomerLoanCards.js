@@ -3,6 +3,7 @@ import { useAuth } from '../Contexts/AuthContext'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import TableComponent from "../Components/TableComponent";
+import responseFilter from "../Helpers/responseFilter";
 export const CustomerLoanCards = () => {
   const navigate = useNavigate();
   const { logout, user, token } = useAuth();
@@ -17,7 +18,8 @@ export const CustomerLoanCards = () => {
       const resp = await axios.get(`${baseURL}/GetLoans?id=${user.userId}`, {
         headers: { "Authorization": `Bearer ${token}` }
       })
-      setLoanCards(resp.data)
+      
+      setLoanCards(resp?.data)
     } catch (err) {
       console.log(err)
     }
@@ -46,7 +48,7 @@ export const CustomerLoanCards = () => {
     <div>
       <h1>Loan Management Application</h1>
       <h2>Loan Cards Availed</h2>
-      <TableComponent headerData={["Loan ID", "Loan Type", "Duration", "Card Issue Date"]} tableData={loanCards} />
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration", "Card Issue Date"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears","cardIssueDate"])} />
       {/* <div
           style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
         >
