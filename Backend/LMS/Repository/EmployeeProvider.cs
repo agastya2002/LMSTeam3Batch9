@@ -34,6 +34,20 @@ namespace LMS.Data
             return list;
         }
 
+        public Boolean DeleteEmployee(String id)
+        {
+            try
+            {
+                _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                return false;
+            }
+        }
+
         public EditEmployeeViewModel GetEmployeeById(string id)
         {
             try

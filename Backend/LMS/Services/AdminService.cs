@@ -31,5 +31,10 @@ namespace LMS.Services
         {
             return _employeeDataProvider.DeleteLoanById(id);
         }
+
+        public Boolean DeleteEmp(string id)
+        {
+            return _employeeDataProvider.DeleteEmployee(id);
+        }
     }
 }

@@ -7,6 +7,7 @@ using LMS.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 
+
 namespace LMS.Controllers
 {
     [Route("api/[controller]")]
@@ -43,9 +44,20 @@ namespace LMS.Controllers
         }
 
         [HttpDelete("DeleteLoanById")]
-        public IActionResult DeleteEmployee(string id) {
+        public IActionResult DeleteLoan(string id) {
             Boolean res = _adminService.DeleteLoanById(id);
             if(res)
+            {
+                return Ok();
+            }
+            else { return BadRequest(); }
+        }
+
+        [HttpDelete("DeleteEmployee")]
+        public IActionResult DeleteEmployee([FromQuery] User userParams)
+        {
+            Boolean res = _adminService.DeleteEmp(userParams.id);
+            if (res)
             {
                 return Ok();
             }

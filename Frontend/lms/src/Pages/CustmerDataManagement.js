@@ -108,8 +108,20 @@ const editEmployee = (val) => {
     setEdit(true)
 }
 
-const deleteEmployee=(val)=>{
-   console.log(val);
+const deleteEmployee=async(val)=>{
+    console.log(val)
+    try{
+        const resp = await axios.delete(`${baseURL}/DeleteEmployee?id=${val.employeeId}`,{
+            headers:{"Authorization":`Bearer ${token}`}
+        })
+        console.log(resp)
+        if(resp.status==200){
+            const editedEmps = emps.filter(e => e.employeeId !== val.employeeId)
+            setEmps(editedEmps)
+        }
+      }catch(err){
+        console.log(err)
+      }
 }
 const handleCancel = () =>{
     setEID("")
