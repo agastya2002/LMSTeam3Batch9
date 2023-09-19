@@ -1,7 +1,11 @@
-﻿namespace LMS.Services
+﻿using LMS.Models;
+
+namespace LMS.Services
 {
     public interface IAdminService
     {
-        bool DeleteItem(string id);
+        public void UpdateEmployee(EditEmployeeViewModel employee);
+        public List<EditEmployeeViewModel> GetEmployees();
+        public EditEmployeeViewModel GetEmployeeById(string id);
     }
 }

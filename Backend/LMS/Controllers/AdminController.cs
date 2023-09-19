@@ -1,4 +1,5 @@
 ﻿using LMS.Models;
+using LMS.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LMS.Data;
@@ -20,18 +21,25 @@ namespace LMS.Controllers
             _adminService=adminService;
         }
 
-        [HttpDelete("DeleteItem")]
-        public IActionResult DeleteItem([FromQuery] User userParameters)
+        [HttpPut("UpdateEmployee")]
+        public async Task<ActionResult> UpdateEmployee(EditEmployeeViewModel e)
         {
-            Boolean res = _adminService.DeleteItem(userParameters.id);
-            if(res)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            _adminService.UpdateEmployee(e);
+            return Ok();
+        }
+
+        [HttpGet("GetEmployees")]
+        public async Task<ActionResult> GetEmployees()
+        {
+            List<EditEmployeeViewModel> list = _adminService.GetEmployees();
+            return Ok(list);
+        }
+
+        [HttpGet("GetEmployeeById")]
+        public async Task<ActionResult> GetEmployeeById(string id)
+        {
+            EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
+            return Ok(employee);
         }
     }
 }

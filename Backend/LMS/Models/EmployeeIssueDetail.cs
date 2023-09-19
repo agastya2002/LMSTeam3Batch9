@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace LMS.Models;
-
+[Keyless]
 public partial class EmployeeIssueDetail
 {
     public string IssueId { get; set; } = null!;
