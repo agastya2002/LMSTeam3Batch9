@@ -1,11 +1,13 @@
 /*Code to render Table Component: Here it has been assumed that the first field of table is the unique identifier of a given row*/
 import React from "react";
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 const TableComponent = ({ headerData, tableData, tableActions }) => {
     console.log(tableData.length)
     console.log(tableActions??"HELLO")
     return (
-        <table className="table table-responsive table-striped table-bordered table-hover w-auto mx-auto">
+        <Table striped bordered hover responsive className="w-auto mx-auto">
             <thead className="table-dark">
                 <tr>
                     {
@@ -24,12 +26,12 @@ const TableComponent = ({ headerData, tableData, tableActions }) => {
                             <li key={`action${data?.actionName}`} className="list-inline-item">
                                 
                             {(data?.actionName==="Edit")?
-                                <button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)} className="btn btn-outline-primary btn-sm">
-                                    <i className="bi bi-pencil-square"></i></button>:
+                                <Button variant="outline-primary" size="sm" key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>
+                                    <i className="bi bi-pencil-square"></i></Button>:
                                 ((data?.actionName==="Delete")?
-                                    (<button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)} className="btn btn-outline-danger btn-sm">
-                                        <i className="bi bi-trash3-fill"></i></button>):
-                                    (<button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>{data?.actionName}</button>)
+                                    (<Button variant="outline-danger" size="sm" key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>
+                                        <i className="bi bi-trash3-fill"></i></Button>):
+                                    (<Button key={`action_${data?.actionName}`} data-entry-obj={val} onClick={()=>data?.actionCallback(val)}>{data?.actionName}</Button>)
                                     )}
                                     
                             </li>
@@ -38,7 +40,7 @@ const TableComponent = ({ headerData, tableData, tableActions }) => {
                 )):null}
                 <tr></tr>
             </tbody>
-        </table>
+        </Table>
     )
 }
 
