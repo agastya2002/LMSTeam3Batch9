@@ -12,6 +12,8 @@ namespace LMS.Services
         public EditEmployeeViewModel GetEmployeeById(string id);
         public Boolean DeleteLoanById(string id);
         public Boolean DeleteEmp(string id);
+        public List<ItemMaster> GetItems();
+        public List<LoanCardMaster> GetLoanCards();
 
     }
 }

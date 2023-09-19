@@ -1,25 +1,50 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
+import { useAuth } from '../Contexts/AuthContext';
+import axios from "axios";
+
 export const AdminEditLoan = () => {
+
+  const [loanCards,setLoanCards] = useState([])
   // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
-  const loanCards = [
-    {
-      loan_id: "L1001",
-      loan_type: "Furniture",
-      duration: 5
-    },
-    {
-      loan_id: "L1002",
-      loan_type: "Stationery",
-      duration: 1
-    },
-    {
-      loan_id: "L1003",
-      loan_type: "Crockery",
-      duration: 2
-    },
-  ];
+  // const loanCards = [
+  //   {
+  //     loan_id: "L1001",
+  //     loan_type: "Furniture",
+  //     duration: 5
+  //   },
+  //   {
+  //     loan_id: "L1002",
+  //     loan_type: "Stationery",
+  //     duration: 1
+  //   },
+  //   {
+  //     loan_id: "L1003",
+  //     loan_type: "Crockery",
+  //     duration: 2
+  //   },
+  // ];
+
+  useEffect(()=>{
+    getLoanCards()
+  },[])
+
+  const baseURL = "https://localhost:7223/api/admin"
+  const { token} = useAuth();
+
+  const getLoanCards = async() => {
+    try{
+      const resp = await axios.get(`${baseURL}/GetLoans`,{
+          headers:{"Authorization":`Bearer ${token}`}
+      })
+      console.log(resp)
+      setLoanCards(resp.data)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   const editLoan = (e) => {
     const loanDetails=e;
     console.log(loanDetails);
@@ -33,7 +58,7 @@ export const AdminEditLoan = () => {
   return (
     <div>
       <h1>Loan Management Application</h1>
-      <h2>Customer Master Data Details</h2>
+      <h2>Loan Card Details</h2>
       <div
         style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
       >
@@ -42,7 +67,7 @@ export const AdminEditLoan = () => {
           <span>Designation: {user?.designation}</span>
           <span>Department: {user?.department}</span> */}
       </div>
-      <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={responseFilter(loanCards,["loan_id","loan_type","duration"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
       {/*         <table>
           <thead>
             <tr>
