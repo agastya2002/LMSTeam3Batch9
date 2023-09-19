@@ -1,5 +1,6 @@
 ﻿using LMS.Data;
 using LMS.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Services
 {
@@ -24,6 +25,11 @@ namespace LMS.Services
         public EditEmployeeViewModel GetEmployeeById(string id)
         {
             return _employeeDataProvider.GetEmployeeById(id);
+        }
+
+        public Boolean DeleteLoanById(string id)
+        {
+            return _employeeDataProvider.DeleteLoanById(id);
         }
     }
 }

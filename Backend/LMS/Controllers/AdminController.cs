@@ -41,5 +41,15 @@ namespace LMS.Controllers
             EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
             return Ok(employee);
         }
+
+        [HttpDelete("DeleteLoanById")]
+        public IActionResult DeleteEmployee(string id) {
+            Boolean res = _adminService.DeleteLoanById(id);
+            if(res)
+            {
+                return Ok();
+            }
+            else { return BadRequest(); }
+        }
     }
 }
