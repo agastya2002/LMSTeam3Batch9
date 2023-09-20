@@ -55,5 +55,10 @@ namespace LMS.Services
         {
             return _employeeDataProvider.GetLoansList();
         }
+
+        public bool DeleteItemById(string id)
+        {
+            return _employeeDataProvider.DeleteItemById(id);
+        }
     }
 }

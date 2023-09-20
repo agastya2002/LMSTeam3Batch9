@@ -95,5 +95,16 @@ namespace LMS.Controllers
             }
             else { return BadRequest(); }
         }
+
+        [HttpDelete("DeleteItemById")]
+        public IActionResult DeleteItem(string id)
+        {
+            Boolean res = _adminService.DeleteItemById(id);
+            if (res)
+            {
+                return Ok();
+            }
+            else { return BadRequest(); }
+        }
     }
 }

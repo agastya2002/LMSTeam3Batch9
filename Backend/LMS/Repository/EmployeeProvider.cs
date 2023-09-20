@@ -64,9 +64,9 @@ namespace LMS.Data
                 }
 
 
-                _db.EmployeeCardDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
-                _db.EmployeeIssueDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
-                _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeCardDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeIssueDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
                 _db.EmployeeCredentials.Where(e => e.EmployeeId == id).ExecuteDelete();
                 // _db.EmployeeMasters.Remove(emp);
                 _db.SaveChanges();
@@ -356,6 +356,20 @@ namespace LMS.Data
             try
             {
                 _db.LoanCardMasters.Where(e => e.LoanId == id).ExecuteDelete();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteItemById(string id)
+        {
+            try
+            {
+                _db.ItemMasters.Where(e => e.ItemId == id).ExecuteDelete();
                 return true;
             }
             catch (Exception exp)

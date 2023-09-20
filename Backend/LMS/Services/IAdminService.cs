@@ -15,5 +15,6 @@ namespace LMS.Services
         public List<ItemMaster> GetItems();
         public List<LoanCardMaster> GetLoanCards();
 
+        public Boolean DeleteItemById(string id);
     }
 }
