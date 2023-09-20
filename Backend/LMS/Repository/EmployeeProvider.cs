@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LMS.Data
 {
@@ -38,12 +39,42 @@ namespace LMS.Data
         {
             try
             {
+                // _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // var emp = _db.EmployeeMasters.Include(e => e.EmployeeIssueDetails).Includ
+               var query1 = from item in _db.ItemMasters
+                                join issue in _db.EmployeeIssueDetails
+                                on item.ItemId equals issue.ItemId
+                                where issue.EmployeeId == id
+                                select item;
+             
+                foreach(var item in query1)
+                {
+                    _db.ItemMasters.Remove(item);
+                }
+
+                var query2 = from loan in _db.LoanCardMasters
+                             join issue in _db.EmployeeCardDetails
+                             on loan.LoanId equals issue.LoanId
+                             where issue.EmployeeId == id
+                             select loan;
+
+                foreach(var item in query2)
+                {
+                    _db.LoanCardMasters.Remove(item);
+                }
+
+
+                _db.EmployeeCardDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
+                _db.EmployeeIssueDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
                 _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                _db.EmployeeCredentials.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeMasters.Remove(emp);
+                _db.SaveChanges();
                 return true;
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp.Message);
+                Debug.WriteLine(exp.Message);
                 return false;
             }
         }
