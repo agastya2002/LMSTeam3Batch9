@@ -33,7 +33,7 @@ const CustomerDataManagement=()=>{
         const resp = await axios.get(`${baseURL}/GetEmployees`,{
             headers:{"Authorization":`Bearer ${token}`}
         })
-        setEmps(resp.data)
+        setEmps(resp?.data.map((o)=>({...o,['dateOfBirth']:o['dateOfBirth'].substring(0,10),['dateOfJoining']:o['dateOfJoining'].substring(0,10)})));
       }catch(err){
         console.log(err)
       }
