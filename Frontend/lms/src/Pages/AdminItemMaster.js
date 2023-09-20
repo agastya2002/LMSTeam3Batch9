@@ -32,10 +32,22 @@ export const AdminItemMaster = () => {
   
     //editLoan code here
   }
-  const deleteItems = (e) => {
-    
-    //editLoan code here
+  const deleteItem=async(val)=>{
+    console.log(val)
+    try{
+        const resp = await axios.delete(`${baseURL}/DeleteItemById?id=${val.itemId}`,{
+            headers:{"Authorization":`Bearer ${token}`}
+        })
+        console.log(resp)
+        if(resp.status==200){
+            const editedItems = items.filter(item => item.itemId !== val.itemId);
+            setItems(editedItems);
+        }
+      }catch(err){
+        console.log(err)
+      }
   }
+
   return (
     <div>
       <h1>Loan Management Application</h1>
@@ -46,7 +58,7 @@ export const AdminItemMaster = () => {
 
        
       </div>
-      <TableComponent headerData={["Item ID", "Issue Status", "Item Description","Item Make","Item Category","Valuation"]} tableData={responseFilter(items,["itemId","issueStatus","itemDescription","itemMake","itemCategory","itemValuation"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editItems(e) }, { actionName: "Delete", actionCallback: (e) => deleteItems(e) }]} />
+      <TableComponent headerData={["Item ID", "Issue Status", "Item Description","Item Make","Item Category","Valuation"]} tableData={responseFilter(items,["itemId","issueStatus","itemDescription","itemMake","itemCategory","itemValuation"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editItems(e) }, { actionName: "Delete", actionCallback: (val) => deleteItem(val) }]} />
       
           
               

@@ -50,11 +50,24 @@ export const AdminEditLoan = () => {
     console.log(loanDetails);
     //editLoan code here
   }
-  const deleteLoan = (e) => {
-    const loanDetails=e;
+
+  const deleteLoan=async(val)=>{
+    const loanDetails=val;
     console.log(loanDetails);
-    //editLoan code here
+    try{
+        const resp = await axios.delete(`${baseURL}/DeleteLoanById?id=${val.loanId}`,{
+            headers:{"Authorization":`Bearer ${token}`}
+        })
+        console.log(resp)
+        if(resp.status==200){
+            const editedLoanCards = loanCards.filter(loanCard => loanCard.loanId !== val.loanId);
+            setLoanCards(editedLoanCards);
+        }
+      }catch(err){
+        console.log(err)
+      }
   }
+
   return (
     <div>
       <h1>Loan Management Application</h1>
