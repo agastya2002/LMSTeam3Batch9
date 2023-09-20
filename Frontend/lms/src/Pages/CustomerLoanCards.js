@@ -18,8 +18,7 @@ export const CustomerLoanCards = () => {
       const resp = await axios.get(`${baseURL}/GetLoans?id=${user.userId}`, {
         headers: { "Authorization": `Bearer ${token}` }
       })
-      
-      setLoanCards(resp?.data)
+      setLoanCards(resp?.data.map((o)=>({...o,['cardIssueDate']:o['cardIssueDate'].substring(0,10)})));
     } catch (err) {
       console.log(err)
     }
