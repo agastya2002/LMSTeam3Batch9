@@ -91,7 +91,7 @@ export const AuthProvider =  ({ children }) => {
 
     const  applyForLoan = async (loanData) => {
       try{
-        const resp = await axios.post(`${baseURL}/applyForLoan`,
+        const resp = await axios.post(`${baseURL}/customer/applyForLoan`,
         loanData,{
           headers:{
               "Content-Type":'application/json'
@@ -111,7 +111,7 @@ export const AuthProvider =  ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, register, login, logout, token}}>
+        <AuthContext.Provider value={{user, register, login, logout, token,applyForLoan}}>
             {children}
         </AuthContext.Provider>
     )
