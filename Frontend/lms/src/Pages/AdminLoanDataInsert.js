@@ -10,20 +10,25 @@ export const AdminLoanDataInsert = () => {
     const [loanId, setLoanId] = useState('')
     const [loanType, setLoanType] = useState("Furniture");
     const [duration, setDuration] = useState('');
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
             LoanId: loanId,
             LoanType: loanType,
-            DurationInYears: duration
+            DurationInYears: Number(duration)
         };
 
         try {
-            const resp = await axios.put(`${baseURL}/AddLoanCard`, data, {
+            const resp = await axios.post(`${baseURL}/AddLoanCard`, data, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
             console.log(resp)
+            setSuccessMessage(`Loan Card with Loan ID = ${resp.data} added successfully!`);
+            setShowSuccessMessage(true);
         } catch (err) {
             console.log(err)
         }
@@ -40,7 +45,7 @@ export const AdminLoanDataInsert = () => {
 
             <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
                 <label>Loan Id
-                    <input type="text" name="loanId" value={loanId} onChange={(e) => setLoanId(e.target.value)}></input>
+                    <input disabled type="text" name="loanId" value={loanId} onChange={(e) => setLoanId(e.target.value)}></input>
                 </label>
                 <label>Loan Type
                     <select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
@@ -52,6 +57,7 @@ export const AdminLoanDataInsert = () => {
                 <label>Duration
                     <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
+                {showSuccessMessage && <div class="alert alert-success" role="alert">{successMessage}</div>}
                 <button onClick={(e) => handleSubmit(e)}>Add Data</button>
                 <Link to="/AdminLoanDataEdit">
                     <button>Loan Card Management</button>
