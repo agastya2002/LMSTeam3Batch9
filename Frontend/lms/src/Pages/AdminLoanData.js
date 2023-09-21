@@ -4,7 +4,7 @@ import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 
-export const AdminEditLoan = () => {
+export const AdminLoanData = () => {
 
   const [loanCards,setLoanCards] = useState([])
   // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
@@ -109,4 +109,4 @@ export const AdminEditLoan = () => {
 };
 
 
-export default AdminEditLoan;
+export default AdminLoanData;

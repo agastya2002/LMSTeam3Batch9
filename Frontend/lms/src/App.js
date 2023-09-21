@@ -9,7 +9,7 @@ import Profile from './Pages/Profile';
 import UserDashboard from './Pages/UserDashboard';
 import AdminDashboard from './Pages/AdminDashboard';
 import ApplyForLoan from './Pages/ApplyForLoan';
-import AdminEditLoan from './Pages/AdminEditLoan';
+import AdminLoanData from './Pages/AdminLoanData';
 import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 import ItemMaster from './Pages/ItemMaster';
@@ -33,10 +33,10 @@ function App() {
           <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased/></ProtectedRoute>} />
           <Route path="/ItemMaster" element={<ProtectedRoute><ItemMaster/></ProtectedRoute>} />
           <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement/></ProtectedRoute>} />
-          <Route path="/LoanCardManagement" element={<ProtectedRoute><AdminEditLoan/></ProtectedRoute>} />
+          <Route path="/LoanCardManagement" element={<ProtectedRoute><AdminLoanData/></ProtectedRoute>} />
           {/* <Route path="/LoanCardManagement" element={<ProtectedRoute><LoanCardManagement/></ProtectedRoute>} />*/}
           <Route path="/AdminItemsMaster" element={<ProtectedRoute><AdminItemMaster/></ProtectedRoute>} />
-          <Route path="/adminEditLoan" element={<AdminEditLoan/>} />
+          <Route path="/AdminLoanData" element={<AdminLoanData/>} />
           
         </Routes>
         </BrowserRouter>
