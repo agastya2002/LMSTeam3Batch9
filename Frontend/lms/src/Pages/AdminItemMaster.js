@@ -28,9 +28,30 @@ export const AdminItemMaster = () => {
         setMake(event.target.value);
     }
 
-    const handleSubmit = ()=>{
-       console.log("HI")
-        
+    const handleSubmit = async(e)=>{
+      e.preventDefault()
+       const data = {
+          ItemId:itemId,
+          ItemDescription:desc,
+          ItemValuation:valuation,
+          IssueStatus:status,
+          ItemMake:make,
+          ItemCategory:category
+       }  
+
+       try{
+          const resp = await axios.put(`${baseURL}/UpdateItem`,data,{
+              headers:{"Authorization":`Bearer ${token}`}
+          })
+          console.log(resp)
+          if(resp.status == 200){
+              const editedItems = items.filter(i => i.itemId != data.ItemId)
+              setItems([...editedItems,{itemId:data.ItemId,itemDescription:data.ItemDescription,itemValuation:data.ItemValuation,issueStatus:data.IssueStatus,itemMake:data.ItemMake,itemCategory:data.ItemCategory}])
+          }
+        }catch(err){
+          console.log(err)
+        }
+
     }
 
   useEffect(()=>{
@@ -113,7 +134,7 @@ export const AdminItemMaster = () => {
             <option value = "Plastic">Plastic</option>
         </select>
         </label>
-        <button onClick={(e)=>handleSubmit(e)}>Add Data</button>
+        <button onClick={(e)=>handleSubmit(e)}>Edit Data</button>
         <button onClick={()=>setEdit(false)}>Cancel</button>
     </form>
         :null
