@@ -16,5 +16,7 @@ namespace LMS.Services
         public List<LoanCardMaster> GetLoanCards();
 
         public Boolean DeleteItemById(string id);
+
+        public string AddLoanCard(LoanCardViewModel e);
     }
 }

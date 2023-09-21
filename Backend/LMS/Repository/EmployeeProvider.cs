@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Runtime.Intrinsics.Arm;
 
 namespace LMS.Data
 {
@@ -376,6 +377,37 @@ namespace LMS.Data
             {
                 Console.WriteLine(exp.Message);
                 return false;
+            }
+        }
+
+        public string AddLoanCard(LoanCardViewModel e)
+        {
+            int min = 1000;
+            int max = 9999;
+            Random _rdm = new Random();
+            string _loanId;
+
+            try
+            {
+                var query5 = from loan in _db.LoanCardMasters
+                             select loan.LoanId;
+                List<String> _loanIDS = query5.ToList();
+
+                _loanId = "L" + _rdm.Next(min, max);
+
+                while (_loanIDS.Contains(_loanId))
+                {
+                    _loanId = "L" + _rdm.Next(min, max);
+                }
+                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears };
+                _db.LoanCardMasters.Add(newLoan);
+                _db.SaveChanges();
+
+                return _loanId;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
             }
         }
     }

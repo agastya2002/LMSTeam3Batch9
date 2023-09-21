@@ -106,5 +106,19 @@ namespace LMS.Controllers
             }
             else { return BadRequest(); }
         }
+
+        [HttpPost("AddLoanCard")]
+        public IActionResult AddLoanCard(LoanCardViewModel e)
+        {
+            var res = _adminService.AddLoanCard(e);
+            if (res[0] == 'L')
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest(res);
+            }
+        }
     }
 }

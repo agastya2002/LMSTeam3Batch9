@@ -25,7 +25,7 @@ const UserDashboard = () => {
                     <button>Customer Data Management</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
-                <Link to="/AdminLoanData">
+                <Link to="/AdminLoanDataEdit">
                     <button>Loan Card Management</button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;

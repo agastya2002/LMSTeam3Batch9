@@ -9,7 +9,7 @@ import Profile from './Pages/Profile';
 import UserDashboard from './Pages/UserDashboard';
 import AdminDashboard from './Pages/AdminDashboard';
 import ApplyForLoan from './Pages/ApplyForLoan';
-import AdminLoanData from './Pages/AdminLoanData';
+import AdminLoanDataEdit from './Pages/AdminLoanDataEdit';
 import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 import ItemMaster from './Pages/ItemMaster';
@@ -33,7 +33,7 @@ function App() {
             <Route path="/ViewItem" element={<ProtectedRoute><CustomerItemsPurchased /></ProtectedRoute>} />
             <Route path="/ItemMaster" element={<ProtectedRoute><ItemMaster /></ProtectedRoute>} />
             <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement /></ProtectedRoute>} />
-            <Route path="/AdminLoanData" element={<ProtectedRoute><AdminLoanData /></ProtectedRoute>} />
+            <Route path="/AdminLoanDataEdit" element={<ProtectedRoute><AdminLoanDataEdit /></ProtectedRoute>} />
             <Route path="/AdminItemsMaster" element={<ProtectedRoute><AdminItemMaster /></ProtectedRoute>} />
 
           </Routes>
