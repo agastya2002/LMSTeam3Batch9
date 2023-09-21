@@ -15,6 +15,7 @@ import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 import ItemMaster from './Pages/ItemMaster';
 import CustomerDataManagement from './Pages/CustmerDataManagement';
 import AdminItemMaster from './Pages/AdminItemMaster';
+import AdminLoanDataInsert from './Pages/AdminLoanDataInsert';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/ItemMaster" element={<ProtectedRoute><ItemMaster /></ProtectedRoute>} />
             <Route path="/CustomerDataManagement" element={<ProtectedRoute><CustomerDataManagement /></ProtectedRoute>} />
             <Route path="/AdminLoanDataEdit" element={<ProtectedRoute><AdminLoanDataEdit /></ProtectedRoute>} />
+            <Route path="/AdminLoanDataInsert" element={<ProtectedRoute><AdminLoanDataInsert /></ProtectedRoute>} />
             <Route path="/AdminItemsMaster" element={<ProtectedRoute><AdminItemMaster /></ProtectedRoute>} />
 
           </Routes>

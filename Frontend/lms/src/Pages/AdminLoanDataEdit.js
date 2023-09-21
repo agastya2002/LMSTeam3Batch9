@@ -3,6 +3,7 @@ import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export const AdminLoanDataEdit = () => {
 
@@ -133,6 +134,10 @@ export const AdminLoanDataEdit = () => {
           <span>Department: {user?.department}</span> */}
       </div>
       <TableComponent headerData={["Loan ID", "Loan Type", "Duration"]} tableData={responseFilter(loanCards, ["loanId", "loanType", "durationInYears"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editLoan(e) }, { actionName: "Delete", actionCallback: (e) => deleteLoan(e) }]} />
+
+      <Link to="/AdminLoanDataInsert">
+        <button>Add Loan Card</button>
+      </Link>
       {/*         <table>
           <thead>
             <tr>

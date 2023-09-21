@@ -3,6 +3,7 @@ import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
 
 export const AdminLoanDataInsert = () => {
 
@@ -13,13 +14,13 @@ export const AdminLoanDataInsert = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
-            loanId: loanId,
-            loanType: loanType,
-            durationInYears: duration
+            LoanId: loanId,
+            LoanType: loanType,
+            DurationInYears: duration
         };
 
         try {
-            const resp = await axios.put(`${baseURL}/UpdateLoan`, data, {
+            const resp = await axios.put(`${baseURL}/AddLoanCard`, data, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
             console.log(resp)
@@ -28,11 +29,6 @@ export const AdminLoanDataInsert = () => {
         }
 
     }
-
-    useEffect(() => {
-        getLoanCards()
-    }, [])
-
     const baseURL = "https://localhost:7223/api/admin"
     const { token } = useAuth();
 
@@ -56,8 +52,10 @@ export const AdminLoanDataInsert = () => {
                 <label>Duration
                     <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
-                <button onClick={(e) => handleSubmit(e)}>Edit Data</button>
-                <button onClick={() => setEdit(false)}>Cancel</button>
+                <button onClick={(e) => handleSubmit(e)}>Add Data</button>
+                <Link to="/AdminLoanDataEdit">
+                    <button>Loan Card Management</button>
+                </Link>
             </form>
         </div>
     );
