@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export const AdminLoanDataInsert = () => {
 
+    const [employeeId, setEmployeeId] = useState('')
     const [loanId, setLoanId] = useState('')
     const [loanType, setLoanType] = useState("furniture");
     const [duration, setDuration] = useState('');
@@ -17,6 +18,7 @@ export const AdminLoanDataInsert = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
+            EmployeeId: employeeId,
             LoanId: loanId,
             LoanType: loanType,
             DurationInYears: Number(duration)
@@ -44,6 +46,9 @@ export const AdminLoanDataInsert = () => {
 
 
             <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+                <label>Employee Id
+                    <input type="text" name="employeeId" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}></input>
+                </label>
                 <label>Loan Id
                     <input disabled type="text" name="loanId" value={loanId} onChange={(e) => setLoanId(e.target.value)}></input>
                 </label>
