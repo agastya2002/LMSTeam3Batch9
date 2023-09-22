@@ -25,8 +25,10 @@ namespace LMS.Controllers
         [HttpPut("UpdateEmployee")]
         public async Task<ActionResult> UpdateEmployee(EditEmployeeViewModel e)
         {
-            _adminService.UpdateEmployee(e);
-            return Ok();
+            string res = _adminService.UpdateEmployee(e);
+            if (res[0]=='E')
+                return Ok(res);
+            else return BadRequest(res);
         }
 
         [HttpPut("UpdateLoan")]
@@ -50,15 +52,32 @@ namespace LMS.Controllers
         [HttpGet("GetEmployees")]
         public async Task<ActionResult> GetEmployees()
         {
-            List<EditEmployeeViewModel> list = _adminService.GetEmployees();
-            return Ok(list);
+            try
+            {
+                List<EditEmployeeViewModel> list = _adminService.GetEmployees();
+                if (list.Count==0) throw new EmployeeNotFoundException("No Employees present in table");
+                return Ok(list);
+            }
+            catch(Exception ex) { 
+                return BadRequest(ex);
+            }
+           
         }
 
         [HttpGet("GetEmployeeById")]
         public async Task<ActionResult> GetEmployeeById(string id)
         {
-            EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
-            return Ok(employee);
+            try
+            {
+                EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
+                if (employee.EmployeeId!=id) throw new EmployeeNotFoundException("Employee with the given ID does not exist");
+                return Ok(employee);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+       
         }
 
         [HttpGet("GetItems")]
@@ -94,6 +113,31 @@ namespace LMS.Controllers
                 return Ok();
             }
             else { return BadRequest(); }
+        }
+
+        [HttpDelete("DeleteItemById")]
+        public IActionResult DeleteItem(string id)
+        {
+            Boolean res = _adminService.DeleteItemById(id);
+            if (res)
+            {
+                return Ok();
+            }
+            else { return BadRequest(); }
+        }
+
+        [HttpPost("AddLoanCard")]
+        public IActionResult AddLoanCard(LoanCardViewModel e)
+        {
+            var res = _adminService.AddLoanCard(e);
+            if (res[0] == 'L')
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest(res);
+            }
         }
     }
 }

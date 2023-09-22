@@ -5,7 +5,7 @@ namespace LMS.Services
 {
     public interface IAdminService
     {
-        public void UpdateEmployee(EditEmployeeViewModel employee);
+        public string UpdateEmployee(EditEmployeeViewModel employee);
         public string UpdateLoan(LoanCardMaster l);
         public string UpdateItem(ItemMaster i);
         public List<EditEmployeeViewModel> GetEmployees();
@@ -15,5 +15,8 @@ namespace LMS.Services
         public List<ItemMaster> GetItems();
         public List<LoanCardMaster> GetLoanCards();
 
+        public Boolean DeleteItemById(string id);
+
+        public string AddLoanCard(LoanCardViewModel e);
     }
 }

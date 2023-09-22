@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Runtime.Intrinsics.Arm;
 
 namespace LMS.Data
 {
@@ -38,12 +40,42 @@ namespace LMS.Data
         {
             try
             {
-                _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // var emp = _db.EmployeeMasters.Include(e => e.EmployeeIssueDetails).Includ
+               var query1 = from item in _db.ItemMasters
+                                join issue in _db.EmployeeIssueDetails
+                                on item.ItemId equals issue.ItemId
+                                where issue.EmployeeId == id
+                                select item;
+             
+                foreach(var item in query1)
+                {
+                    _db.ItemMasters.Remove(item);
+                }
+
+                var query2 = from loan in _db.LoanCardMasters
+                             join issue in _db.EmployeeCardDetails
+                             on loan.LoanId equals issue.LoanId
+                             where issue.EmployeeId == id
+                             select loan;
+
+                foreach(var item in query2)
+                {
+                    _db.LoanCardMasters.Remove(item);
+                }
+
+
+                // _db.EmployeeCardDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeIssueDetails.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeMasters.Where(e => e.EmployeeId == id).ExecuteDelete();
+                _db.EmployeeCredentials.Where(e => e.EmployeeId == id).ExecuteDelete();
+                // _db.EmployeeMasters.Remove(emp);
+                _db.SaveChanges();
                 return true;
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp.Message);
+                Debug.WriteLine(exp.Message);
                 return false;
             }
         }
@@ -65,25 +97,33 @@ namespace LMS.Data
             }
         }
 
-        public void EditEmployee(EditEmployeeViewModel e, String id)
+        public string EditEmployee(EditEmployeeViewModel e, string id)
         {
-            EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
-
-            EmployeeMaster newEmp = new EmployeeMaster()
+            try
             {
-                EmployeeId = e.EmployeeId,
-                EmployeeName = e.EmployeeName,
-                Designation = e.Designation,
-                Department = e.Department,
-                Gender = e.Gender,
-                DateOfBirth = e.DateOfBirth,
-                DateOfJoining = e.DateOfJoining,
-                Employee = ec
-            };
+                EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
 
-            _db.EmployeeMasters.Update(newEmp);
-            _db.SaveChanges();
-            
+                EmployeeMaster newEmp = new EmployeeMaster()
+                {
+                    EmployeeId = e.EmployeeId,
+                    EmployeeName = e.EmployeeName,
+                    Designation = e.Designation,
+                    Department = e.Department,
+                    Gender = e.Gender,
+                    DateOfBirth = e.DateOfBirth,
+                    DateOfJoining = e.DateOfJoining,
+                    Employee = ec
+                };
+
+                _db.EmployeeMasters.Update(newEmp);
+                _db.SaveChanges();
+
+                return id;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
+            }
         }
 
         public string RegisterEmployee(RegisterViewModel e)
@@ -331,6 +371,51 @@ namespace LMS.Data
             {
                 Console.WriteLine(exp.Message);
                 return false;
+            }
+        }
+
+        public bool DeleteItemById(string id)
+        {
+            try
+            {
+                _db.ItemMasters.Where(e => e.ItemId == id).ExecuteDelete();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                return false;
+            }
+        }
+
+        public string AddLoanCard(LoanCardViewModel e)
+        {
+            int min = 1000;
+            int max = 9999;
+            Random _rdm = new Random();
+            string _loanId;
+
+            try
+            {
+                var query5 = from loan in _db.LoanCardMasters
+                             select loan.LoanId;
+                List<String> _loanIDS = query5.ToList();
+
+                _loanId = "L" + _rdm.Next(min, max);
+
+                while (_loanIDS.Contains(_loanId))
+                {
+                    _loanId = "L" + _rdm.Next(min, max);
+                }
+                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears };
+                _db.LoanCardMasters.Add(newLoan);
+                _db.SaveChanges();
+
+                return _loanId;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
             }
         }
     }

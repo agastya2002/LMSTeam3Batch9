@@ -3,17 +3,21 @@ import '../Styles/CustomerDetails.css'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const ApplyForLoan=()=>{
 
     const navigate = useNavigate();
-    const {user, applyForLoan}  = useAuth();
-    const [eID,setEID]=useState("E0001");
-    const [iDesc,setIDesc]=useState("Table");
-    const [iMake,setIMake]=useState("Wooden");
-    const [iCategory,setICategory]=useState("Furniture");
-    const [iValue,setIValue]=useState(1000);
+    const {user, applyForLoan,token}  = useAuth();
+    const[category,setCategory] = useState("Furniture");
+    // const[status,setStatus] = useState("Y");
+    const[make,setMake] = useState("Wood");
+    const [desc,setDesc] = useState('Item Description')
+    const [valuation,setValuation] = useState(0)
     let isDataValid=true;
+
+    const baseURL = "https://localhost:7223/api/customer"
+
 
     // Example JSON object for applying for loan
     // {
@@ -24,17 +28,16 @@ const ApplyForLoan=()=>{
     //     "iValue": 1000
     //   }
 
-    const validateEntries=async ()=>{
+    console.log(token)
+
+    const validateEntries=async (e)=>{
+        e.preventDefault()
         //check employee ID
-        if (!eID.match(/[A-Z]{1}[0-9]/)){
-            alert("Invalid employee ID format!");
-            isDataValid=false;
-        }
-        if(iDesc.length===0){
+        if(desc.length===0){
             alert("Please enter item description!");
             isDataValid=false;
         }
-        if(iValue <= 0){
+        if(valuation.length == 0){
             alert("Item value should be > 0");
             isDataValid=false;
         }
@@ -44,13 +47,13 @@ const ApplyForLoan=()=>{
         }
 
         const loanData = {
-            EmployeeId: eID,
-            iDesc: iDesc,
-            iMake:iMake,
-            iCategory:iCategory,
-            iValue:iValue
+            employeeID:user.userId,
+            itemDescription:desc,
+            itemValue:valuation,
+            itemMake:make,
+            itemCategory:category
         }
-        // const res = applyForLoan(loanData);
+         applyLoan(loanData)
         // if(res) {
         //     while(!user) {}
         //     if(user) {
@@ -58,6 +61,25 @@ const ApplyForLoan=()=>{
         //     }
         // }
         
+    }
+
+    const applyLoan = async(data) => {
+        try{
+            const resp = await axios.post(`${baseURL}/applyForLoan`,
+            data,{
+              headers:{
+                  "Authorization":`Bearer ${token}`
+              }
+            })
+            console.log(resp)
+            // if(resp.status===200){
+            //   return true;
+            // }
+          }
+          catch(err){
+            console.log(err)
+            //return false;
+          }
     }
     return (
         <div>
@@ -68,19 +90,19 @@ const ApplyForLoan=()=>{
             <div className='customer_details'>
                 <div className='employee_details'>
                     <div className='employee_detail'>
-                        <span className='employee_field'>Employee id</span>
-                        <input type="text" id="eid" value={eID} onChange={(e) => setEID(e.target.value)} />
+                        <span className='employee_field'>Item Description</span>
+                        <input type="text" id="iDesc" value={desc} onChange={(e) => setDesc(e.target.value)}/>
                     </div>
                     <div className='employee_detail'>
-                        <span className='employee_field'>Item Description</span>
-                        <input type="text" id="iDesc" value={iDesc} onChange={(e) => setIDesc(e.target.value)}/>
+                    <span className='employee_field'>Item Value</span>
+                        <div><input type="number" id="iValue" value={valuation} onChange={(e) => setValuation(e.target.value)}/></div>
                     </div>
                 </div>
                 <div className='employee_details'>
                     <div className='employee_detail'>
                     <span className='employee_field'>Item Make</span>
                         <div>
-                            <select name="iMake" id="iMake" value={iMake} onChange={(e) => setIMake(e.target.value)}> 
+                            <select name="iMake" id="iMake" value={make} onChange={(e) => setMake(e.target.value)}> 
                                 <option value="glass">Glass</option> 
                                 <option value="plastic">Plastic</option> 
                                 <option value="wood">Wood</option> 
@@ -90,7 +112,7 @@ const ApplyForLoan=()=>{
                     <div className='employee_detail'>
                     <span className='employee_field'>Item Category</span>
                         <div>
-                            <select name="iCategory" id="iCategory" value={iCategory} onChange={(e) => setICategory(e.target.value)}> 
+                            <select name="iCategory" id="iCategory" value={category} onChange={(e) => setCategory(e.target.value)}> 
                                 <option value="crockery">Crockery</option> 
                                 <option value="furniture">Furniture</option>
                                 <option value="stationery">Stationery</option>
@@ -98,14 +120,8 @@ const ApplyForLoan=()=>{
                         </div>
                     </div>
                 </div>
-                <div className='employee_details'>
-                    <div className='employee_detail'>
-                    <span className='employee_field'>Item Value</span>
-                        <div><input type="number" id="iValue" value={iValue} onChange={(e) => setIValue(e.target.value)}/></div>
-                    </div>
-                </div>
                 <div>
-                    <button type="submit" onClick={()=>validateEntries()}>Add Data</button>
+                    <button type="submit" onClick={(e)=>validateEntries(e)}>Add Data</button>
                 </div>
             </div>
         </div>

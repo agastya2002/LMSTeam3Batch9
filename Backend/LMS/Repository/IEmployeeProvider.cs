@@ -17,6 +17,10 @@ namespace LMS.Data
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
         public Boolean DeleteLoanById(String id);
+
+        public Boolean DeleteItemById(String id);
+
+        public string AddLoanCard(LoanCardViewModel e);
         public List<ItemMaster> GetItemsList();
     }
 }

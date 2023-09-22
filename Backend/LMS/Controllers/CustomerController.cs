@@ -36,7 +36,7 @@ namespace LMS.Controllers
         }
 
         [HttpPost("ApplyForLoan")]
-        public IActionResult RegisterEmployee(EmployeeIssueViewModel e)
+        public IActionResult ApplyLoan(EmployeeIssueViewModel e)
         {
             var res = _customerService.ApplyForLoan(e);
             if (res[0]=='I')

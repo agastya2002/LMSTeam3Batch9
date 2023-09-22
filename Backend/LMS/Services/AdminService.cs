@@ -17,9 +17,9 @@ namespace LMS.Services
             return _employeeDataProvider.GetEmployees();
         }
 
-        public void UpdateEmployee(EditEmployeeViewModel employee)
+        public string UpdateEmployee(EditEmployeeViewModel employee)
        {
-            _employeeDataProvider.EditEmployee(employee, employee.EmployeeId);
+            return _employeeDataProvider.EditEmployee(employee, employee.EmployeeId);
         }
         public string UpdateLoan(LoanCardMaster l)
         {
@@ -54,6 +54,16 @@ namespace LMS.Services
         public List<LoanCardMaster> GetLoanCards()
         {
             return _employeeDataProvider.GetLoansList();
+        }
+
+        public bool DeleteItemById(string id)
+        {
+            return _employeeDataProvider.DeleteItemById(id);
+        }
+
+        public string AddLoanCard(LoanCardViewModel e)
+        {
+            return _employeeDataProvider.AddLoanCard(e);
         }
     }
 }
