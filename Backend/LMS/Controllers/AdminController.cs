@@ -127,7 +127,7 @@ namespace LMS.Controllers
         }
 
         [HttpPost("AddLoanCard")]
-        public IActionResult AddLoanCard(LoanCardViewModel e)
+        public IActionResult AddLoanCard(LoanViewModel e)
         {
             var res = _adminService.AddLoanCard(e);
             if (res[0] == 'L')

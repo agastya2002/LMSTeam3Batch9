@@ -388,7 +388,7 @@ namespace LMS.Data
             }
         }
 
-        public string AddLoanCard(LoanCardViewModel e)
+        public string AddLoanCard(LoanViewModel e)
         {
             int min = 1000;
             int max = 9999;
@@ -409,6 +409,10 @@ namespace LMS.Data
                 }
                 LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears };
                 _db.LoanCardMasters.Add(newLoan);
+                _db.SaveChanges();
+
+                EmployeeCardDetail newCard = new EmployeeCardDetail() { EmployeeId = e.EmployeeId, LoanId = _loanId, CardIssueDate = DateTime.Now };
+                _db.EmployeeCardDetails.Add(newCard);
                 _db.SaveChanges();
 
                 return _loanId;

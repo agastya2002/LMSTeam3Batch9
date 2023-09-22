@@ -61,7 +61,7 @@ namespace LMS.Services
             return _employeeDataProvider.DeleteItemById(id);
         }
 
-        public string AddLoanCard(LoanCardViewModel e)
+        public string AddLoanCard(LoanViewModel e)
         {
             return _employeeDataProvider.AddLoanCard(e);
         }

@@ -9,5 +9,7 @@
         public int? DurationInYears { get; set; }
 
         public DateTime? CardIssueDate { get; set; }
+
+        public string? EmployeeId { get; set; }
     }
 }
