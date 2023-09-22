@@ -17,5 +17,6 @@ namespace LMS.Data
         public List<ItemMaster> GetItemDetailsById(String id);
         public List<LoanViewModel> GetLoanDeatilsById(String id);
         public Boolean DeleteLoanById(String id);
+        public List<ItemMaster> GetItemsList();
     }
 }
