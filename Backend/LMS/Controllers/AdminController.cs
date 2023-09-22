@@ -50,15 +50,32 @@ namespace LMS.Controllers
         [HttpGet("GetEmployees")]
         public async Task<ActionResult> GetEmployees()
         {
-            List<EditEmployeeViewModel> list = _adminService.GetEmployees();
-            return Ok(list);
+            try
+            {
+                List<EditEmployeeViewModel> list = _adminService.GetEmployees();
+                if (list.Count==0) throw new EmployeeNotFoundException("No Employees present in table");
+                return Ok(list);
+            }
+            catch(Exception ex) { 
+                return BadRequest(ex);
+            }
+           
         }
 
         [HttpGet("GetEmployeeById")]
         public async Task<ActionResult> GetEmployeeById(string id)
         {
-            EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
-            return Ok(employee);
+            try
+            {
+                EditEmployeeViewModel employee = _adminService.GetEmployeeById(id);
+                if (employee.EmployeeId!=id) throw new EmployeeNotFoundException("Employee with the given ID does not exist");
+                return Ok(employee);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+       
         }
 
         [HttpGet("GetItems")]
