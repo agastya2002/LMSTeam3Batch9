@@ -33,7 +33,7 @@ export const CustomerItemsPurchased = () => {
          issue_id: "I1001",
          item_description: "Tea Table",
          item_make: "Wooden",
-         item_category: "Furniture",
+         item_category: "furniture",
          item_valuation: "5000",
        },
        {

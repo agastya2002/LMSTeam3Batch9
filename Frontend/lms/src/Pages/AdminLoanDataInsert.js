@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export const AdminLoanDataInsert = () => {
 
     const [loanId, setLoanId] = useState('')
-    const [loanType, setLoanType] = useState("Furniture");
+    const [loanType, setLoanType] = useState("furniture");
     const [duration, setDuration] = useState('');
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -49,9 +49,9 @@ export const AdminLoanDataInsert = () => {
                 </label>
                 <label>Loan Type
                     <select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Crockery">Crockery</option>
-                        <option value="Stationery">Stationery</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="crockery">Crockery</option>
+                        <option value="stationery">Stationery</option>
                     </select>
                 </label>
                 <label>Duration

@@ -6,28 +6,28 @@ import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-const ItemMaster =()=>{
-    const[inputs,setInputs] = useState({});
-    const[category,setCategory] = useState("Furniture");
-    const[status,setStatus] = useState("Y");
-    const[make,setMake] = useState("Wood");
-    const [desc,setDesc] = useState('Item Description')
-    const [valuation,setValuation] = useState('Item Valuation')
+const ItemMaster = () => {
+    const [inputs, setInputs] = useState({});
+    const [category, setCategory] = useState("furniture");
+    const [status, setStatus] = useState("Y");
+    const [make, setMake] = useState("wood");
+    const [desc, setDesc] = useState('Item Description')
+    const [valuation, setValuation] = useState('Item Valuation')
 
-    const {user,token} = useAuth()
+    const { user, token } = useAuth()
 
     const baseURL = "https://localhost:7223/api/customer"
 
 
-    const handleCategoryChange = (event)=>{
+    const handleCategoryChange = (event) => {
         setCategory(event.target.value)
     }
 
-    const handleItemStatus = (event)=>{
+    const handleItemStatus = (event) => {
         setStatus(event.target.value);
     }
 
-    const handleItemMake = (event)=>{
+    const handleItemMake = (event) => {
         setMake(event.target.value);
     }
 
@@ -37,44 +37,44 @@ const ItemMaster =()=>{
     //     setInputs(values => ({...values,[name]:value}))
     // }
 
-    const handleSubmit = async(event)=>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
-            EmployeeID:user.userId,
-            ItemDescription:desc,
-            ItemValuation:valuation,
-            ItemMake:make,
-            ItemCategory:category
+            EmployeeID: user.userId,
+            ItemDescription: desc,
+            ItemValuation: valuation,
+            ItemMake: make,
+            ItemCategory: category
         }
 
-        try{
-            const resp = await axios.post(`${baseURL}/ApplyForLoan`,data,{
-                headers:{"Authorization":`Bearer ${token}`}
+        try {
+            const resp = await axios.post(`${baseURL}/ApplyForLoan`, data, {
+                headers: { "Authorization": `Bearer ${token}` }
             })
-            console.log(resp)          
-          }catch(err){
+            console.log(resp)
+        } catch (err) {
             console.log(err)
-          }
+        }
 
     }
 
-    return(
+    return (
         <div>
             <h1>Loan Management Application</h1>
             <h2>Item Master Data Details</h2>
             <form>
                 <label>Item Category:
-                <select value = {category} onChange = {handleCategoryChange}>
-                    <option value = "Furniture">Furniture</option>
-                    <option value = "Crockery">Crockery</option>
-                    <option value = "Stationery">Stationery</option>
-                </select>
+                    <select value={category} onChange={handleCategoryChange}>
+                        <option value="furniture">Furniture</option>
+                        <option value="crockery">Crockery</option>
+                        <option value="stationery">Stationery</option>
+                    </select>
                 </label>
                 <label>Item Description
-                    <input type = "text" name = "itemDescription" value = {desc} onChange = {(e)=>setDesc(e.target.value)}></input>
+                    <input type="text" name="itemDescription" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
                 </label>
                 <label>Item Value
-                    <input type = "text" name = "itemValue" value = {valuation} onChange = {(e)=>setValuation(e.target.value)}></input>
+                    <input type="text" name="itemValue" value={valuation} onChange={(e) => setValuation(e.target.value)}></input>
                 </label>
                 {/* <label>Issue Status:
                 <select value = {status} onChange = {handleItemStatus}>
@@ -83,13 +83,13 @@ const ItemMaster =()=>{
                 </select>
                 </label> */}
                 <label>Item Make:
-                <select value = {make} onChange = {handleItemMake}>
-                    <option value = "Wood">Wood</option>
-                    <option value = "Glass">Glass</option>
-                    <option value = "Plastic">Plastic</option>
-                </select>
+                    <select value={make} onChange={handleItemMake}>
+                        <option value="wood">Wood</option>
+                        <option value="glass">Glass</option>
+                        <option value="plastic">Plastic</option>
+                    </select>
                 </label>
-                <button onClick={(e)=>handleSubmit(e)}>Add Data</button>
+                <button onClick={(e) => handleSubmit(e)}>Add Data</button>
             </form>
         </div>
     )

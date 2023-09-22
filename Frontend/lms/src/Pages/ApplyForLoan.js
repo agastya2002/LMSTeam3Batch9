@@ -9,9 +9,9 @@ const ApplyForLoan=()=>{
 
     const navigate = useNavigate();
     const {user, applyForLoan,token}  = useAuth();
-    const[category,setCategory] = useState("Furniture");
+    const[category,setCategory] = useState("furniture");
     // const[status,setStatus] = useState("Y");
-    const[make,setMake] = useState("Wood");
+    const[make,setMake] = useState("wood");
     const [desc,setDesc] = useState('Item Description')
     const [valuation,setValuation] = useState(0)
     let isDataValid=true;
