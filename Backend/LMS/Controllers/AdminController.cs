@@ -26,7 +26,7 @@ namespace LMS.Controllers
         public async Task<ActionResult> UpdateEmployee(EditEmployeeViewModel e)
         {
             string res = _adminService.UpdateEmployee(e);
-            if (res[0]=='L')
+            if (res[0]=='E')
                 return Ok(res);
             else return BadRequest(res);
         }
