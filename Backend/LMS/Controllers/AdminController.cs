@@ -25,8 +25,10 @@ namespace LMS.Controllers
         [HttpPut("UpdateEmployee")]
         public async Task<ActionResult> UpdateEmployee(EditEmployeeViewModel e)
         {
-            _adminService.UpdateEmployee(e);
-            return Ok();
+            string res = _adminService.UpdateEmployee(e);
+            if (res[0]=='L')
+                return Ok(res);
+            else return BadRequest(res);
         }
 
         [HttpPut("UpdateLoan")]

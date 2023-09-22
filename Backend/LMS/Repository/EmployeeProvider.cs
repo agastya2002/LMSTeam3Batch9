@@ -97,25 +97,33 @@ namespace LMS.Data
             }
         }
 
-        public void EditEmployee(EditEmployeeViewModel e, String id)
+        public string EditEmployee(EditEmployeeViewModel e, string id)
         {
-            EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
-
-            EmployeeMaster newEmp = new EmployeeMaster()
+            try
             {
-                EmployeeId = e.EmployeeId,
-                EmployeeName = e.EmployeeName,
-                Designation = e.Designation,
-                Department = e.Department,
-                Gender = e.Gender,
-                DateOfBirth = e.DateOfBirth,
-                DateOfJoining = e.DateOfJoining,
-                Employee = ec
-            };
+                EmployeeCredential ec = _db.EmployeeCredentials.Find(id);
 
-            _db.EmployeeMasters.Update(newEmp);
-            _db.SaveChanges();
-            
+                EmployeeMaster newEmp = new EmployeeMaster()
+                {
+                    EmployeeId = e.EmployeeId,
+                    EmployeeName = e.EmployeeName,
+                    Designation = e.Designation,
+                    Department = e.Department,
+                    Gender = e.Gender,
+                    DateOfBirth = e.DateOfBirth,
+                    DateOfJoining = e.DateOfJoining,
+                    Employee = ec
+                };
+
+                _db.EmployeeMasters.Update(newEmp);
+                _db.SaveChanges();
+
+                return id;
+            }
+            catch (Exception exp)
+            {
+                return exp.Message;
+            }
         }
 
         public string RegisterEmployee(RegisterViewModel e)
