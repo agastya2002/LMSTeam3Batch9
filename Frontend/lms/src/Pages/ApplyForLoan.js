@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import swal from 'sweetalert';
 
 const ApplyForLoan=()=>{
 
@@ -43,11 +44,11 @@ const ApplyForLoan=()=>{
         e.preventDefault()
         //check employee ID
         if(desc.length===0){
-            alert("Please enter item description!");
+            swal("Validation Failed","Please enter item description!","error");
             isDataValid=false;
         }
-        if(valuation.length == 0){
-            alert("Item value should be > 0");
+        if(valuation > 0){
+            swal("Validation Failed","Item value should be > 0","error");
             isDataValid=false;
         }
 
@@ -80,12 +81,12 @@ const ApplyForLoan=()=>{
                   "Authorization":`Bearer ${token}`
               }
             })
-            console.log(resp)
-            // if(resp.status===200){
-            //   return true;
-            // }
+            if(resp.status===200){
+              swal("Application Success","Your Loan Application has been added","success")
+            }
           }
           catch(err){
+            swal("Application error","Sommething went wrong","error")
             console.log(err)
             //return false;
           }

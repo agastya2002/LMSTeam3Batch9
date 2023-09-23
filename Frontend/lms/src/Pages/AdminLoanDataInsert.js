@@ -4,6 +4,7 @@ import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
 
 export const AdminLoanDataInsert = () => {
 
@@ -28,10 +29,11 @@ export const AdminLoanDataInsert = () => {
             const resp = await axios.post(`${baseURL}/AddLoanCard`, data, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
-            console.log(resp)
-            setSuccessMessage(`Loan Card with Loan ID = ${resp.data} added successfully!`);
-            setShowSuccessMessage(true);
+            if(resp.status==200){
+                swal("Loan Card Added",`Loan Card with Id ${resp.data} has been added successfully`,"success")
+            }
         } catch (err) {
+            swal("Failed to Add","Something Unexpected occured.Please try again!","error")
             console.log(err)
         }
 

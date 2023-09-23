@@ -4,6 +4,7 @@ import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import swal from "sweetalert";
 
 export const AdminLoanDataEdit = () => {
 
@@ -46,10 +47,12 @@ export const AdminLoanDataEdit = () => {
       })
       console.log(resp)
       if (resp.status == 200) {
+        swal("Edit Successful","The Loan Card details has been edited succesfully","success")
         const edittedLoanCards = loanCards.filter(l => l.loanId != data.loanId)
         setLoanCards([...edittedLoanCards, { loanId: data.loanId, loanType: data.loanType, durationInYears: data.durationInYears }])
       }
     } catch (err) {
+      swal("Edit not succesfull","Some unexpected error occured, please try again","error")
       console.log(err)
     }
 
@@ -73,6 +76,7 @@ export const AdminLoanDataEdit = () => {
       console.log(resp)
       setLoanCards(resp.data)
     } catch (err) {
+      swal("Failed fetching Loan Cards","Some unexpected error occured, please try again","error")
       console.log(err)
     }
   }
@@ -95,10 +99,12 @@ export const AdminLoanDataEdit = () => {
       })
       console.log(resp)
       if (resp.status == 200) {
+        swal("Delete Successful","The Loan Card details has been deleted succesfully","success")
         const edittedLoanCards = loanCards.filter(loanCard => loanCard.loanId !== val.loanId);
         setLoanCards(edittedLoanCards);
       }
     } catch (err) {
+      swal("Delete not succesfull","Some unexpected error occured, please try again","error")
       console.log(err)
     }
   }
