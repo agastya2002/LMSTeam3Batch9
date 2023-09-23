@@ -8,14 +8,15 @@ import responseFilter from "../Helpers/responseFilter";
 export const CustomerItemsPurchased = () => {
 
     const navigate = useNavigate();
-    const {logout, user, token} = useAuth();
+    // const {logout, user, token} = useAuth();
+    const {logout} = useAuth();
 
     const [items,setItems] = useState([])
 
     
     const baseURL = "https://localhost:7223/api/customer"
 
-    const getItems = async () => {
+    const getItems = async (token, user) => {
         try{
         const resp = await axios.get(`${baseURL}/GetPurchasedItems?id=${user.userId}`,{
             headers:{"Authorization":`Bearer ${token}`}
@@ -25,9 +26,12 @@ export const CustomerItemsPurchased = () => {
         console.log(err)
       }
     }
-    useEffect(()=>{
-      getItems()
-    },[]); 
+    useEffect(() => {
+      const sessionToken=sessionStorage.getItem('token');
+      const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+      getItems(sessionToken, sessionUser);
+    }, []);
+
      const iitems = [
        {
          issue_id: "I1001",

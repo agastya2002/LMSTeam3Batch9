@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,11 +14,19 @@ const ItemMaster = () => {
     const [desc, setDesc] = useState('Item Description')
     const [valuation, setValuation] = useState('Item Valuation')
 
-    const { user, token } = useAuth()
+    // const { user, token } = useAuth()
+    const [token, setToken] =useState("init val");
+    const [user, setUser] =useState({});
 
     const baseURL = "https://localhost:7223/api/customer"
 
-
+    useEffect(() => {
+        const sessionToken=sessionStorage.getItem('token');
+        const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+        setToken(sessionToken);
+        setUser(sessionUser);
+      }, []);
+      
     const handleCategoryChange = (event) => {
         setCategory(event.target.value)
     }

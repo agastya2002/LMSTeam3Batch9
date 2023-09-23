@@ -25,11 +25,24 @@ export const AuthProvider =  ({ children }) => {
     // };
 
     const updateUser = (user) => {
-      setUser(user)
+      setUser(user);
+      if(user){
+        sessionStorage.setItem("user", JSON.stringify(user));
+      }
+      else{
+        sessionStorage.removeItem("user");
+      }
+      
     }
 
     const updateToken = (token) => {
-      setToken(token)
+      setToken(token);
+      if(token){
+        sessionStorage.setItem("token", token);
+      }
+      else{
+        sessionStorage.removeItem("token");
+      }
     }
 
 
@@ -72,8 +85,8 @@ export const AuthProvider =  ({ children }) => {
         if(resp.status===200){
           // updateUserId(resp.data.user_Id);
           updateToken (resp.data.token);
-        //  updateUserRole(resp.data.role);
-         updateUser({userId:resp.data.user_Id,userRole:resp.data.role})
+          //  updateUserRole(resp.data.role);
+          updateUser({userId:resp.data.user_Id,userRole:resp.data.role})
           return resp.data.role;
         }
       }
@@ -85,8 +98,8 @@ export const AuthProvider =  ({ children }) => {
     }
 
     const logout = () => {
-        setUser(null);
-        setToken(null)
+        updateUser(null);
+        updateToken(null);
     };
 
     const  applyForLoan = async (loanData) => {

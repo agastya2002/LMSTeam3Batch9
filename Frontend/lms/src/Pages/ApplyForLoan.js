@@ -8,7 +8,10 @@ import axios from 'axios'
 const ApplyForLoan=()=>{
 
     const navigate = useNavigate();
-    const {user, applyForLoan,token}  = useAuth();
+    // const {user, applyForLoan,token}  = useAuth();
+    const {applyForLoan}  = useAuth();
+    const [token, setToken] =useState("init val");
+    const [user, setUser] =useState({});
     const[category,setCategory] = useState("furniture");
     // const[status,setStatus] = useState("Y");
     const[make,setMake] = useState("wood");
@@ -16,7 +19,13 @@ const ApplyForLoan=()=>{
     const [valuation,setValuation] = useState(0)
     let isDataValid=true;
 
-    const baseURL = "https://localhost:7223/api/customer"
+    const baseURL = "https://localhost:7223/api/customer";
+    useEffect(() => {
+        const sessionToken=sessionStorage.getItem('token');
+        const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+        setToken(sessionToken);
+        setUser(sessionUser);
+      }, []);
 
 
     // Example JSON object for applying for loan

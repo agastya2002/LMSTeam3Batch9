@@ -55,14 +55,17 @@ export const AdminLoanDataEdit = () => {
 
   }
 
+  const baseURL = "https://localhost:7223/api/admin"
+  // const { token } = useAuth();
+  const [token, setToken] =useState("init val");
+
   useEffect(() => {
-    getLoanCards()
+    const sessionToken=sessionStorage.getItem('token');
+    setToken(sessionToken);
+    getLoanCards(sessionToken)
   }, [])
 
-  const baseURL = "https://localhost:7223/api/admin"
-  const { token } = useAuth();
-
-  const getLoanCards = async () => {
+  const getLoanCards = async (token) => {
     try {
       const resp = await axios.get(`${baseURL}/GetLoans`, {
         headers: { "Authorization": `Bearer ${token}` }

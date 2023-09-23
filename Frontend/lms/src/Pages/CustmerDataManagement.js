@@ -23,12 +23,13 @@ const CustomerDataManagement=()=>{
     let isDataValid=true;
 
     const baseURL = "https://localhost:7223/api/admin"
-    const {logout, user, token,register} = useAuth();
-
+    // const {logout, user, token,register} = useAuth();
+    const {logout,register} = useAuth();
+    const [token, setToken] =useState("init val");
 
     console.log(emps)
 
-    const getEmployees = async () => {
+    const getEmployees = async (token) => {
         try{
         const resp = await axios.get(`${baseURL}/GetEmployees`,{
             headers:{"Authorization":`Bearer ${token}`}
@@ -53,10 +54,11 @@ const CustomerDataManagement=()=>{
       }
     }
 
-
-    useEffect(()=>{
-        getEmployees()
-    },[])
+    useEffect(() => {
+        const sessionToken=sessionStorage.getItem('token');
+        setToken(sessionToken);
+        getEmployees(sessionToken);
+      }, []);
 
     const validateEntries=async ()=>{
         if(eName.length===0){

@@ -37,7 +37,13 @@ export const AdminLoanDataInsert = () => {
 
     }
     const baseURL = "https://localhost:7223/api/admin"
-    const { token } = useAuth();
+    // const { token } = useAuth();
+    const [token, setToken] =useState("init val");
+
+    useEffect(() => {
+        const sessionToken=sessionStorage.getItem('token');
+        setToken(sessionToken);
+      }, []);
 
     return (
         <div>
@@ -62,7 +68,7 @@ export const AdminLoanDataInsert = () => {
                 <label>Duration
                     <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
-                {showSuccessMessage && <div class="alert alert-success" role="alert">{successMessage}</div>}
+                {showSuccessMessage && <div className="alert alert-success" role="alert">{successMessage}</div>}
                 <button onClick={(e) => handleSubmit(e)}>Add Data</button>
                 <Link to="/AdminLoanDataEdit">
                     <button>Loan Card Management</button>

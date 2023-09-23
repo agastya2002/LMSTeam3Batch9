@@ -54,14 +54,17 @@ export const AdminItemMaster = () => {
 
   }
 
+  const baseURL = "https://localhost:7223/api/admin"
+  // const { token } = useAuth();
+  const [token, setToken] =useState("init val");
+
   useEffect(() => {
-    getItems()
+    const sessionToken=sessionStorage.getItem('token');
+    setToken(sessionToken);
+    getItems(sessionToken);
   }, [])
 
-  const baseURL = "https://localhost:7223/api/admin"
-  const { token } = useAuth();
-
-  const getItems = async () => {
+  const getItems = async (token) => {
     try {
       const resp = await axios.get(`${baseURL}/GetItems`, {
         headers: { "Authorization": `Bearer ${token}` }

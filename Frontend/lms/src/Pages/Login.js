@@ -9,7 +9,8 @@ const Login=()=>{
     const navigate = useNavigate();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    const {user, login} = useAuth();
+    // const {user, login} = useAuth();
+    const {login} = useAuth();
     let isDataValid=true;
 
 

@@ -6,14 +6,16 @@ import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 export const CustomerLoanCards = () => {
   const navigate = useNavigate();
-  const { logout, user, token } = useAuth();
+  // const { logout, user, token } = useAuth();
+  const { logout } = useAuth();
 
   const [loanCards, setLoanCards] = useState([])
 
 
   const baseURL = "https://localhost:7223/api/customer"
+  
 
-  const getLoans = async () => {
+  const getLoans = async (token, user) => {
     try {
       const resp = await axios.get(`${baseURL}/GetLoans?id=${user.userId}`, {
         headers: { "Authorization": `Bearer ${token}` }
@@ -24,8 +26,10 @@ export const CustomerLoanCards = () => {
     }
   }
   useEffect(() => {
-    getLoans()
-  }, [])
+    const sessionToken=sessionStorage.getItem('token');
+    const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+    getLoans(sessionToken, sessionUser);
+  }, []);
 
   console.log(loanCards)
   // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };

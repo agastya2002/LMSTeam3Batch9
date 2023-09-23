@@ -9,7 +9,8 @@ import axios from 'axios';
 const UserDashboard =()=>{
 
     const navigate = useNavigate();
-    const {logout, user, token} = useAuth();
+    // const {logout, user, token} = useAuth();
+    const {logout} = useAuth();
 
     const userLogout=()=>{
         logout();

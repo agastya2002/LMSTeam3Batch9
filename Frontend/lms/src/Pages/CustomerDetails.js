@@ -7,7 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 const CustomerDetails=()=>{
 
     const navigate = useNavigate();
-    const {user, register}  = useAuth();
+    // const {user, register}  = useAuth();
+    const {register}  = useAuth();
+    const [user, setUser] =useState({});
+
     const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
@@ -18,6 +21,11 @@ const CustomerDetails=()=>{
     const [dob,setDob]=useState("");
     const [doj,setDoj]=useState("");
     let isDataValid=true;
+
+    useEffect(() => {
+        const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+        setUser(sessionUser);
+      }, []);
 
     // Example JSON object for registering employee
     // {
