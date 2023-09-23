@@ -16,7 +16,6 @@ import ItemMaster from './Pages/ItemMaster';
 import CustomerDataManagement from './Pages/CustmerDataManagement';
 import AdminItemMaster from './Pages/AdminItemMaster';
 import AdminLoanDataInsert from './Pages/AdminLoanDataInsert';
-import SessionStorage from './Pages/SessionStorage';
 
 
 function App() {
@@ -38,7 +37,6 @@ function App() {
             <Route path="/AdminLoanDataEdit" element={<ProtectedRoute><AdminLoanDataEdit /></ProtectedRoute>} />
             <Route path="/AdminLoanDataInsert" element={<ProtectedRoute><AdminLoanDataInsert /></ProtectedRoute>} />
             <Route path="/AdminItemsMaster" element={<ProtectedRoute><AdminItemMaster /></ProtectedRoute>} />
-            <Route path="/SessionStorage" element={<ProtectedRoute><SessionStorage /></ProtectedRoute>} />
 
           </Routes>
         </BrowserRouter>

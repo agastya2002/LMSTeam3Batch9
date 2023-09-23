@@ -47,7 +47,7 @@ const ApplyForLoan=()=>{
             swal("Validation Failed","Please enter item description!","error");
             isDataValid=false;
         }
-        if(valuation > 0){
+        if(valuation <= 0){
             swal("Validation Failed","Item value should be > 0","error");
             isDataValid=false;
         }
