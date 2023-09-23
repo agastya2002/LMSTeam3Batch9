@@ -3,6 +3,8 @@ import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {useAuth} from '../Contexts/AuthContext'
+import swal from 'sweetalert';
+
 
 const Login=()=>{
 
@@ -16,16 +18,17 @@ const Login=()=>{
     const validateEntries=()=>{
         //check employee ID
         if (!eID.match(/[A-Z]{1}[0-9]/)){
-            alert("Invalid employee ID format!");
+            swal("Error","Invalid employee ID format!","error");
             isDataValid=false;
         }
         if(ePass.length===0){
-            alert("Please enter password");
+            swal("Error","Please enter a valid password","error");
             isDataValid=false;
         }
         if(isDataValid) {
             const res = login(eID, ePass);
             if(res) {
+               
                 console.log(res);
                 res.then((r) => {
                     if(r==="admin") {

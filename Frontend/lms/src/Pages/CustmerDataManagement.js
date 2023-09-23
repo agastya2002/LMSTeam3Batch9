@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TableComponent from '../Components/TableComponent';
 import responseFilter from '../Helpers/responseFilter';
+import swal from 'sweetalert';
 
 const CustomerDataManagement=()=>{
 
@@ -35,6 +36,7 @@ const CustomerDataManagement=()=>{
         })
         setEmps(resp?.data.map((o)=>({...o,['dateOfBirth']:o['dateOfBirth'].substring(0,10),['dateOfJoining']:o['dateOfJoining'].substring(0,10)})));
       }catch(err){
+        swal("Failed in Fetching Employeee Details","Some unexpected error occured, please try again","error")
         console.log(err)
       }
     }
@@ -45,10 +47,12 @@ const CustomerDataManagement=()=>{
             headers:{"Authorization":`Bearer ${token}`}
         })
         if(resp.status == 200){
+            swal("Updated Successful","The Employee details has been edited succesfully","success")
             const editedEmps = emps.filter(e => e.employeeId !== data.EmployeeId)
             setEmps([...editedEmps,{employeeId:data.EmployeeId,employeeName:data.EmployeeName,department:data.Department,gender:data.Gender,designation:data.Designation,dateOfBirth:data.DateOfBirth,dateOfJoining:data.DateOfJoining}])
         }
       }catch(err){
+        swal("Update not succesfull","Some unexpected error occured, please try again","error")
         console.log(err)
       }
     }
@@ -60,19 +64,19 @@ const CustomerDataManagement=()=>{
 
     const validateEntries=async ()=>{
         if(eName.length===0){
-            alert("Please enter employee name!");
+            swal("Validation Error","Please enter a name","error")
             isDataValid=false;
         }
         if(!eName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)){
-            alert("Employee name is invalid!\nUse of special characters and numbers is not allowed")
+            swal("Validation Error","Please enter a valid name","error")
             isDataValid=false;
         }
         if(dob.length===0){
-            alert("Please enter date of birth!");
+            swal("Validation Error","Please provide the date of birth","error")
             isDataValid=false;
         }
         if(doj.length===0){
-            alert("Please enter date of joining!");
+            swal("Validation Error","Please Provide the date of joining","error")
             isDataValid=false;
         }
    
@@ -116,10 +120,12 @@ const deleteEmployee=async(val)=>{
         })
         console.log(resp)
         if(resp.status==200){
+            swal("Delete Successful","The Employee details has been deleted succesfully","success")
             const editedEmps = emps.filter(e => e.employeeId !== val.employeeId)
             setEmps(editedEmps)
         }
       }catch(err){
+        swal("Delete not succesfull","Some unexpected error occured, please try again","error")
         console.log(err)
       }
 }

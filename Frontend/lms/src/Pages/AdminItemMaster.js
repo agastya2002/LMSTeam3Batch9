@@ -3,6 +3,7 @@ import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
+import swal from "sweetalert";
 
 export const AdminItemMaster = () => {
 
@@ -45,10 +46,12 @@ export const AdminItemMaster = () => {
       })
       console.log(resp)
       if (resp.status == 200) {
+        swal("Edit Successfull","Item Details have been edited successfully","success")
         const editedItems = items.filter(i => i.itemId != data.ItemId)
         setItems([...editedItems, { itemId: data.ItemId, itemDescription: data.ItemDescription, itemValuation: data.ItemValuation, issueStatus: data.IssueStatus, itemMake: data.ItemMake, itemCategory: data.ItemCategory }])
       }
     } catch (err) {
+      swal("Edit Not Successful","Something Unexpected occured.Please try again!","error")
       console.log(err)
     }
 
@@ -69,6 +72,7 @@ export const AdminItemMaster = () => {
       console.log(resp)
       setItems(resp.data)
     } catch (err) {
+      swal("Failed Items Fetch","Something Unexpected occured.Please try again!","error")
       console.log(err)
     }
   }
@@ -90,10 +94,12 @@ export const AdminItemMaster = () => {
       })
       console.log(resp)
       if (resp.status == 200) {
+        swal("Delete Successful","The Item details has been deleted succesfully","success")
         const editedItems = items.filter(item => item.itemId !== val.itemId);
         setItems(editedItems);
       }
     } catch (err) {
+      swal("Delete not succesfull","Some unexpected error occured, please try again","error")
       console.log(err)
     }
   }
