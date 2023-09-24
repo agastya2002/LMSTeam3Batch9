@@ -5,6 +5,7 @@ import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import swal from 'sweetalert';
+import NavbarCust from '../Components/NavbarCust';
 
 const ApplyForLoan=()=>{
 
@@ -93,8 +94,8 @@ const ApplyForLoan=()=>{
     }
     return (
         <div>
-            <div>
-                <h1>Loan Management Application</h1>
+            <NavbarCust/>
+            <div style={{padding:"10px"}}>
                 <h2>Select Product and Apply for Loan</h2>
             </div>
             <div className='customer_details'>
