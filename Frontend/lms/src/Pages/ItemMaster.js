@@ -11,8 +11,8 @@ const ItemMaster = () => {
     const [category, setCategory] = useState("furniture");
     const [status, setStatus] = useState("Y");
     const [make, setMake] = useState("wood");
-    const [desc, setDesc] = useState('Item Description')
-    const [valuation, setValuation] = useState('Item Valuation')
+    const [desc, setDesc] = useState('')
+    const [valuation, setValuation] = useState('')
 
     // const { user, token } = useAuth()
     const [token, setToken] =useState("init val");
@@ -79,10 +79,10 @@ const ItemMaster = () => {
                     </select>
                 </label>
                 <label>Item Description
-                    <input type="text" name="itemDescription" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
+                    <input type="text" name="itemDescription" value={desc} onChange={(e) => setDesc(e.target.value)} placeholder='Item Description'></input>
                 </label>
                 <label>Item Value
-                    <input type="text" name="itemValue" value={valuation} onChange={(e) => setValuation(e.target.value)}></input>
+                    <input type="text" name="itemValue" value={valuation} onChange={(e) => setValuation(e.target.value)} placeholder='Item Valuation'></input>
                 </label>
                 {/* <label>Issue Status:
                 <select value = {status} onChange = {handleItemStatus}>

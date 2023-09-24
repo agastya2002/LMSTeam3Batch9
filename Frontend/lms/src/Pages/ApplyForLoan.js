@@ -14,11 +14,11 @@ const ApplyForLoan=()=>{
     const {applyForLoan}  = useAuth();
     const [token, setToken] =useState("init val");
     const [user, setUser] =useState({});
-    const [empId, setEmpId] =useState("E0001");
+    // const [empId, setEmpId] =useState("E0001");
     const[category,setCategory] = useState("furniture");
     // const[status,setStatus] = useState("Y");
     const[make,setMake] = useState("wood");
-    const [desc,setDesc] = useState('Item Description')
+    const [desc,setDesc] = useState('')
     const [valuation,setValuation] = useState(0)
     let isDataValid=true;
 
@@ -28,7 +28,7 @@ const ApplyForLoan=()=>{
         const sessionUser=JSON.parse(sessionStorage.getItem('user'));
         setToken(sessionToken);
         setUser(sessionUser);
-        setEmpId(sessionUser.userId);
+        // setEmpId(sessionUser.userId);
       }, []);
 
 
@@ -104,11 +104,11 @@ const ApplyForLoan=()=>{
                 <div className='employee_details'>
                     <div className='employee_detail'>
                         <span className='employee_field'>Employee ID</span>
-                        <input type="text" id="eId" value={empId}/>
+                        <input disabled type="text" id="eId" value={user.userId}/>
                     </div>
                     <div className='employee_detail'>
                         <span className='employee_field'>Item Description</span>
-                        <input type="text" id="iDesc" value={desc} onChange={(e) => setDesc(e.target.value)}/>
+                        <input type="text" id="iDesc" value={desc} onChange={(e) => setDesc(e.target.value)} placeholder='Item Description'/>
                     </div>
                     <div className='employee_detail'>
                     <span className='employee_field'>Item Value</span>

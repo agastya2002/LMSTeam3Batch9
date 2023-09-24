@@ -126,7 +126,7 @@ export const AdminItemMaster = () => {
               </select>
             </label>
             <label>Item Description
-              <input type="text" name="itemDescription" value={desc} onChange={(e) => setDesc(e.target.value)}></input>
+              <input type="text" name="itemDescription" value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Item Description"></input>
             </label>
             <label>Item Value
               <input type="text" name="itemValue" value={valuation} onChange={(e) => setValuation(e.target.value)}></input>
