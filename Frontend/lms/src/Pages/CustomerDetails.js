@@ -94,10 +94,10 @@ const CustomerDetails=()=>{
     }
     return (
         <div>
-            <div>
+            {/* <div>
                 <h1>Loan Management Application</h1>
                 <h2>Customer Master Data Details</h2>
-            </div>
+            </div> */}
             <div className='customer_details'>
                 <div className='employee_details'>
                     <div className='employee_detail'>

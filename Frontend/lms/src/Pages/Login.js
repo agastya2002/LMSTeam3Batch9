@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import '../Styles/Login.css'
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 import {useAuth} from '../Contexts/AuthContext'
 import swal from 'sweetalert';
+import CustomerDetails from './CustomerDetails';
 
 
 const Login=()=>{
@@ -12,11 +15,79 @@ const Login=()=>{
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
     // const {user, login} = useAuth();
-    const {login} = useAuth();
+    const {login, register} = useAuth();
     let isDataValid=true;
 
+    const [user, setUser] =useState({});
+    const [eName,setEName]=useState("John Doe");
+    const [eRole,setERole]=useState('customer');
+    const [department,setDepartment]=useState("it");
+    const [gender,setGender]=useState("M");
+    const [designation,setDesignation]=useState("manager");
+    const [dob,setDob]=useState("");
+    const [doj,setDoj]=useState("");
 
-    const validateEntries=()=>{
+
+    const validateRegisterEntries=async ()=>{
+        if(eName.length===0){
+            alert("Please enter employee name!");
+            isDataValid=false;
+        }
+        if(ePass.length===0){
+            alert("Please enter password");
+            isDataValid=false;
+        }
+        if(!eName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)){
+            alert("Employee name is invalid!\nUse of special characters and numbers is not allowed")
+            isDataValid=false;
+        }
+        if(dob.length===0){
+            alert("Please enter date of birth!");
+            isDataValid=false;
+        }
+        if(doj.length===0){
+            alert("Please enter date of joining!");
+            isDataValid=false;
+        }
+        if(eRole.length===0){
+            alert("Please mention the role of employee");
+            isDataValid = false;
+        }
+
+        if(isDataValid===false){
+            return;
+        }
+
+        const userData = {
+            EmployeeName: eName,
+            Designation:designation,
+            Department:department,
+            Gender:gender,
+            DateOfBirth: dob,
+            DateOfJoining: doj,
+            Employee: {
+                EmployeePassword: ePass,
+                EmployeeRole: eRole
+            }
+        }
+        const res = register(userData);
+        if(res) {
+            while(!user) {}
+            if(user) {
+                if(eRole=="admin") {
+                    navigate("AdminDashboard");
+                }
+                else if(eRole=="customer"){
+                    navigate("UserDashboard");
+                }
+            }
+        }
+        
+    }
+
+    const validateEntries=(e)=>{
+        e.preventDefault();
+        console.log(eID, ePass)
         //check employee ID
         if (!eID.match(/[A-Z]{1}[0-9]/)){
             swal("Error","Invalid employee ID format!","error");
@@ -44,28 +115,91 @@ const Login=()=>{
     }
     return (
         <div>
-            <div>
-                <h1>Loan Management Application</h1>
-                <h2>Login</h2>
-            </div>
-            <div className='customer_details'>
-                <div className='employee_details'>
-                    <div className='employee_detail'>
-                        <span className='employee_field'>Employee id</span>
-                        <input type="text" id="eid" onChange={(e) => setEID(e.target.value)} />
+            <Navbar bg="light" expand="lg" style={{padding:"15px"}}>
+                <Navbar.Brand style={{paddingX:"15px"}}>LMS</Navbar.Brand>
+            </Navbar>
+            <div className='Authentication'>
+                <div className="main">
+                    <input type="checkbox" id="chk" />
+                    <div className="signup">
+                        <form>
+                            <label htmlFor="chk" className="sig">Register</label>
+                            <div className='user-box'>
+                                <input type="text" id="ename" value={eName} onChange={(e) => setEName(e.target.value)}/>
+                                <label>Employee Name</label>
+                            </div>
+                            <div className='user-box'>
+                                <input type="password" id="pass" value={ePass} onChange={(p) => setEPass(p.target.value)} />
+                                <label>Password</label>
+                            </div>
+                            <div>
+                                <span className='user-box'>
+                                    <select name="department" id="department" value={department} onChange={(e) => setDepartment(e.target.value)}> 
+                                        <option value="it">IT</option> 
+                                        <option value="finance">Finance</option> 
+                                        <option value="sales">Sales</option> 
+                                        <option value="hr">HR</option> 
+                                    </select>
+                                    <label>Department</label>
+                                </span>
+                                <span className='user-box'>
+                                    <select name="gender" id="gender" value={gender} onChange={(e) => setGender(e.target.value)}> 
+                                        <option value="M">Male</option> 
+                                        <option value="F">Female</option>
+                                    </select>   
+                                    <label>Gender</label>
+                                </span>
+                                <span className='user-box'>
+                                    <select name="designation" id="designation" value={designation} onChange={(e) => setDesignation(e.target.value)}> 
+                                        <option value="manager">Manager</option> 
+                                        <option value="ca">CA</option> 
+                                        <option value="dgm">DGM</option> 
+                                        <option value="associate">Associate</option> 
+                                    </select>
+                                    <label>Designation</label>
+                                </span>
+                                <span className='user-box'>
+                                    <select name="erole" id="erole" value={eRole} onChange={(e) => setERole(e.target.value)}> 
+                                        <option value="customer">Customer</option> 
+                                        <option value="admin">Admin</option>
+                                    </select>   
+                                    <label>Role</label>
+                                </span>
+                            </div>
+                            <span className='user-box'>
+                                <span>
+                                    <input type="date" id="dob" value={dob} onChange={(e) => setDob(e.target.value)}/>
+                                    <label>Date Of Birth</label>
+                                </span>
+                                </span>
+                                <span className="user-box">
+                                <span>
+                                    <input type="date" id="doj" value={doj} onChange={(e) => setDoj(e.target.value)} />
+                                    <label>Date Of Joining</label>
+                                </span>
+                            </span>
+                            <div>
+                                <button type="submit" className="authBtn" onClick={()=>validateRegisterEntries()}>Add Data</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="login">
+                        <form onSubmit={validateEntries}>
+                            <label htmlFor="chk" className="log">Login</label>
+                            <div className="user-box">
+                                <input type="text" title="Enter Employee ID" onChange={(e) => setEID(e.target.value)}  required />
+                                <label>Employee ID</label>
+                            </div>
+                            <div className="user-box">
+                                <input type="password" title="Enter password" onChange={(p) => setEPass(p.target.value)}  required />
+                                <label>Password</label>
+                            </div>
+                            <button className="authBtn" type="submit">Login</button>
+                        </form>
                     </div>
                 </div>
-                <div className='employee_details'>
-                    <div className='employee_detail'>
-                        <span className='employee_field'>Password</span>
-                        <input type="password" id="pass" onChange={(p) => setEPass(p.target.value)} />
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" onClick={()=>validateEntries()}>Login</button>
-                </div>
             </div>
-            <div>New User? <Link to="/register">Register here</Link></div>
         </div>
     )
 }
