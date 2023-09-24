@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
+import NavbarCust from "../Components/NavbarCust";
 
 export const CustomerItemsPurchased = () => {
 
@@ -32,61 +33,12 @@ export const CustomerItemsPurchased = () => {
       getItems(sessionToken, sessionUser);
     }, []);
 
-     const iitems = [
-       {
-         issue_id: "I1001",
-         item_description: "Tea Table",
-         item_make: "Wooden",
-         item_category: "furniture",
-         item_valuation: "5000",
-       },
-       {
-         issue_id: "I1002",
-         item_description: "Tea Set",
-         item_make: "Glass",
-         item_category: "Crockery",
-         item_valuation: "2000",
-       },
-     ];
-    console.log(items)
-
     return (
       <div>
-        <h1>Loan Management Application</h1>
-        <h2>Items Purchased</h2>
+        <NavbarCust/>
+        <h2 style={{padding:"10px"}}>Items Purchased</h2>
         <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation"])}/>
-        {/* <div
-          style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
-        >
-          <span>Employee ID: {user?.emp_id}</span>
-          <span>Designation: {user?.designation}</span>
-          <span>Department: {user?.department}</span>
-        </div> */}
-        {/* {
-          items.length!=0?<table>
-          <thead>
-            <tr>
-              <th>Issue_Id</th>
-              <th>Item Description</th>
-              <th>Item Make</th>
-              <th>Item Category</th>
-              <th>Item Valuation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              items.map((val,idx) => (
-                <tr key={`item${idx}`}>
-                  <td>{val?.itemId}</td>
-                  <td>{val?.itemDescription}</td>
-                  <td>{val?.itemMake}</td>
-                  <td>{val?.itemCategory}</td>
-                  <td>{val?.itemValuation}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>:null
-        } */}        
+           
       </div>
     );
 };

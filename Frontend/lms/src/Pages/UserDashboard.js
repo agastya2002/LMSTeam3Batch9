@@ -7,6 +7,7 @@ import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
 import DashboardCard from '../Components/DashboardCard';
 import { Col, Container, Row } from 'react-bootstrap';
+import NavbarCust from '../Components/NavbarCust';
 
 const UserDashboard =()=>{
 
@@ -21,9 +22,9 @@ const UserDashboard =()=>{
 
    
     return (
-        <div style={{height:'80vh'}}>
-            <h1>Loan Management Application</h1>
-            <h2>User Dashboard</h2>
+        <div style={{height:'70vh'}}>
+            <NavbarCust/>
+            <h2 style={{padding:"10px"}}>User Dashboard</h2>
             <Container
                 style={{
                     height: '100%',
@@ -54,8 +55,7 @@ const UserDashboard =()=>{
                     </Col>
                 </Row>
                 </Container>
-            <button type="submit" onClick={() => userLogout()}>Logout</button>
-        </div>
+                        </div>
     )
 }
 

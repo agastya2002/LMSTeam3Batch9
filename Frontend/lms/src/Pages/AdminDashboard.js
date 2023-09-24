@@ -53,7 +53,6 @@ const UserDashboard = () => {
                     </Col>
                 </Row>
                 </Container>
-            <button type="submit" onClick={() => userLogout()}>Logout</button>
         </div>
     )
 }
