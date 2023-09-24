@@ -95,6 +95,7 @@ export const AuthProvider =  ({ children }) => {
         }
       }
       catch(err){
+        console.log(err)
         swal("Login Unsuccessful","Your credentials are wrong","error")
         console.log("Invalid Creadentials")
         return false;

@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
+import DashboardCard from '../Components/DashboardCard';
+import { Col, Container, Row } from 'react-bootstrap';
 
 const UserDashboard =()=>{
 
@@ -19,23 +21,40 @@ const UserDashboard =()=>{
 
    
     return (
-        <div>
+        <div style={{height:'80vh'}}>
             <h1>Loan Management Application</h1>
             <h2>User Dashboard</h2>
-            <div>
-                <Link to = "/ViewLoan">
-                <button>View Loans</button>
-                </Link>
-                &nbsp;&nbsp;&nbsp;
-                <Link to = "/ApplyLoan">
-                <button>Apply For Loan</button>
-                </Link>
-                &nbsp;&nbsp;&nbsp;
-                <Link to="/ViewItem">
-                <button>View Items Purchased</button>
-                </Link>
-            </div>
-            <button type="submit" onClick={()=>userLogout()}>Logout</button>
+            <Container
+                style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+                >
+                <Row>
+                    <Col>
+                    <Link to="/ViewLoan" style={{textDecoration:"none"}}>
+                    <DashboardCard title="View Loans" icon="Loans"/>
+                    </Link>
+
+                    </Col>
+                    <Col>
+                    <Link to="/ApplyLoan" style={{textDecoration:"none"}}>
+                    <DashboardCard title="Apply for Loan"icon="Apply"/>
+                    </Link>
+
+                    </Col>
+                    <Col>
+                    <Link to="/ViewItem" style={{textDecoration:"none"}}>
+                    <DashboardCard title="View Purchased Items" icon="Getitems"/>
+                    </Link>
+
+                    </Col>
+                </Row>
+                </Container>
+            <button type="submit" onClick={() => userLogout()}>Logout</button>
         </div>
     )
 }
