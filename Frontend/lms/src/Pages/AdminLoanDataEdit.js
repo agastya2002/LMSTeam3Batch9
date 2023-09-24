@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
+import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminLoanDataEdit = () => {
   const lc = [
@@ -145,7 +146,7 @@ export const AdminLoanDataEdit = () => {
 
   return (
     <Container fluid>
-      <h1>Loan Management Application</h1>
+      <NavbarAdmin/>
       <Row>
         <Col className="p-1 m-2 text-white bg-primary">
           <h6 className="display-6">Loan Card Details</h6>

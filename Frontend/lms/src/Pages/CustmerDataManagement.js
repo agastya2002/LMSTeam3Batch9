@@ -7,6 +7,7 @@ import axios from 'axios';
 import TableComponent from '../Components/TableComponent';
 import responseFilter from '../Helpers/responseFilter';
 import swal from 'sweetalert';
+import NavbarAdmin from '../Components/NavbarAdmin';
 
 const CustomerDataManagement=()=>{
 
@@ -144,8 +145,8 @@ const handleCancel = () =>{
 
     return (
         <div>
+            <NavbarAdmin/>
             <div>
-                <h1>Loan Management Application</h1>
                 <h2>Customer Data Management</h2>
             </div>
             {

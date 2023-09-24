@@ -5,6 +5,7 @@ import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
+import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminLoanDataInsert = () => {
 
@@ -49,7 +50,7 @@ export const AdminLoanDataInsert = () => {
 
     return (
         <div>
-            <h1>Loan Management Application</h1>
+            <NavbarAdmin/>
             <h2>Loan Card Data Insert</h2>
 
 

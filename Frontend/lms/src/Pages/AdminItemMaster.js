@@ -4,6 +4,7 @@ import responseFilter from "../Helpers/responseFilter";
 import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 import swal from "sweetalert";
+import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminItemMaster = () => {
 
@@ -109,7 +110,7 @@ export const AdminItemMaster = () => {
 
   return (
     <div>
-      <h1>Loan Management Application</h1>
+      <NavbarAdmin/>
       <h2>Item Master Data Details</h2>
       {
         edit ?

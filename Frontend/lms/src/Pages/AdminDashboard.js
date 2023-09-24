@@ -7,6 +7,7 @@ import { useAuth } from '../Contexts/AuthContext'
 import DashboardCard from '../Components/DashboardCard';
 import { Col, Container, Row } from 'react-bootstrap';
 import { BasketFill } from 'react-bootstrap-icons'; 
+import NavbarAdmin from '../Components/NavbarAdmin';
 
 const UserDashboard = () => {
 
@@ -20,8 +21,8 @@ const UserDashboard = () => {
     }
 
     return (
-        <div style={{height:'80vh'}}>
-            <h1>Loan Management Application</h1>
+        <div style={{height:'70vh'}}>
+            <NavbarAdmin/>
             <h2>Admin Dashboard</h2>
             <Container
                 style={{
