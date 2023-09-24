@@ -206,7 +206,10 @@ const handleCancel = () =>{
                     </div>
                 </div>
                 <div>
-                    <button onClick={validateEntries}>Edit Data</button>
+                    <button onClick={(e) => {
+                    setEdit(false);
+                    validateEntries();
+                  }}>Edit Data</button>
                     <button onClick={handleCancel}>Cancel</button>
                 </div>
             </div>

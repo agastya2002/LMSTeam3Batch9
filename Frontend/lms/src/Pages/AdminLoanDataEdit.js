@@ -146,7 +146,7 @@ export const AdminLoanDataEdit = () => {
 
   return (
     <Container fluid>
-      <NavbarAdmin/>
+      <NavbarAdmin />
       <Row>
         <Col className="p-1 m-2 text-white bg-primary">
           <h6 className="display-6">Loan Card Details</h6>
@@ -259,7 +259,10 @@ export const AdminLoanDataEdit = () => {
               </Form.Group>
               <Row>
                 <Col>
-                  <Button variant="success" onClick={(e) => handleSubmit(e)}>
+                  <Button variant="success" onClick={(e) => {
+                    setEdit(false);
+                    handleSubmit(e);
+                  }}>
                     Edit Data
                   </Button>
                   <Button

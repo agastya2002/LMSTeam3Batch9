@@ -10,7 +10,7 @@ namespace LMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "customer")]
+    [Authorize(Roles = "customer,admin")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
@@ -35,6 +35,7 @@ namespace LMS.Controllers
             return Ok(items);
         }
 
+        
         [HttpPost("ApplyForLoan")]
         public IActionResult ApplyLoan(EmployeeIssueViewModel e)
         {

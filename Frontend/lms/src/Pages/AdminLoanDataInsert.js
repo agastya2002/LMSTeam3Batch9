@@ -13,9 +13,7 @@ export const AdminLoanDataInsert = () => {
     const [loanId, setLoanId] = useState('')
     const [loanType, setLoanType] = useState("furniture");
     const [duration, setDuration] = useState('');
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
-
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -71,7 +69,7 @@ export const AdminLoanDataInsert = () => {
                 <label>Duration
                     <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
-                {showSuccessMessage && <div className="alert alert-success" role="alert">{successMessage}</div>}
+                
                 <button onClick={(e) => handleSubmit(e)}>Add Data</button>
                 <Link to="/AdminLoanDataEdit">
                     <button>Loan Card Management</button>

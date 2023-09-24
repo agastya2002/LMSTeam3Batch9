@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { NavLink,useNavigate } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext'
+import { useAuth } from '../Contexts/AuthContext';
 
 function NavbarAdmin() {
 
   const navigate = useNavigate();
-  const { logout,user } = useAuth();
+  // const { logout,user } = useAuth();
+  const { logout } = useAuth();
+  const [user, setUser] =useState({});
 
 
   const userLogout = () => {
       logout();
       navigate("/");
-  }
+  };
+
+  useEffect(() => {
+    const sessionUser=JSON.parse(sessionStorage.getItem('user'));
+    setUser(sessionUser);
+  }, []);
 
   return (
     <Navbar bg="light" expand="lg" style={{padding:"15px"}}>
