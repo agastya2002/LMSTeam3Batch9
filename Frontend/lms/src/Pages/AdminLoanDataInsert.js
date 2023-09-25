@@ -66,7 +66,7 @@ export const AdminLoanDataInsert = () => {
                         <option value="stationery">Stationery</option>
                     </select>
                 </label>
-                <label>Duration
+                <label>{"Duration (in years)"}
                     <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
                 
