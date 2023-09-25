@@ -2,6 +2,7 @@ import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
+import NavbarAdmin from "../Components/NavbarAdmin";
 import { Link, useNavigate } from 'react-router-dom';
 
 const CustomerDetails=()=>{
@@ -98,6 +99,7 @@ const CustomerDetails=()=>{
                 <h1>Loan Management Application</h1>
                 <h2>Customer Master Data Details</h2>
             </div> */}
+            <NavbarAdmin />
             <div className='customer_details'>
                 <div className='employee_details'>
                     <div className='employee_detail'>
@@ -165,7 +167,6 @@ const CustomerDetails=()=>{
                     <button type="submit" onClick={()=>validateEntries()}>Add Data</button>
                 </div>
             </div>
-            <div>Already an user? <Link to="/">Login</Link></div>
         </div>
     )
 }

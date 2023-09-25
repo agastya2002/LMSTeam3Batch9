@@ -8,6 +8,8 @@ import TableComponent from '../Components/TableComponent';
 import responseFilter from '../Helpers/responseFilter';
 import swal from 'sweetalert';
 import NavbarAdmin from '../Components/NavbarAdmin';
+import { Button } from "react-bootstrap";
+import { Plus } from "react-bootstrap-icons";
 
 const CustomerDataManagement=()=>{
 
@@ -149,6 +151,11 @@ const handleCancel = () =>{
             <div>
                 <h2>Customer Data Management</h2>
             </div>
+            <Link to="/register">
+            <Button variant="success" className='mb-2'>
+              <Plus className="fs-4"></Plus>Add Employee
+            </Button>
+            </Link>
             {
                 edit?
             <div className='customer_details'>
