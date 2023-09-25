@@ -7,6 +7,7 @@ import { Navbar } from 'react-bootstrap';
 import {useAuth} from '../Contexts/AuthContext'
 import swal from 'sweetalert';
 import CustomerDetails from './CustomerDetails';
+import { sha256 } from 'js-sha256';
 
 
 const Login=()=>{
@@ -66,7 +67,7 @@ const Login=()=>{
             DateOfBirth: dob,
             DateOfJoining: doj,
             Employee: {
-                EmployeePassword: ePass,
+                EmployeePassword: sha256(ePass),
                 EmployeeRole: eRole
             }
         }

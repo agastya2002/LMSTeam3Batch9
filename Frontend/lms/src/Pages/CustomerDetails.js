@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import NavbarAdmin from "../Components/NavbarAdmin";
 import { Link, useNavigate } from 'react-router-dom';
+import { sha256 } from 'js-sha256';
 
 const CustomerDetails=()=>{
 
     const navigate = useNavigate();
     // const {user, register}  = useAuth();
-    const {register}  = useAuth();
+    const {addEmployee}  = useAuth();
     const [user, setUser] =useState({});
 
-    const [eID,setEID]=useState("E0001");
+    // const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
     const [eRole,setERole]=useState('customer');
@@ -80,17 +81,17 @@ const CustomerDetails=()=>{
             DateOfBirth: dob,
             DateOfJoining: doj,
             Employee: {
-                EmployeePassword: ePass,
+                EmployeePassword: sha256(ePass),
                 EmployeeRole: eRole
             }
         }
-        const res = register(userData);
-        if(res) {
-            while(!user) {}
-            if(user) {
-                navigate("/profile")
-            }
-        }
+        addEmployee(userData);
+        // if(res) {
+        //     while(!user) {}
+        //     if(user) {
+        //         navigate("/profile")
+        //     }
+        // }
         
     }
     return (

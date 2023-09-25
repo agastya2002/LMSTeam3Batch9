@@ -59,10 +59,10 @@ export const AuthProvider =  ({ children }) => {
         })
         console.log(resp)
         if(resp.status===200){
-          swal("Signup Successful","Your details has been added","success");
+          swal("Signup Successful",`Your details have been added (Employee ID = ${resp.data})`,"success");
           // updateUserId(userData.EmployeeId);
           // updateUserRole(userData.Employee.EmployeeRole);
-          updateUser({userId:resp.data,userRole:userData.EmployeeRole})
+          // updateUser({userId:resp.data,userRole:userData.EmployeeRole})
           return true;
         }
       }
@@ -129,8 +129,29 @@ export const AuthProvider =  ({ children }) => {
          
     };
 
+    const addEmployee = async (userData) => {
+      try{
+        const resp = await axios.post(`${baseURL}/register`,
+          userData,{
+          headers:{
+              "Content-Type":'application/json'
+          }
+        })
+        console.log(resp)
+        if(resp.status===200){
+          swal("Employee added successfully",`Employee ID = ${resp.data}`,"success");
+          return true;
+        }
+      }
+      catch(err){
+        swal("Unable to add employee","Something unexpected happened, please try again","error")
+        console.log(err)
+        return false;
+      }
+    }
+
     return (
-        <AuthContext.Provider value={{user, register, login, logout, token,applyForLoan}}>
+        <AuthContext.Provider value={{user, register, login, logout, token,applyForLoan, addEmployee}}>
             {children}
         </AuthContext.Provider>
     )
