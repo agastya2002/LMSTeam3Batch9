@@ -13,7 +13,7 @@ import AdminLoanDataEdit from './Pages/AdminLoanDataEdit';
 import { CustomerItemsPurchased } from './Pages/CustomerItemsPurchased';
 import { CustomerLoanCards } from './Pages/CustomerLoanCards';
 import AdminAddItem from './Pages/AdminAddItem';
-import CustomerDataManagement from './Pages/CustmerDataManagement';
+import CustomerDataManagement from './Pages/CustomerDataManagement';
 import AdminItemMaster from './Pages/AdminItemMaster';
 import AdminLoanDataInsert from './Pages/AdminLoanDataInsert';
 

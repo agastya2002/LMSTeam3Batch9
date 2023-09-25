@@ -153,7 +153,7 @@ const handleCancel = () =>{
             </div>
             <Link to="/register">
             <Button variant="success" className='mb-2'>
-              <Plus className="fs-4"></Plus>Add Loan Card
+              <Plus className="fs-4"></Plus>Add Employee
             </Button>
             </Link>
             {

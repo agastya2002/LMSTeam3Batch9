@@ -167,7 +167,6 @@ const CustomerDetails=()=>{
                     <button type="submit" onClick={()=>validateEntries()}>Add Data</button>
                 </div>
             </div>
-            <div>Already an user? <Link to="/">Login</Link></div>
         </div>
     )
 }
