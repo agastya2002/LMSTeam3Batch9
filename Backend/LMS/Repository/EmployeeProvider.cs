@@ -193,7 +193,7 @@ namespace LMS.Data
                              join issue in _db.EmployeeCardDetails
                              on loan.LoanId equals issue.LoanId
                              where issue.EmployeeId == id
-                             select new LoanViewModel(){ LoanId = loan.LoanId, LoanType = loan.LoanType, DurationInYears = loan.DurationInYears, CardIssueDate = issue.CardIssueDate };
+                             select new LoanViewModel(){ LoanId = loan.LoanId, LoanType = loan.LoanType, DurationInYears = loan.DurationInYears, Valuation=loan.Valuation ,CardIssueDate = issue.CardIssueDate };
 
                 List<LoanViewModel> _items = query1.ToList();
                 return _items;
@@ -238,6 +238,9 @@ namespace LMS.Data
                     int _duration = (int)query3[0].duration;
                     DateTime _cardIssueDate = (DateTime)query4[0];                    
                     _returnDate = _cardIssueDate.AddYears(_duration);
+
+                    _db.LoanCardMasters.FirstOrDefault(l => l.LoanId == _loanId).Valuation+=e.ItemValue;
+                    _db.SaveChanges();
                 }
                 else
                 {
@@ -251,7 +254,7 @@ namespace LMS.Data
                     {
                         _loanId = "L" + _rdm.Next(min, max);
                     }
-                    LoanCardMaster newLoan = new LoanCardMaster() { LoanId=_loanId, LoanType=e.ItemCategory, DurationInYears=1 };
+                    LoanCardMaster newLoan = new LoanCardMaster() { LoanId=_loanId, LoanType=e.ItemCategory, DurationInYears=1,Valuation=e.ItemValue };
                     _db.LoanCardMasters.Add(newLoan);
                     _db.SaveChanges();
 
@@ -322,7 +325,8 @@ namespace LMS.Data
                     {
                         LoanId=e.LoanId,
                         LoanType=e.LoanType,
-                        DurationInYears=e.DurationInYears
+                        DurationInYears=e.DurationInYears,
+                        Valuation=e.Valuation
                     };
 
                     _db.LoanCardMasters.Update(newLoan);
@@ -444,7 +448,7 @@ namespace LMS.Data
                 {
                     _loanId = "L" + _rdm.Next(min, max);
                 }
-                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears };
+                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears, Valuation = e.Valuation };
                 _db.LoanCardMasters.Add(newLoan);
                 _db.SaveChanges();
 
