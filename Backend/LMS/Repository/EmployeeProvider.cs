@@ -364,7 +364,11 @@ namespace LMS.Data
         {
             try
             {
+                _db.EmployeeCardDetails.Where(e => e.LoanId==id).ToString();
+                _db.EmployeeCardDetails.Where(e => e.LoanId == id).ExecuteDelete();
+                _db.SaveChangesAsync();
                 _db.LoanCardMasters.Where(e => e.LoanId == id).ExecuteDelete();
+                _db.SaveChangesAsync();
                 return true;
             }
             catch (Exception exp)
@@ -378,7 +382,10 @@ namespace LMS.Data
         {
             try
             {
+                _db.EmployeeIssueDetails.Where(e => e.ItemId == id).ExecuteDelete();
+                _db.SaveChangesAsync(true);
                 _db.ItemMasters.Where(e => e.ItemId == id).ExecuteDelete();
+                _db.SaveChangesAsync(true);
                 return true;
             }
             catch (Exception exp)
