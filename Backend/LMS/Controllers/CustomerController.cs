@@ -24,7 +24,7 @@ namespace LMS.Controllers
         [HttpGet("GetPurchasedItems")]
         public async Task<ActionResult> GetAllItems([FromQuery] User userParameters)
         {
-            List<ItemMaster> items =  _customerService.GetitemInformation(userParameters.id);
+            List<ItemViewModel> items =  _customerService.GetitemInformation(userParameters.id);
             return Ok(items);
         }
 

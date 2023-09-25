@@ -10,9 +10,9 @@ namespace LMS.Services
         {
             _employeeDataProvider = employeeDataProvider;
         }
-        public List<ItemMaster> GetitemInformation(string id)
+        public List<ItemViewModel> GetitemInformation(string id)
         {
-            List<ItemMaster> items = _employeeDataProvider.GetItemDetailsById(id);
+            List<ItemViewModel> items = _employeeDataProvider.GetItemDetailsById(id);
             return items;
         }
         public List<LoanViewModel> GetLoanInformation(string id)

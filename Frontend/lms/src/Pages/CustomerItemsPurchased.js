@@ -22,7 +22,7 @@ export const CustomerItemsPurchased = () => {
         const resp = await axios.get(`${baseURL}/GetPurchasedItems?id=${user.userId}`,{
             headers:{"Authorization":`Bearer ${token}`}
         })
-        setItems(resp.data)
+        setItems(resp.data.map((o)=>({...o,['returnDate']:o['returnDate'].substring(0,10)})))
       }catch(err){
         console.log(err)
       }
@@ -37,7 +37,7 @@ export const CustomerItemsPurchased = () => {
       <div>
         <NavbarCust/>
         <h2 style={{padding:"10px"}}>Items Purchased</h2>
-        <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation"])}/>
+        <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation", "Return Date"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation", "returnDate"])}/>
            
       </div>
     );

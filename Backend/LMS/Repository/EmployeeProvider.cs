@@ -166,7 +166,7 @@ namespace LMS.Data
             }
         }
 
-        public List<ItemMaster> GetItemDetailsById(String id)
+        public List<ItemViewModel> GetItemDetailsById(String id)
         {
             try
             {
@@ -174,14 +174,15 @@ namespace LMS.Data
                               join issue in _db.EmployeeIssueDetails
                               on item.ItemId equals issue.ItemId
                               where issue.EmployeeId == id
-                              select item;
+                              select new ItemViewModel() { ItemId = item.ItemId, IssueStatus=item.IssueStatus, ItemDescription=item.ItemDescription, 
+                              ItemCategory=item.ItemCategory, ItemMake=item.ItemMake, ItemValuation=item.ItemValuation, ReturnDate=issue.ReturnDate};
 
-                List<ItemMaster> _items = query1.ToList();
+                List<ItemViewModel> _items = query1.ToList();
                 return _items;
             }
             catch
             {
-                return new List<ItemMaster>();
+                return new List<ItemViewModel>();
             }
         }
 
