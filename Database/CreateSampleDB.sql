@@ -45,9 +45,9 @@ return_date date
 create table loan_card_master(
 loan_id varchar(100) primary key,
 loan_type varchar(100) references categories(category) ON DELETE CASCADE,
-duration_in_years int
+duration_in_years int,
+valuation int
 );
-
 
 create table employee_card_details(
 employee_id varchar(100) references employee_master(employee_id) ON DELETE CASCADE,
@@ -73,10 +73,10 @@ insert into materials values ('wood');
 insert into employee_master values ('E0001','Bob','manager','it','M','1995-05-01','2021-05-02'), ('E0002','Dylan','ca','finance','M','1993-02-03','2019-02-06'), ('E0003','Tara','dgm','sales','F','1997-07-10','2015-03-11'),('E0004','Barney','associate','hr','M','1991-10-11','2022-07-08');
 
 
-insert into loan_card_master values ('L0001','furniture', 1), 
-('L0002', 'crockery', 2),
-('L0003', 'stationery', 3),
-('L0004', 'furniture', 2);
+insert into loan_card_master values ('L0001','furniture', 1,1000), 
+('L0002', 'crockery', 2,100),
+('L0003', 'stationery', 3,50),
+('L0004', 'furniture', 2,500);
 
 
 insert into item_master values 
@@ -97,4 +97,3 @@ insert into employee_issue_details values
 ('IS0002','E0002','I0002', '2023-07-24', '2025-07-24' ),
 ('IS0003','E0003','I0003', '2023-08-22', '2026-08-22' ),
 ('IS0004','E0004','I0004', '2023-09-01', '2025-09-01' );
-
