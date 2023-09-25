@@ -364,7 +364,37 @@ namespace LMS.Data
         {
             try
             {
-                _db.EmployeeCardDetails.Where(e => e.LoanId==id).ToString();
+                var query1 = from emp in _db.EmployeeCardDetails
+                             where emp.LoanId==id
+                             select emp.EmployeeId;
+
+                Console.WriteLine(id);
+                
+                string _empId = query1.ToList()[0];
+                Console.WriteLine(query1);
+
+                var query2 = from loan in _db.LoanCardMasters
+                             where loan.LoanId==id
+                             select loan.LoanType;
+
+                string _category = query2.ToList()[0];
+
+                var query3 = (from issue in _db.EmployeeIssueDetails
+                              join item in _db.ItemMasters
+                              on issue.ItemId equals item.ItemId
+                              where issue.EmployeeId == _empId && item.ItemCategory == _category
+                              select item.ItemId).ToList();
+
+                foreach (var x in query3)
+                {
+                    
+                    _db.EmployeeIssueDetails.Where(e => e.ItemId == x).ExecuteDelete();
+                    _db.SaveChangesAsync();
+                    _db.ItemMasters.Where(e => e.ItemId == x).ExecuteDelete();
+                    _db.SaveChangesAsync();
+
+                }
+
                 _db.EmployeeCardDetails.Where(e => e.LoanId == id).ExecuteDelete();
                 _db.SaveChangesAsync();
                 _db.LoanCardMasters.Where(e => e.LoanId == id).ExecuteDelete();
