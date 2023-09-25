@@ -11,5 +11,7 @@ public partial class LoanCardMaster
 
     public int? DurationInYears { get; set; }
 
+    public int? Valuation { get; set; }
+
     public virtual Category? LoanTypeNavigation { get; set; }
 }

@@ -33,13 +33,13 @@ public partial class GisdbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=WINDOWS-BVQNF6J;Database=GISDB;Trusted_Connection=True;Encrypt=False;");
+        => optionsBuilder.UseSqlServer("Server=WINDOWS-BVQNF6J;Database=gisdb;Trusted_Connection=True;Encrypt=false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Category1).HasName("PK__categori__F7F53CC32283412D");
+            entity.HasKey(e => e.Category1).HasName("PK__categori__F7F53CC36D20D567");
 
             entity.ToTable("categories");
 
@@ -51,8 +51,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<EmployeeCardDetail>(entity =>
         {
-            // .HasNoKey()
-            entity 
+            entity
                 .ToTable("employee_card_details");
 
             entity.Property(e => e.CardIssueDate)
@@ -80,7 +79,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<EmployeeCredential>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA81219AEB5");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA82FC2978B");
 
             entity.ToTable("employee_credentials");
 
@@ -100,7 +99,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<EmployeeIssueDetail>(entity =>
         {
-            entity.HasKey(e => e.IssueId).HasName("PK__employee__D6185C399F8FAB55");
+            entity.HasKey(e => e.IssueId).HasName("PK__employee__D6185C39A2A14B1D");
 
             entity.ToTable("employee_issue_details");
 
@@ -136,7 +135,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<EmployeeMaster>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA85902816A");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__employee__C52E0BA8BC63B330");
 
             entity.ToTable("employee_master");
 
@@ -174,7 +173,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<ItemMaster>(entity =>
         {
-            entity.HasKey(e => e.ItemId).HasName("PK__item_mas__52020FDDC6230B42");
+            entity.HasKey(e => e.ItemId).HasName("PK__item_mas__52020FDD8E8D511A");
 
             entity.ToTable("item_master");
 
@@ -211,7 +210,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<LoanCardMaster>(entity =>
         {
-            entity.HasKey(e => e.LoanId).HasName("PK__loan_car__A1F795544CC612E3");
+            entity.HasKey(e => e.LoanId).HasName("PK__loan_car__A1F79554B593D706");
 
             entity.ToTable("loan_card_master");
 
@@ -224,6 +223,7 @@ public partial class GisdbContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("loan_type");
+            entity.Property(e => e.Valuation).HasColumnName("valuation");
 
             entity.HasOne(d => d.LoanTypeNavigation).WithMany(p => p.LoanCardMasters)
                 .HasForeignKey(d => d.LoanType)
@@ -233,7 +233,7 @@ public partial class GisdbContext : DbContext
 
         modelBuilder.Entity<Material>(entity =>
         {
-            entity.HasKey(e => e.Material1).HasName("PK__material__DEDA434422D99B03");
+            entity.HasKey(e => e.Material1).HasName("PK__material__DEDA4344AA459D9D");
 
             entity.ToTable("materials");
 

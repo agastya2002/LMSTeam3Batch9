@@ -38,7 +38,7 @@ export const CustomerLoanCards = () => {
     <div>
       <NavbarCust/>
       <h2 style={{padding:"10px"}}>Loan Cards Availed</h2>
-      <TableComponent headerData={["Loan ID", "Loan Type", "Duration", "Card Issue Date"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears","cardIssueDate"])} />
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration", "Card Issue Date","Valuation"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears","cardIssueDate","valuation"])} />
    
     </div>
   );

@@ -43,6 +43,7 @@ create table loan_card_master(
 loan_id varchar(100) primary key,
 loan_type varchar(100) references categories(category) ON DELETE CASCADE,
 duration_in_years int
+valuation int
 );
 
 
