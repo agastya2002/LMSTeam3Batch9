@@ -95,7 +95,7 @@ const ApplyForLoan=()=>{
           }
     }
     return (
-        <div>
+        <div className='whole_page'>
             <NavbarCust/>
             <div style={{padding:"10px"}}>
                 <h2>Select Product and Apply for Loan</h2>

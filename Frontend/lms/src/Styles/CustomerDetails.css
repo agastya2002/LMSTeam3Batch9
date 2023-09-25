@@ -1,3 +1,8 @@
+.whole_page{
+    background-color: blueviolet;
+    min-height: 100vh;
+}
+
 .customer_details{
     display: flex;
     flex-direction: column;
