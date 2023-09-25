@@ -13,6 +13,7 @@ export const AuthProvider =  ({ children }) => {
     const [user, setUser] = useState({
       userId: '',
       userRole:'',
+      userName:''
     });
 
     const [token,setToken] = useState(null)
@@ -90,7 +91,9 @@ export const AuthProvider =  ({ children }) => {
           swal("Login Successful","You have been successfully logged in","success");
           updateToken (resp.data.token);
           //  updateUserRole(resp.data.role);
-          updateUser({userId:resp.data.user_Id,userRole:resp.data.role})
+          updateUser({userId:resp.data.user_Id,
+                        userRole:resp.data.role,
+                      userName: resp.data.employeeName})
           return resp.data.role;
         }
       }

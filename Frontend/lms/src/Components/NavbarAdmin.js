@@ -34,7 +34,7 @@ function NavbarAdmin() {
           <NavLink style={{textDecoration:"none"}} to="/AdminLoanDataEdit">Loan Management</NavLink>
           </div>
           <div style={{display:'flex',columnGap:'20px',alignItems:"center"}}>
-           <span> EID : {user.userId}</span>
+           <span> Employee name : {user.userName}</span>
           <Button variant="outline-danger" onClick={() => userLogout()}>Logout</Button>
           </div>
         </div>

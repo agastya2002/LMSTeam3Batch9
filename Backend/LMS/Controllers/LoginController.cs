@@ -22,10 +22,12 @@ namespace LMS.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IAdminService _adminService;
 
-        public LoginController(IAuthService authService)
+        public LoginController(IAuthService authService, IAdminService adminService)
         {
-            _authService=authService;
+            _authService = authService;
+            _adminService = adminService;
         }
         [AllowAnonymous]
         [HttpPost]
@@ -37,8 +39,9 @@ namespace LMS.Controllers
             if (employee != null)
             {
                 var tokenString = _authService.GenerateJSONWebToken(employee);
+                var employeeName = _adminService.GetEmployeeById(employee.EmployeeId).EmployeeName;
 
-                response = Ok(new LoginResponse { token = tokenString, User_Id = login.Username, Role=employee.EmployeeRole });
+                response = Ok(new LoginResponse { token = tokenString, User_Id = login.Username, Role=employee.EmployeeRole, EmployeeName=employeeName });
             }
 
             return response;
