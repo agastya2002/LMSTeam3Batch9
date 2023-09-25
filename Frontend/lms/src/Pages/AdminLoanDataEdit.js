@@ -31,6 +31,7 @@ export const AdminLoanDataEdit = () => {
   const [loanId, setLoanId] = useState("");
   const [loanType, setLoanType] = useState("furniture");
   const [duration, setDuration] = useState("");
+  const [valuation, setValuation] = useState("");
   const [edit, setEdit] = useState(false);
 
   // const user = { emp_id: "E0002", designation: "Manager", department: "IT" };
@@ -41,6 +42,7 @@ export const AdminLoanDataEdit = () => {
       loanId: loanId,
       loanType: loanType,
       durationInYears: duration,
+      valuation: valuation
     };
 
     try {
@@ -63,6 +65,7 @@ export const AdminLoanDataEdit = () => {
             loanId: data.loanId,
             loanType: data.loanType,
             durationInYears: data.durationInYears,
+            valuation: valuation
           },
         ]);
       }
@@ -109,6 +112,7 @@ export const AdminLoanDataEdit = () => {
     setLoanId(val.loanId);
     setLoanType(val.loanType);
     setDuration(val.durationInYears);
+    setValuation(val.valuation);
     setEdit(true);
   };
 
@@ -165,11 +169,12 @@ export const AdminLoanDataEdit = () => {
       </Row>
       <Row className="m-4">
         <TableComponent
-          headerData={["Loan ID", "Loan Type", "Duration"]}
+          headerData={["Loan ID", "Loan Type", "Duration", "Valuation"]}
           tableData={responseFilter(loanCards, [
             "loanId",
             "loanType",
             "durationInYears",
+            "valuation"
           ])}
           tableActions={[
             { actionName: "Edit", actionCallback: (e) => editLoan(e) },
@@ -254,6 +259,22 @@ export const AdminLoanDataEdit = () => {
                     type="text"
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group
+                as={Row}
+                className="mb-3 justify-content-md-center"
+                controlId="valuation"
+              >
+                <Form.Label column sm={2}>
+                  Loan Valuation
+                </Form.Label>
+                <Col sm={4}>
+                  <Form.Control
+                    type="text"
+                    placeholder={valuation}
+                    disabled={true}
                   />
                 </Col>
               </Form.Group>

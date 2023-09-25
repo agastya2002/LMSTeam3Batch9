@@ -448,7 +448,7 @@ namespace LMS.Data
                 {
                     _loanId = "L" + _rdm.Next(min, max);
                 }
-                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears, Valuation = e.Valuation };
+                LoanCardMaster newLoan = new LoanCardMaster() { LoanId = _loanId, LoanType = e.LoanType, DurationInYears = e.DurationInYears, Valuation = 0 };
                 _db.LoanCardMasters.Add(newLoan);
                 _db.SaveChanges();
 

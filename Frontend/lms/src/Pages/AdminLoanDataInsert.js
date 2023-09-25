@@ -10,7 +10,7 @@ import NavbarAdmin from "../Components/NavbarAdmin";
 export const AdminLoanDataInsert = () => {
 
     const [employeeId, setEmployeeId] = useState('')
-    const [loanId, setLoanId] = useState('')
+    // const [loanId, setLoanId] = useState('')
     const [loanType, setLoanType] = useState("furniture");
     const [duration, setDuration] = useState('');
     
@@ -19,7 +19,7 @@ export const AdminLoanDataInsert = () => {
         e.preventDefault()
         const data = {
             EmployeeId: employeeId,
-            LoanId: loanId,
+            // LoanId: 'loanId',
             LoanType: loanType,
             DurationInYears: Number(duration)
         };
@@ -56,9 +56,9 @@ export const AdminLoanDataInsert = () => {
                 <label>Employee Id
                     <input type="text" name="employeeId" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}></input>
                 </label>
-                <label>Loan Id
+                {/* <label>Loan Id
                     <input disabled type="text" name="loanId" value={loanId} onChange={(e) => setLoanId(e.target.value)}></input>
-                </label>
+                </label> */}
                 <label>Loan Type
                     <select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
                         <option value="furniture">Furniture</option>
