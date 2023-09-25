@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/CustomerDetails.css'
+import '../Styles/ApplyLoan.css'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -95,7 +95,7 @@ const ApplyForLoan=()=>{
           }
     }
     return (
-        <div className='whole_page'>
+        <div>
             <NavbarCust/>
             <div style={{padding:"10px"}}>
                 <h2>Select Product and Apply for Loan</h2>
