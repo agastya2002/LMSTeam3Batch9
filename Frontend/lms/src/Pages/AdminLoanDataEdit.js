@@ -272,7 +272,7 @@ export const AdminLoanDataEdit = () => {
                 </Form.Label>
                 <Col sm={4}>
                   <Form.Control
-                    type="text"
+                    type="number"
                     placeholder={valuation}
                     disabled={true}
                   />

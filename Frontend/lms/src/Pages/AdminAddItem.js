@@ -86,7 +86,7 @@ const AdminAddItem = () => {
                         Add Item
                     </Card.Title>
                     <Form>
-                        <Form.Group
+                        {/*<Form.Group
                             as={Row}
                             className="mb-3 justify-content-md-center"
                             controlId="loanId"
@@ -100,7 +100,7 @@ const AdminAddItem = () => {
                                     disabled={true}
                                 />
                             </Col>
-                        </Form.Group>
+                    </Form.Group>*/}
 
                         {/* <Row>
                 <Col sm={3}>

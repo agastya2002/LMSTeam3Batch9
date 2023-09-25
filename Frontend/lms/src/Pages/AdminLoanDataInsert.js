@@ -67,7 +67,7 @@ export const AdminLoanDataInsert = () => {
                     </select>
                 </label>
                 <label>{"Duration (in years)"}
-                    <input type="text" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
+                    <input type="number" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
                 </label>
                 
                 <button onClick={(e) => handleSubmit(e)}>Add Data</button>
