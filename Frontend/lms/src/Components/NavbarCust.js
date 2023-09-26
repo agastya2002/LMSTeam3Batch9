@@ -33,7 +33,7 @@ function NavbarCust() {
           <NavLink style={{textDecoration:"none"}} to="/ViewLoan">View Loans</NavLink>
           </div>
           <div style={{display:'flex',columnGap:'20px',alignItems:"center"}}>
-           <span> Employee name : {user.userName}</span>
+           <span> Welcome {user.userName}</span>
           <Button variant="outline-danger" onClick={() => userLogout()}>Logout</Button>
           </div>
         </div>
