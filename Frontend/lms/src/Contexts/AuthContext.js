@@ -2,6 +2,7 @@ import React, {createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import { sha256 } from 'js-sha256';
 import swal from 'sweetalert';
+
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -42,7 +43,7 @@ export const AuthProvider =  ({ children }) => {
 
     const baseURL = "https://localhost:7223/api"
 
-    const  register = async (userData) => {
+    const  register = async (userData, loginFn) => {
       try{
         const resp = await axios.post(`${baseURL}/register`,
           userData,{
@@ -51,14 +52,18 @@ export const AuthProvider =  ({ children }) => {
           }
         })
         if(resp.status===200){
-          swal("Signup Successful",`Your details have been added (Employee ID = ${resp.data})`,"success");
-          return true;
+          swal({title:"Signup Successful",
+          text:`Your details have been added (Employee ID = ${resp.data})`,
+          icon:"success"}).then(()=>{
+            loginFn(resp.data);
+          });
+          return resp.data;
         }
       }
       catch(err){
         swal("Signup Unsuccessful","Something unexpected happened, please try again","error")
         console.log(err)
-        return false;
+        return null;
       }
     }
     const login = async(eID, ePass) => {
@@ -85,7 +90,7 @@ export const AuthProvider =  ({ children }) => {
       }
       catch(err){
         console.log(err)
-        swal("Login Unsuccessful","Y have entered invalid credentials, please try again","error")
+        swal("Login Unsuccessful","You have entered invalid credentials, please try again","error")
         return false;
       }
     }

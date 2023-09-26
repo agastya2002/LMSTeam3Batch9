@@ -27,7 +27,9 @@ const Login=()=>{
     const [doj,setDoj]=useState("");
 
 
-    const validateRegisterEntries=async ()=>{
+    const validateRegisterEntries=async (e)=>{
+        e.preventDefault();
+
         if(eName.length===0){
             swal("Validation Failed","Please enter employee name!","error");
             isDataValid=false;
@@ -69,19 +71,19 @@ const Login=()=>{
                 EmployeeRole: eRole
             }
         }
-        const res = register(userData);
-        if(res) {
-            while(!user) {}
-            if(user) {
-                if(eRole=="admin") {
-                    navigate("AdminDashboard");
-                }
-                else if(eRole=="customer"){
-                    navigate("UserDashboard");
-                }
+        register(userData, (newEmpId)=>{
+            const res = login(newEmpId, ePass);
+            if(res) {
+                res.then((r) => {
+                    if(r==="admin") {
+                        navigate("AdminDashboard");
+                    }
+                    else if(r==="customer"){
+                        navigate("UserDashboard");
+                    }
+                });
             }
-        }
-        
+        });      
     }
 
     const validateEntries=(e)=>{
@@ -156,13 +158,13 @@ const Login=()=>{
                                     </select>
                                     <label>Designation</label>
                                 </span>
-                                <span className='user-box'>
+                                {/* <span className='user-box'>
                                     <select name="erole" id="erole" value={eRole} onChange={(e) => setERole(e.target.value)}> 
                                         <option value="customer">Customer</option> 
                                         <option value="admin">Admin</option>
                                     </select>   
                                     <label>Role</label>
-                                </span>
+                                </span> */}
                             </div>
                             <span className='user-box'>
                                 <span>
@@ -177,7 +179,7 @@ const Login=()=>{
                                 </span>
                             </span>
                             <div>
-                                <button type="submit" className="authBtn" onClick={()=>validateRegisterEntries()}>Add Data</button>
+                                <button type="submit" className="authBtn" onClick={(e)=>validateRegisterEntries(e)}>Add Data</button>
                             </div>
                         </form>
                     </div>
