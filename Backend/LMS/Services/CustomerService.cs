@@ -5,8 +5,8 @@ namespace LMS.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly EmployeeProvider _employeeDataProvider;
-        public CustomerService(EmployeeProvider employeeDataProvider)
+        private readonly IEmployeeProvider _employeeDataProvider;
+        public CustomerService(IEmployeeProvider employeeDataProvider)
         {
             _employeeDataProvider = employeeDataProvider;
         }

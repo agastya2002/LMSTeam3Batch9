@@ -17,8 +17,8 @@ namespace LMS.Services
     public class AuthService : IAuthService
     {
         private readonly IConfiguration _config;
-        private readonly EmployeeProvider _employeeDataProvider;
-        public AuthService(IConfiguration config, EmployeeProvider employeeDataProvider)
+        private readonly IEmployeeProvider _employeeDataProvider;
+        public AuthService(IConfiguration config, IEmployeeProvider employeeDataProvider)
         {
             _config = config;
             _employeeDataProvider = employeeDataProvider;
