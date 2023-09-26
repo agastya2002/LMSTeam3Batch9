@@ -32,7 +32,6 @@ export const CustomerLoanCards = () => {
     getLoans(sessionToken, sessionUser);
   }, []);
 
-  console.log(loanCards)
 
   return (
     <div>

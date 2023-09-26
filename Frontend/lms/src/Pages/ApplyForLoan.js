@@ -1,22 +1,16 @@
 import React from 'react';
 import '../Styles/ApplyLoan.css'
 import { useState, useEffect } from 'react';
-import { useAuth } from '../Contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+
 import axios from 'axios'
 import swal from 'sweetalert';
 import NavbarCust from '../Components/NavbarCust';
 
 const ApplyForLoan=()=>{
 
-    const navigate = useNavigate();
-    // const {user, applyForLoan,token}  = useAuth();
-    const {applyForLoan}  = useAuth();
     const [token, setToken] =useState("init val");
     const [user, setUser] =useState({});
-    // const [empId, setEmpId] =useState("E0001");
     const[category,setCategory] = useState("furniture");
-    // const[status,setStatus] = useState("Y");
     const[make,setMake] = useState("wood");
     const [desc,setDesc] = useState('')
     const [valuation,setValuation] = useState(0)
@@ -28,24 +22,11 @@ const ApplyForLoan=()=>{
         const sessionUser=JSON.parse(sessionStorage.getItem('user'));
         setToken(sessionToken);
         setUser(sessionUser);
-        // setEmpId(sessionUser.userId);
       }, []);
 
 
-    // Example JSON object for applying for loan
-    // {
-    //     "employeeId": "E0006",
-    //     "iDesc": "Table",
-    //     "iMake": "Wooden",
-    //     "iCategory": "Furniture",
-    //     "iValue": 1000
-    //   }
-
-    console.log(token)
-
     const validateEntries=async (e)=>{
         e.preventDefault()
-        //check employee ID
         if(desc.length===0){
             swal("Validation Failed","Please enter item description!","error");
             isDataValid=false;
@@ -67,12 +48,6 @@ const ApplyForLoan=()=>{
             itemCategory:category
         }
          applyLoan(loanData)
-        // if(res) {
-        //     while(!user) {}
-        //     if(user) {
-        //         navigate("/ViewLoan")
-        //     }
-        // }
         
     }
 
@@ -91,7 +66,6 @@ const ApplyForLoan=()=>{
           catch(err){
             swal("Application error","Sommething went wrong, Please try again","error")
             console.log(err)
-            //return false;
           }
     }
     return (

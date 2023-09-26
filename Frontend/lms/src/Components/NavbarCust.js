@@ -6,7 +6,6 @@ import { useAuth } from '../Contexts/AuthContext'
 function NavbarCust() {
 
   const navigate = useNavigate();
-  // const { logout,user } = useAuth();
   const { logout } = useAuth();
   const [user, setUser] =useState({});
 
@@ -33,7 +32,7 @@ function NavbarCust() {
           <NavLink style={{textDecoration:"none"}} to="/ViewLoan">View Loans</NavLink>
           </div>
           <div style={{display:'flex',columnGap:'20px',alignItems:"center"}}>
-           <span> Employee name : {user.userName}</span>
+           <span> Welcome {user.userName}</span>
           <Button variant="outline-danger" onClick={() => userLogout()}>Logout</Button>
           </div>
         </div>

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {useAuth} from '../Contexts/AuthContext'
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import NavbarCust from "../Components/NavbarCust";
 
 export const CustomerItemsPurchased = () => {
 
-    const navigate = useNavigate();
-    // const {logout, user, token} = useAuth();
-    const {logout} = useAuth();
+
 
     const [items,setItems] = useState([])
 

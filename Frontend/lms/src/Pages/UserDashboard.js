@@ -1,24 +1,12 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {useAuth} from '../Contexts/AuthContext'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import DashboardCard from '../Components/DashboardCard';
 import { Col, Container, Row } from 'react-bootstrap';
 import NavbarCust from '../Components/NavbarCust';
 
 const UserDashboard =()=>{
 
-    const navigate = useNavigate();
-    // const {logout, user, token} = useAuth();
-    const {logout} = useAuth();
-
-    const userLogout=()=>{
-        logout();
-        navigate("/");
-    }
 
    
     return (

@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../Styles/Login.css'
 import '../Styles/CustomerDetails.css'
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import {useAuth} from '../Contexts/AuthContext'
 import swal from 'sweetalert';
-import CustomerDetails from './CustomerDetails';
 import { sha256 } from 'js-sha256';
 
 
@@ -15,7 +14,6 @@ const Login=()=>{
     const navigate = useNavigate();
     const [eID,setEID]=useState("");
     const [ePass, setEPass] = useState("");
-    // const {user, login} = useAuth();
     const {login, register} = useAuth();
     let isDataValid=true;
 
@@ -88,8 +86,7 @@ const Login=()=>{
 
     const validateEntries=(e)=>{
         e.preventDefault();
-        console.log(eID, ePass)
-        //check employee ID
+       
         if (!eID.match(/[A-Z]{1}[0-9]/)){
             swal("Error","Invalid employee ID format!","error");
             isDataValid=false;

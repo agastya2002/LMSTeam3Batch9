@@ -1,17 +1,13 @@
 import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from "sweetalert";
 import NavbarAdmin from "../Components/NavbarAdmin";
-import { Button, Container, Row, Col, Form, Card, FormSelect } from "react-bootstrap";
-import { event } from 'jquery';
+import { Button, Row, Col, Form, Card } from "react-bootstrap";
 
 const AdminAddItem = () => {
-    const [inputs, setInputs] = useState({});
     const [employeeId, setEmployeeId] = useState("");
     const [category, setCategory] = useState("furniture");
     const [status, setStatus] = useState("Y");
@@ -19,7 +15,6 @@ const AdminAddItem = () => {
     const [desc, setDesc] = useState('')
     const [valuation, setValuation] = useState('')
 
-    // const { user, token } = useAuth()
     const [token, setToken] = useState("init val");
     const [user, setUser] = useState({});
 
@@ -44,11 +39,6 @@ const AdminAddItem = () => {
         setMake(event.target.value);
     }
 
-    // const handleChange = (event)=>{
-    //     const name = event.target.name;
-    //     const value = event.target.value;
-    //     setInputs(values => ({...values,[name]:value}))
-    // }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -64,7 +54,6 @@ const AdminAddItem = () => {
             const resp = await axios.post(`${baseURL}/ApplyForLoan`, data, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
-            console.log(resp);
             if (resp.status == 200) {
                 swal("Item Added", `Item with Id ${resp.data} has been added successfully`, "success");
             }
@@ -86,35 +75,6 @@ const AdminAddItem = () => {
                         Add Item
                     </Card.Title>
                     <Form>
-                        {/*<Form.Group
-                            as={Row}
-                            className="mb-3 justify-content-md-center"
-                            controlId="loanId"
-                        >
-                            <Form.Label column sm={2}>
-                                Item Id
-                            </Form.Label>
-                            <Col sm={4}>
-                                <Form.Control
-                                    type="text"
-                                    disabled={true}
-                                />
-                            </Col>
-                    </Form.Group>*/}
-
-                        {/* <Row>
-                <Col sm={3}>
-                  <label>Loan Id</label>
-                </Col>
-                <Col sm={5}>
-                  <input 
-                    type="text" 
-                      name="itemId" 
-                      value={itemId} 
-                      onChange={(e) => setItemId(e.target.value)}>
-                  </input>
-                </Col>
-              </Row> */}
                         <Form.Group
                             as={Row}
                             className="mb-3 justify-content-md-center"
@@ -147,16 +107,7 @@ const AdminAddItem = () => {
                                 </Form.Select>
                             </Col>
                         </Form.Group>
-                        {/* <label>Item Category
-              <select 
-              value={category} 
-              onChange={handleCategoryChange}>
-                  <option       value="furniture">Furniture</option>
-                  <option value="crockery">Crockery</option>
-                  <option value="stationery">Stationery</option>
-              </select>
-            </label> */}
-
+                    
                         <Form.Group
                             as={Row}
                             className="mb-3 justify-content-md-center"
