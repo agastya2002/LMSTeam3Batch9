@@ -2,7 +2,7 @@
 {
     public class LoanViewModel
     {
-        public string LoanId { get; set; } = null!;
+        public string? LoanId { get; set; } = null!;
 
         public string? LoanType { get; set; }
 

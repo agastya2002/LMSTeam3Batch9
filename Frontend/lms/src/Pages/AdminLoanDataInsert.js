@@ -71,9 +71,7 @@ export const AdminLoanDataInsert = () => {
                 </label>
                 
                 <button onClick={(e) => handleSubmit(e)}>Add Data</button>
-                <Link to="/AdminLoanDataEdit">
-                    <button>Loan Card Management</button>
-                </Link>
+                
             </form>
         </div>
     );
