@@ -143,7 +143,9 @@ export const AdminItemMaster = () => {
           tableActions={[
             { actionName: "Edit", actionCallback: (e) => editItems(e) },
             { actionName: "Delete", actionCallback: (val) => deleteItem(val) }
-          ]} />
+          ]}
+          noDataMessage={{title:"No items are present", message: "Use the Add Item button above to add an item"}}
+           />
       </Row>
       {edit ? (
         <Row className="justify-content-md-center">

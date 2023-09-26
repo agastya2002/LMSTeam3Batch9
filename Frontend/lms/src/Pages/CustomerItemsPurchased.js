@@ -33,7 +33,8 @@ export const CustomerItemsPurchased = () => {
       <div>
         <NavbarCust/>
         <h2 style={{padding:"10px"}}>Items Purchased</h2>
-        <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation", "Return Date"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation", "returnDate"])}/>
+        <TableComponent headerData={["Issue ID","Item Description","Item Make","Item Category","Item Valuation", "Return Date"]} tableData={responseFilter(items,["itemId","itemDescription","itemMake","itemCategory","itemValuation", "returnDate"])}
+          noDataMessage={{title:"No items are purchased", message: "Use the Apply for Loan to purchase an item"}}/>
            
       </div>
     );

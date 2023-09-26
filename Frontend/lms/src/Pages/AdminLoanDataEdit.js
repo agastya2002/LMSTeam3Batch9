@@ -165,6 +165,7 @@ export const AdminLoanDataEdit = () => {
             { actionName: "Edit", actionCallback: (e) => editLoan(e) },
             { actionName: "Delete", actionCallback: (e) => deleteLoan(e) },
           ]}
+          noDataMessage={{title:"No loan cards are present", message: "Use the Add Loan Card button above to add a loan card"}}
         />
       </Row>
       {edit ? (

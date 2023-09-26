@@ -213,7 +213,8 @@ const handleCancel = () =>{
             </div>
               :null
             }
-            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={responseFilter(emps,["employeeId","employeeName","gender","department","designation","dateOfBirth","dateOfJoining"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} />
+            <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={responseFilter(emps,["employeeId","employeeName","gender","designation","department","dateOfBirth","dateOfJoining"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} 
+          noDataMessage={{title:"No employees are present", message: "Use the Add Employee button above to add an employee"}}/>
           
            
         </div>

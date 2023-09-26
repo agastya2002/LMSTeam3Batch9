@@ -37,7 +37,8 @@ export const CustomerLoanCards = () => {
     <div>
       <NavbarCust/>
       <h2 style={{padding:"10px"}}>Loan Cards Availed</h2>
-      <TableComponent headerData={["Loan ID", "Loan Type", "Duration (in years)", "Card Issue Date","Valuation"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears","cardIssueDate","valuation"])} />
+      <TableComponent headerData={["Loan ID", "Loan Type", "Duration (in years)", "Card Issue Date","Valuation"]} tableData={responseFilter(loanCards,["loanId","loanType","durationInYears","cardIssueDate","valuation"])} 
+          noDataMessage={{title:"No loan cards are availed", message: "Use the Apply for Loan option to add a loan card"}}/>
    
     </div>
   );
