@@ -14,8 +14,8 @@ export const AdminLoanDataEdit = () => {
   const [loanCards, setLoanCards] = useState([]);
   const [loanId, setLoanId] = useState("");
   const [loanType, setLoanType] = useState("furniture");
-  const [duration, setDuration] = useState("");
-  const [valuation, setValuation] = useState("");
+  const [duration, setDuration] = useState(0);
+  const [valuation, setValuation] = useState(0);
   const [edit, setEdit] = useState(false);
 
   const handleSubmit = async (e) => {

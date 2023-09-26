@@ -17,7 +17,7 @@ export const AdminItemMaster = () => {
   const [make, setMake] = useState("wood");
   const [itemId, setItemId] = useState('')
   const [desc, setDesc] = useState('')
-  const [valuation, setValuation] = useState('')
+  const [valuation, setValuation] = useState(0)
   const [edit, setEdit] = useState(false)
 
   const handleCategoryChange = (event) => {

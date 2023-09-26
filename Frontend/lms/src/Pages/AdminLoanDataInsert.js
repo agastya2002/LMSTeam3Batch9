@@ -9,7 +9,7 @@ export const AdminLoanDataInsert = () => {
 
     const [employeeId, setEmployeeId] = useState('')
     const [loanType, setLoanType] = useState("furniture");
-    const [duration, setDuration] = useState('');
+    const [duration, setDuration] = useState(0);
     
 
     const handleSubmit = async (e) => {

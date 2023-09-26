@@ -13,7 +13,7 @@ const AdminAddItem = () => {
     const [status, setStatus] = useState("Y");
     const [make, setMake] = useState("wood");
     const [desc, setDesc] = useState('')
-    const [valuation, setValuation] = useState('')
+    const [valuation, setValuation] = useState(0)
 
     const [token, setToken] = useState("init val");
     const [user, setUser] = useState({});
@@ -45,7 +45,7 @@ const AdminAddItem = () => {
         const data = {
             EmployeeID: employeeId,
             ItemDescription: desc,
-            ItemValuation: valuation,
+            ItemValue: valuation,
             ItemMake: make,
             ItemCategory: category
         }
