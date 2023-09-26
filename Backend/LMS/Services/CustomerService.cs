@@ -5,25 +5,25 @@ namespace LMS.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IEmployeeProvider _employeeDataProvider;
-        public CustomerService(IEmployeeProvider employeeDataProvider)
+        private readonly IEmployeeRepository _employeeDataRepository;
+        public CustomerService(IEmployeeRepository employeeDataRepository)
         {
-            _employeeDataProvider = employeeDataProvider;
+            _employeeDataRepository = employeeDataRepository;
         }
         public List<ItemViewModel> GetitemInformation(string id)
         {
-            List<ItemViewModel> items = _employeeDataProvider.GetItemDetailsById(id);
+            List<ItemViewModel> items = _employeeDataRepository.GetItemDetailsById(id);
             return items;
         }
         public List<LoanViewModel> GetLoanInformation(string id)
         {
-            List<LoanViewModel> items = _employeeDataProvider.GetLoanDeatilsById(id);
+            List<LoanViewModel> items = _employeeDataRepository.GetLoanDeatilsById(id);
             return items;
         }
 
         public string ApplyForLoan(EmployeeIssueViewModel e)
         {
-            return _employeeDataProvider.ApplyForLoan(e);
+            return _employeeDataRepository.ApplyForLoan(e);
         }
 
     }

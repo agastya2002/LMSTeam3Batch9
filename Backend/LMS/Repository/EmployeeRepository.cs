@@ -13,10 +13,10 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace LMS.Data
 {
-    public class EmployeeProvider : IEmployeeProvider
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly GisdbContext _db;
-        public EmployeeProvider(GisdbContext db)
+        public EmployeeRepository(GisdbContext db)
         {
             _db = db;
         }

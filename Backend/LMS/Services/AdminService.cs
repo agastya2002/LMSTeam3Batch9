@@ -6,64 +6,64 @@ namespace LMS.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly IEmployeeProvider _employeeDataProvider;
-        public AdminService(IEmployeeProvider employeeDataProvider)
+        private readonly IEmployeeRepository _employeeDataRepository;
+        public AdminService(IEmployeeRepository employeeDataRepository)
         {
-            _employeeDataProvider = employeeDataProvider;
+            _employeeDataRepository = employeeDataRepository;
         }
 
         public List<EditEmployeeViewModel> GetEmployees()
         {
-            return _employeeDataProvider.GetEmployees();
+            return _employeeDataRepository.GetEmployees();
         }
 
         public string UpdateEmployee(EditEmployeeViewModel employee)
        {
-            return _employeeDataProvider.EditEmployee(employee, employee.EmployeeId);
+            return _employeeDataRepository.EditEmployee(employee, employee.EmployeeId);
         }
         public string UpdateLoan(LoanCardMaster l)
         {
-            return _employeeDataProvider.EditLoan(l);
+            return _employeeDataRepository.EditLoan(l);
         }
 
         public string UpdateItem(ItemMaster i)
         {
-            return _employeeDataProvider.EditItem(i);
+            return _employeeDataRepository.EditItem(i);
         }
 
         public EditEmployeeViewModel GetEmployeeById(string id)
         {
-            return _employeeDataProvider.GetEmployeeById(id);
+            return _employeeDataRepository.GetEmployeeById(id);
         }
 
         public Boolean DeleteLoanById(string id)
         {
-            return _employeeDataProvider.DeleteLoanById(id);
+            return _employeeDataRepository.DeleteLoanById(id);
         }
 
         public Boolean DeleteEmp(string id)
         {
-            return _employeeDataProvider.DeleteEmployee(id);
+            return _employeeDataRepository.DeleteEmployee(id);
         }
 
         public List<ItemMaster> GetItems() 
         { 
-            return _employeeDataProvider.GetItemsList();
+            return _employeeDataRepository.GetItemsList();
         }
 
         public List<LoanCardMaster> GetLoanCards()
         {
-            return _employeeDataProvider.GetLoansList();
+            return _employeeDataRepository.GetLoansList();
         }
 
         public bool DeleteItemById(string id)
         {
-            return _employeeDataProvider.DeleteItemById(id);
+            return _employeeDataRepository.DeleteItemById(id);
         }
 
         public string AddLoanCard(LoanViewModel e)
         {
-            return _employeeDataProvider.AddLoanCard(e);
+            return _employeeDataRepository.AddLoanCard(e);
         }
     }
 }

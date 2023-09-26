@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LMS.Data
 {
-    public interface IEmployeeProvider
+    public interface IEmployeeRepository
     {
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login);
         public string RegisterEmployee(RegisterViewModel e);

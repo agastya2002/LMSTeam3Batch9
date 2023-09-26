@@ -17,12 +17,12 @@ namespace Test
         private readonly List<ItemMaster> items = new (){
             new ItemMaster { ItemId="I0001", ItemCategory="Furniture", IssueStatus="Y", ItemDescription="Table", ItemMake="Wood", ItemValuation=5000 }
     };
-        private Mock<IEmployeeProvider> EmpRepoObj;
+        private Mock<IEmployeeRepository> EmpRepoObj;
 
         [SetUp]
         public void Setup()
         {
-            EmpRepoObj=new Mock<IEmployeeProvider>();
+            EmpRepoObj=new Mock<IEmployeeRepository>();
             EmpRepoObj.Setup(x => x.GetItemsList()).Returns(items);
         }
 
