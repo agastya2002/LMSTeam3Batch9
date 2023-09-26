@@ -51,7 +51,7 @@ const ApplyForLoan=()=>{
             isDataValid=false;
         }
         if(valuation <= 0){
-            swal("Validation Failed","Item value should be > 0","error");
+            swal("Validation Failed","Please enter a Item value greater than 0","error");
             isDataValid=false;
         }
 
@@ -89,7 +89,7 @@ const ApplyForLoan=()=>{
             }
           }
           catch(err){
-            swal("Application error","Sommething went wrong","error")
+            swal("Application error","Sommething went wrong, Please try again","error")
             console.log(err)
             //return false;
           }

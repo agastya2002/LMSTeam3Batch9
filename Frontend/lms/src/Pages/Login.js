@@ -31,27 +31,27 @@ const Login=()=>{
 
     const validateRegisterEntries=async ()=>{
         if(eName.length===0){
-            alert("Please enter employee name!");
+            swal("Validation Failed","Please enter employee name!","error");
             isDataValid=false;
         }
         if(ePass.length===0){
-            alert("Please enter password");
+            swal("Validation Failed","Please enter password","error");
             isDataValid=false;
         }
         if(!eName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)){
-            alert("Employee name is invalid!\nUse of special characters and numbers is not allowed")
+            swal("Validation Failed","Employee name is invalid!\nUse of special characters and numbers is not allowed","Error")
             isDataValid=false;
         }
         if(dob.length===0){
-            alert("Please enter date of birth!");
+            swal("Validation Failed","Please enter date of birth","error");
             isDataValid=false;
         }
         if(doj.length===0){
-            alert("Please enter date of joining!");
+            swal("Validation Failed","Please enter date of joining","error");
             isDataValid=false;
         }
         if(eRole.length===0){
-            alert("Please mention the role of employee");
+            swal("Validation failed","Please mention the role of employee","error");
             isDataValid = false;
         }
 
