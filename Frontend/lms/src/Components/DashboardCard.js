@@ -20,7 +20,6 @@ export default function DashboardCard({title,icon}) {
       <div style={{
         textAlign:'center'
       }}>
-        {console.log(icon)}
         {icon?icons[icon]:null}
         <h4>{title}</h4>
       </div>

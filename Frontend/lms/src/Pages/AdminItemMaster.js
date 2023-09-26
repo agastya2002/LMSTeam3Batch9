@@ -1,18 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
-import { useAuth } from '../Contexts/AuthContext';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { Button, Container, Row, Col, Form, Card, FormSelect } from "react-bootstrap";
+import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminItemMaster = () => {
 
   const [items, setItems] = useState([])
-  const [inputs, setInputs] = useState({});
   const [category, setCategory] = useState("furniture");
   const [status, setStatus] = useState("Y");
   const [make, setMake] = useState("wood");
@@ -48,7 +46,6 @@ export const AdminItemMaster = () => {
       const resp = await axios.put(`${baseURL}/UpdateItem`, data, {
         headers: { "Authorization": `Bearer ${token}` }
       })
-      console.log(resp)
       if (resp.status == 200) {
         swal("Edit Successfull", "Item Details have been edited successfully", "success")
         const editedItems = items.filter(i => i.itemId != data.ItemId)
@@ -62,7 +59,6 @@ export const AdminItemMaster = () => {
   }
 
   const baseURL = "https://localhost:7223/api/admin"
-  // const { token } = useAuth();
   const [token, setToken] = useState("init val");
 
   useEffect(() => {
@@ -76,7 +72,6 @@ export const AdminItemMaster = () => {
       const resp = await axios.get(`${baseURL}/GetItems`, {
         headers: { "Authorization": `Bearer ${token}` }
       })
-      console.log(resp)
       setItems(resp.data)
     } catch (err) {
       swal("Failed Items Fetch", "Something Unexpected occured.Please try again!", "error")
@@ -94,7 +89,6 @@ export const AdminItemMaster = () => {
     setEdit(true)
   }
   const deleteItem = async (val) => {
-    console.log(val)
     try {
       const resp = await axios.delete(`${baseURL}/DeleteItemById?id=${val.itemId}`, {
         headers: { "Authorization": `Bearer ${token}` }
@@ -163,19 +157,7 @@ export const AdminItemMaster = () => {
                 </Col>
               </Form.Group>
 
-              {/* <Row>
-                <Col sm={3}>
-                  <label>Loan Id</label>
-                </Col>
-                <Col sm={5}>
-                  <input 
-                    type="text" 
-                      name="itemId" 
-                      value={itemId} 
-                      onChange={(e) => setItemId(e.target.value)}>
-                  </input>
-                </Col>
-              </Row> */}
+             
               <Form.Group
                 as={Row}
                 className="mb-3 justify-content-md-center"
@@ -192,15 +174,7 @@ export const AdminItemMaster = () => {
                   </Form.Select>
                 </Col>
               </Form.Group>
-              {/* <label>Item Category
-              <select 
-              value={category} 
-              onChange={handleCategoryChange}>
-                  <option       value="furniture">Furniture</option>
-                  <option value="crockery">Crockery</option>
-                  <option value="stationery">Stationery</option>
-              </select>
-            </label> */}
+            
 
               <Form.Group
                 as={Row}
@@ -286,17 +260,7 @@ export const AdminItemMaster = () => {
           </Card>
         </Row>
       ) : null}
-      {/* <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        { <span>Employee ID: {user?.emp_id}</span>
-          <span>Designation: {user?.designation}</span>
-          <span>Department: {user?.department}</span>}
-      </div> */}
+     
     </Container>
 
   );

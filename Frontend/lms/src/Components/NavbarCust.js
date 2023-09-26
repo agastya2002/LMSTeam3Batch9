@@ -6,7 +6,6 @@ import { useAuth } from '../Contexts/AuthContext'
 function NavbarCust() {
 
   const navigate = useNavigate();
-  // const { logout,user } = useAuth();
   const { logout } = useAuth();
   const [user, setUser] =useState({});
 

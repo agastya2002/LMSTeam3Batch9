@@ -18,14 +18,6 @@ export const AuthProvider =  ({ children }) => {
 
     const [token,setToken] = useState(null)
 
-    // const updateUserId = (uId) =>{
-    //   setUser({...user,userId: uId});
-    // };
-
-    // const updateUserRole = (uRole) =>{
-    //   setUser({...user,userRole: uRole});
-    // };
-
     const updateUser = (user) => {
       setUser(user);
       if(user){
@@ -58,12 +50,8 @@ export const AuthProvider =  ({ children }) => {
               "Content-Type":'application/json'
           }
         })
-        console.log(resp)
         if(resp.status===200){
           swal("Signup Successful",`Your details have been added (Employee ID = ${resp.data})`,"success");
-          // updateUserId(userData.EmployeeId);
-          // updateUserRole(userData.Employee.EmployeeRole);
-          // updateUser({userId:resp.data,userRole:userData.EmployeeRole})
           return true;
         }
       }
@@ -87,10 +75,8 @@ export const AuthProvider =  ({ children }) => {
         })
 
         if(resp.status===200){
-          // updateUserId(resp.data.user_Id);
           swal("Login Successful","You have been successfully logged in","success");
           updateToken (resp.data.token);
-          //  updateUserRole(resp.data.role);
           updateUser({userId:resp.data.user_Id,
                         userRole:resp.data.role,
                       userName: resp.data.employeeName})
@@ -100,7 +86,6 @@ export const AuthProvider =  ({ children }) => {
       catch(err){
         console.log(err)
         swal("Login Unsuccessful","Y have entered invalid credentials, please try again","error")
-        console.log("Invalid Creadentials")
         return false;
       }
     }
@@ -119,7 +104,6 @@ export const AuthProvider =  ({ children }) => {
               "Content-Type":'application/json'
           }
         })
-        console.log(resp)
         if(resp.status===200){
           return true;
         }
@@ -140,7 +124,6 @@ export const AuthProvider =  ({ children }) => {
               "Content-Type":'application/json'
           }
         })
-        console.log(resp)
         if(resp.status===200){
           swal("Employee added successfully",`Employee ID = ${resp.data}`,"success");
           return true;

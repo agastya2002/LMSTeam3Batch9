@@ -1,16 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import TableComponent from "../Components/TableComponent";
-import responseFilter from "../Helpers/responseFilter";
-import { useAuth } from '../Contexts/AuthContext';
+import React, {  useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import swal from "sweetalert";
 import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminLoanDataInsert = () => {
 
     const [employeeId, setEmployeeId] = useState('')
-    // const [loanId, setLoanId] = useState('')
     const [loanType, setLoanType] = useState("furniture");
     const [duration, setDuration] = useState('');
     
@@ -19,7 +15,6 @@ export const AdminLoanDataInsert = () => {
         e.preventDefault()
         const data = {
             EmployeeId: employeeId,
-            // LoanId: 'loanId',
             LoanType: loanType,
             DurationInYears: Number(duration)
         };
@@ -38,7 +33,6 @@ export const AdminLoanDataInsert = () => {
 
     }
     const baseURL = "https://localhost:7223/api/admin"
-    // const { token } = useAuth();
     const [token, setToken] =useState("init val");
 
     useEffect(() => {
@@ -56,9 +50,7 @@ export const AdminLoanDataInsert = () => {
                 <label>Employee Id
                     <input type="text" name="employeeId" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}></input>
                 </label>
-                {/* <label>Loan Id
-                    <input disabled type="text" name="loanId" value={loanId} onChange={(e) => setLoanId(e.target.value)}></input>
-                </label> */}
+    
                 <label>Loan Type
                     <select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
                         <option value="furniture">Furniture</option>
