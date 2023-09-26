@@ -131,7 +131,7 @@ const AdminAddItem = () => {
                             controlId="valuation"
                         >
                             <Form.Label column sm={2}>
-                                Item Value
+                                {"Item Value (₹)"}
                             </Form.Label>
                             <Col sm={4}>
                                 <Form.Control

@@ -40,7 +40,7 @@ export const CustomerItemsPurchased = () => {
       </Row>
       <Row className="m-4">
         <TableComponent
-          headerData={["Issue ID", "Item Description", "Item Make", "Item Category", "Item Valuation", "Return Date"]}
+          headerData={["Issue ID", "Item Description", "Item Make", "Item Category", "Item Valuation (₹)", "Return Date"]}
           tableData={responseFilter(items, ["itemId", "itemDescription", "itemMake", "itemCategory", "itemValuation", "returnDate"])}
           noDataMessage={{ title: "No items are purchased", message: "Use the Apply for Loan option to purchase an item" }} />
       </Row>

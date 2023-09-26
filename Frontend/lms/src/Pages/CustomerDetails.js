@@ -118,7 +118,7 @@ const CustomerDetails = () => {
                             </Form.Label>
                             <Col sm={4}>
                                 <Form.Control
-                                    type="text"
+                                    type="password"
                                     value={ePass}
                                     placeholder='Enter password'
                                     onChange={(p) => setEPass(p.target.value)}

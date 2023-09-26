@@ -140,7 +140,7 @@ export const AdminItemMaster = () => {
       </Row>
       <Row className="m-4">
         <TableComponent
-          headerData={["Item ID", "Issue Status", "Item Description", "Item Make", "Item Category", "Valuation"]}
+          headerData={["Item ID", "Issue Status", "Item Description", "Item Make", "Item Category", "Valuation (₹)"]}
           tableData={responseFilter(items, ["itemId", "issueStatus", "itemDescription", "itemMake", "itemCategory", "itemValuation"])}
           tableActions={[
             { actionName: "Edit", actionCallback: (e) => editItems(e) },
@@ -214,7 +214,7 @@ export const AdminItemMaster = () => {
                 controlId="valuation"
               >
                 <Form.Label column sm={2}>
-                  Item Value
+                  {"Item Value (₹)"}
                 </Form.Label>
                 <Col sm={4}>
                   <Form.Control

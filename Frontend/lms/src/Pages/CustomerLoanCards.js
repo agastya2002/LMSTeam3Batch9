@@ -46,7 +46,7 @@ export const CustomerLoanCards = () => {
       </Row>
       <Row className="m-4">
         <TableComponent
-          headerData={["Loan ID", "Loan Type", "Duration (in years)", "Card Issue Date", "Valuation"]}
+          headerData={["Loan ID", "Loan Type", "Duration (in years)", "Card Issue Date", "Valuation (₹)"]}
           tableData={responseFilter(loanCards, ["loanId", "loanType", "durationInYears", "cardIssueDate", "valuation"])}
           noDataMessage={{ title: "No loan cards are availed", message: "Use the Apply for Loan option to add a loan card" }} />
       </Row>

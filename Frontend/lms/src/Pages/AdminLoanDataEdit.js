@@ -156,7 +156,7 @@ export const AdminLoanDataEdit = () => {
       </Row>
       <Row className="m-4">
         <TableComponent
-          headerData={["Loan ID", "Loan Type", "Duration (in years)", "Valuation"]}
+          headerData={["Loan ID", "Loan Type", "Duration (in years)", "Valuation (₹)"]}
           tableData={responseFilter(loanCards, [
             "loanId",
             "loanType",
@@ -233,7 +233,7 @@ export const AdminLoanDataEdit = () => {
                 controlId="valuation"
               >
                 <Form.Label column sm={2}>
-                  Loan Valuation
+                  {"Loan Valuation (₹)"}
                 </Form.Label>
                 <Col sm={4}>
                   <Form.Control
