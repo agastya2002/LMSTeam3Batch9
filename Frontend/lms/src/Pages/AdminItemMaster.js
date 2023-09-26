@@ -30,9 +30,22 @@ export const AdminItemMaster = () => {
   const handleItemMake = (event) => {
     setMake(event.target.value);
   }
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
+    var isDataValid = true;
+    if(desc.length===0){
+        swal("Validation Failed","Please enter item description!","error");
+        isDataValid=false;
+    }
+    if(valuation <= 0){
+        swal("Validation Failed","Please enter a Item value greater than 0","error");
+        isDataValid=false;
+    }
+
+    if(isDataValid===false){
+        return;
+    }
     const data = {
       ItemId: itemId,
       ItemDescription: desc,
@@ -55,7 +68,6 @@ export const AdminItemMaster = () => {
       swal("Edit Not Successful", "Something Unexpected occured.Please try again!", "error")
       console.log(err)
     }
-
   }
 
   const baseURL = "https://localhost:7223/api/admin"
