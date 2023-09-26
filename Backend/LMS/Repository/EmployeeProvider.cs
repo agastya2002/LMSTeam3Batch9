@@ -115,10 +115,16 @@ namespace LMS.Data
                     Employee = ec
                 };
 
-                _db.EmployeeMasters.Update(newEmp);
-                _db.SaveChanges();
+                if (newEmp.DateOfJoining>newEmp.DateOfBirth)
+                {
+                    _db.EmployeeMasters.Update(newEmp);
+                    _db.SaveChanges();
 
-                return id;
+                    return id;
+                    
+                }
+
+                return "Invalid entries";
             }
             catch (Exception exp)
             {
@@ -153,12 +159,16 @@ namespace LMS.Data
                     DateOfJoining = e.DateOfJoining,
                     Employee = c
                 };
-
-                _db.EmployeeCredentials.Add(c);
-                _db.SaveChanges();
-                _db.EmployeeMasters.Add(newEmp);
-                _db.SaveChanges();
-                return empId;
+                if (newEmp.DateOfJoining > newEmp.DateOfBirth)
+                {
+                    _db.EmployeeCredentials.Add(c);
+                    _db.SaveChanges();
+                    _db.EmployeeMasters.Add(newEmp);
+                    _db.SaveChanges();
+                    return empId;
+                }
+                
+                return "Invalid entries";
             } 
             catch (Exception exp)
             {
