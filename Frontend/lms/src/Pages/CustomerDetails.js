@@ -51,6 +51,10 @@ const CustomerDetails = () => {
             swal("Validation Failed", "Please enter date of joining", "error");
             isDataValid = false;
         }
+        if(doj<=dob){
+            swal("Validation Failed","Please ensure date of joining is after date of birth","error");
+            isDataValid=false;
+        }
         if (eRole.length === 0) {
             swal("Validation failed", "Please mention the role of employee", "error");
             isDataValid = false;
