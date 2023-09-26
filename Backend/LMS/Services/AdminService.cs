@@ -6,8 +6,8 @@ namespace LMS.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly EmployeeProvider _employeeDataProvider;
-        public AdminService(EmployeeProvider employeeDataProvider)
+        private readonly IEmployeeProvider _employeeDataProvider;
+        public AdminService(IEmployeeProvider employeeDataProvider)
         {
             _employeeDataProvider = employeeDataProvider;
         }

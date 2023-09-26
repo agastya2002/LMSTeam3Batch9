@@ -18,6 +18,13 @@ namespace LMS.Data
         public List<LoanViewModel> GetLoanDeatilsById(String id);
         public Boolean DeleteLoanById(String id);
 
+        //public string UpdateEmployee(EditEmployeeViewModel employee);
+        public List<EditEmployeeViewModel> GetEmployees();
+        public string EditEmployee(EditEmployeeViewModel employee, String id);
+        public Boolean DeleteEmployee(string id);
+        public List<LoanCardMaster> GetLoansList();
+        public EditEmployeeViewModel GetEmployeeById(string id);
+
         public Boolean DeleteItemById(String id);
 
         public string AddLoanCard(LoanViewModel e);
