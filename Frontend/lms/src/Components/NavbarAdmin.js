@@ -6,7 +6,6 @@ import { useAuth } from '../Contexts/AuthContext';
 function NavbarAdmin() {
 
   const navigate = useNavigate();
-  // const { logout,user } = useAuth();
   const { logout } = useAuth();
   const [user, setUser] =useState({});
 
@@ -34,7 +33,7 @@ function NavbarAdmin() {
           <NavLink style={{textDecoration:"none"}} to="/AdminLoanDataEdit">Loan Management</NavLink>
           </div>
           <div style={{display:'flex',columnGap:'20px',alignItems:"center"}}>
-           <span> Employee name : {user.userName}</span>
+           <span> Welcome {user.userName}</span>
           <Button variant="outline-danger" onClick={() => userLogout()}>Logout</Button>
           </div>
         </div>

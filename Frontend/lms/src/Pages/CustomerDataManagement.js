@@ -2,7 +2,7 @@ import React from 'react';
 import '../Styles/CustomerDetails.css'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import TableComponent from '../Components/TableComponent';
 import responseFilter from '../Helpers/responseFilter';
@@ -12,8 +12,6 @@ import { Button } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
 
 const CustomerDataManagement=()=>{
-
-    const navigate = useNavigate();
 
     const [eID,setEID]=useState("");
     const [eName,setEName]=useState("");
@@ -27,11 +25,7 @@ const CustomerDataManagement=()=>{
     let isDataValid=true;
 
     const baseURL = "https://localhost:7223/api/admin"
-    // const {logout, user, token,register} = useAuth();
-    const {logout,register} = useAuth();
     const [token, setToken] =useState("init val");
-
-    console.log(emps)
 
     const getEmployees = async (token) => {
         try{
@@ -106,7 +100,6 @@ const CustomerDataManagement=()=>{
 
 const editEmployee = (val) => {
 
-    console.log(val)
     setEName(val.employeeName)
     setEID(val.employeeId)
     setGender(val.gender)
@@ -118,12 +111,10 @@ const editEmployee = (val) => {
 }
 
 const deleteEmployee=async(val)=>{
-    console.log(val)
     try{
         const resp = await axios.delete(`${baseURL}/DeleteEmployee?id=${val.employeeId}`,{
             headers:{"Authorization":`Bearer ${token}`}
         })
-        console.log(resp)
         if(resp.status==200){
             swal("Delete Successful","The Employee details has been deleted succesfully","success")
             const editedEmps = emps.filter(e => e.employeeId !== val.employeeId)
@@ -223,37 +214,8 @@ const handleCancel = () =>{
               :null
             }
             <TableComponent headerData={["Employee ID", "Employee Name", "Gender","Designation","Department","Date of Birth","Date of joining"]} tableData={responseFilter(emps,["employeeId","employeeName","gender","department","designation","dateOfBirth","dateOfJoining"])} tableActions={[{ actionName: "Edit", actionCallback: (e) => editEmployee(e) }, { actionName: "Delete", actionCallback: (val) => deleteEmployee(val) }]} />
-             {/* {
-          emps.length!=0?<table>
-          <thead>
-            <tr>
-              <th>EmployeeId</th>
-              <th>Employee Name</th>
-              <th>Gender</th>
-              <th>Designation</th>
-              <th>Department</th>
-              <th>Date of Birth</th>
-              <th>Date of joining</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              emps.map((val,idx) => (
-                <tr key={`emps${idx}`}>
-                  <td>{val?.employeeId}</td>
-                  <td>{val?.employeeName}</td>
-                  <td>{val?.gender}</td>
-                  <td>{val?.designation}</td>
-                  <td>{val?.department}</td>
-                  <td>{val?.dateOfBirth.substring(0,10)}</td>
-                  <td>{val?.dateOfJoining.substring(0,10)}</td>
-                  <td><div><button onClick={(e)=>editEmployee(e,val)}>Edit</button> <button>Delete</button></div></td>
-                </tr>
-              ))}
-          </tbody>
-        </table>:null
-        } */}
+          
+           
         </div>
     )
 }

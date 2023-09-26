@@ -3,17 +3,14 @@ import '../Styles/CustomerDetails.css'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import NavbarAdmin from "../Components/NavbarAdmin";
-import { Link, useNavigate } from 'react-router-dom';
 import { sha256 } from 'js-sha256';
+import swal from 'sweetalert';
 
 const CustomerDetails=()=>{
 
-    const navigate = useNavigate();
-    // const {user, register}  = useAuth();
     const {addEmployee}  = useAuth();
     const [user, setUser] =useState({});
 
-    // const [eID,setEID]=useState("E0001");
     const [ePass, setEPass] = useState("****");
     const [eName,setEName]=useState("John Doe");
     const [eRole,setERole]=useState('customer');
@@ -29,43 +26,31 @@ const CustomerDetails=()=>{
         setUser(sessionUser);
       }, []);
 
-    // Example JSON object for registering employee
-    // {
-    //     "employeeName": "John Doe",
-    //     "designation": "Manager",
-    //     "department": "IT",
-    //     "gender": "M",
-    //     "dateOfBirth": "2023-09-11T03:49:32.942Z",
-    //     "dateOfJoining": "2023-09-11T03:49:32.942Z",
-    //     "employee": {
-    //       "employeePassword": "25efd29860a4f83a7c971bdcfb3eb771c95dab9356b7dec0aa165eb80bfd817f",
-    //       "employeeRole": "customer"
-    //     }
-    //   }
+   
 
     const validateEntries=async ()=>{
         if(eName.length===0){
-            alert("Please enter employee name!");
+            swal("Validation Failed","Please enter employee name!","error");
             isDataValid=false;
         }
         if(ePass.length===0){
-            alert("Please enter password");
+            swal("Validation Failed","Please enter password","error");
             isDataValid=false;
         }
         if(!eName.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g)){
-            alert("Employee name is invalid!\nUse of special characters and numbers is not allowed")
+            swal("Validation Failed","Employee name is invalid!\nUse of special characters and numbers is not allowed","Error")
             isDataValid=false;
         }
         if(dob.length===0){
-            alert("Please enter date of birth!");
+            swal("Validation Failed","Please enter date of birth","error");
             isDataValid=false;
         }
         if(doj.length===0){
-            alert("Please enter date of joining!");
+            swal("Validation Failed","Please enter date of joining","error");
             isDataValid=false;
         }
         if(eRole.length===0){
-            alert("Please mention the role of employee");
+            swal("Validation failed","Please mention the role of employee","error");
             isDataValid = false;
         }
 
@@ -86,20 +71,12 @@ const CustomerDetails=()=>{
             }
         }
         addEmployee(userData);
-        // if(res) {
-        //     while(!user) {}
-        //     if(user) {
-        //         navigate("/profile")
-        //     }
-        // }
+       
         
     }
     return (
         <div>
-            {/* <div>
-                <h1>Loan Management Application</h1>
-                <h2>Customer Master Data Details</h2>
-            </div> */}
+            
             <NavbarAdmin />
             <div className='customer_details'>
                 <div className='employee_details'>

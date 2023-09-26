@@ -17,19 +17,20 @@ namespace Test
         private readonly List<ItemMaster> items = new (){
             new ItemMaster { ItemId="I0001", ItemCategory="Furniture", IssueStatus="Y", ItemDescription="Table", ItemMake="Wood", ItemValuation=5000 }
     };
+        private Mock<IEmployeeProvider> EmpRepoObj;
 
         [SetUp]
         public void Setup()
         {
-            var EmpRepoObj = new Mock<IEmployeeProvider>();
+            EmpRepoObj=new Mock<IEmployeeProvider>();
             EmpRepoObj.Setup(x => x.GetItemsList()).Returns(items);
-            adminService = new AdminService(EmpRepoObj.As<EmployeeProvider>().Object);
         }
 
 
         [Test]
         public void GetItemsListTest()
         {
+            adminService = new AdminService(EmpRepoObj.Object);
             var result = adminService.GetItems();
             // To print something to debug window
             //System.Diagnostics.Debug.WriteLine(result);

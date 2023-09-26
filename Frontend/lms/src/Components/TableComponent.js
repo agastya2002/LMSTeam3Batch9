@@ -4,8 +4,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 const TableComponent = ({ headerData, tableData, tableActions }) => {
-    console.log(tableData.length)
-    console.log(tableActions??"HELLO")
+    
     return (
         <Table striped bordered hover responsive className="w-auto mx-auto">
             <thead className="table-dark">
