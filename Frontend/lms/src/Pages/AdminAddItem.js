@@ -162,7 +162,7 @@ const AdminAddItem = () => {
                             controlId="make"
                         >
                             <Form.Label column sm={2}>
-                                Issue Make
+                                Item Make
                             </Form.Label>
                             <Col sm={4}>
                                 <Form.Select value={make} onChange={handleItemMake}>
@@ -174,17 +174,11 @@ const AdminAddItem = () => {
                         </Form.Group>
                         <Row>
                             <Col>
-                                <Button variant="success" onClick={(e) => {
+                                <Button className='mb-4' variant="success" onClick={(e) => {
                                     handleSubmit(e);
                                 }}>
                                     Add
                                 </Button>
-                                <br />
-                                <Link to="/AdminItemsMaster">
-                                    <Button variant="primary" className='mt-3'>
-                                        <i className="bi bi-arrow-return-left mr-2"/><span>Item Master</span>
-                                    </Button>
-                                </Link>
 
                             </Col>
                         </Row>

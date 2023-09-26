@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import swal from "sweetalert";
 import NavbarAdmin from "../Components/NavbarAdmin";
+import { Button, Row, Col, Form, Card } from "react-bootstrap";
 
 export const AdminLoanDataInsert = () => {
 
@@ -60,28 +61,79 @@ export const AdminLoanDataInsert = () => {
     return (
         <div>
             <NavbarAdmin/>
-            <h2>Loan Card Data Insert</h2>
+            <h2>Loan Card Data Details</h2>
 
-
-            <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-                <label>Employee Id
-                    <input type="text" name="employeeId" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}></input>
-                </label>
-    
-                <label>Loan Type
-                    <select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
-                        <option value="furniture">Furniture</option>
-                        <option value="crockery">Crockery</option>
-                        <option value="stationery">Stationery</option>
-                    </select>
-                </label>
-                <label>{"Duration (in years)"}
-                    <input type="number" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}></input>
-                </label>
-                
-                <button onClick={(e) => handleSubmit(e)}>Add Data</button>
-                
-            </form>
+            <Row className="justify-content-md-center">
+                <Card className="w-50">
+                    <Card.Title className="m-3 bg-light text-dark p-2">
+                        Add Loan Card
+                    </Card.Title>
+                    <Form>
+                        <Form.Group
+                            as={Row}
+                            className="mb-3 justify-content-md-center"
+                            controlId="employeeId"
+                        >
+                            <Form.Label column sm={2}>
+                                Employee ID
+                            </Form.Label>
+                            <Col sm={4}>
+                                <Form.Control
+                                    type="text"
+                                    value={employeeId}
+                                    onChange={(e) => { setEmployeeId(e.target.value) }}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group
+                            as={Row}
+                            className="mb-3 justify-content-md-center"
+                            controlId="loanType"
+                        >
+                            <Form.Label column sm={2}>
+                                Loan Type
+                            </Form.Label>
+                            <Col sm={4}>
+                                <Form.Select value={loanType} onChange={(e) => setLoanType(e.target.value)}>
+                                    <option value="furniture">Furniture</option>
+                                    <option value="crockery">Crockery</option>
+                                    <option value="stationery">Stationery</option>
+                                </Form.Select>
+                            </Col>
+                        </Form.Group>
+                    
+                        
+                        <Form.Group
+                            as={Row}
+                            className="mb-3 justify-content-md-center"
+                            controlId="duration"
+                        >
+                            <Form.Label column sm={2}>
+                                {"Duration (in years)"}
+                            </Form.Label>
+                            <Col sm={4}>
+                                <Form.Control
+                                    type="number"
+                                    value={duration}
+                                    onChange={(e) => setDuration(e.target.value)}
+                                />
+                            </Col>
+                        </Form.Group>
+                        
+                        
+                        <Row>
+                            <Col>
+                                <Button className="mb-4" variant="success" onClick={(e) => {
+                                    handleSubmit(e);
+                                }}>
+                                    Add
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Card>
+            </Row>
+            
         </div>
     );
 };

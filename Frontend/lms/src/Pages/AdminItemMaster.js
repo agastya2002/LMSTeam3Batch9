@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import axios from "axios";
@@ -9,6 +9,7 @@ import { Plus } from "react-bootstrap-icons";
 import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminItemMaster = () => {
+  const scrollRef = useRef(null);
 
   const [items, setItems] = useState([])
   const [category, setCategory] = useState("furniture");
@@ -30,21 +31,21 @@ export const AdminItemMaster = () => {
   const handleItemMake = (event) => {
     setMake(event.target.value);
   }
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     var isDataValid = true;
-    if(desc.length===0){
-        swal("Validation Failed","Please enter item description!","error");
-        isDataValid=false;
+    if (desc.length === 0) {
+      swal("Validation Failed", "Please enter item description!", "error");
+      isDataValid = false;
     }
-    if(valuation <= 0){
-        swal("Validation Failed","Please enter a Item value greater than 0","error");
-        isDataValid=false;
+    if (valuation <= 0) {
+      swal("Validation Failed", "Please enter a Item value greater than 0", "error");
+      isDataValid = false;
     }
 
-    if(isDataValid===false){
-        return;
+    if (isDataValid === false) {
+      return;
     }
     const data = {
       ItemId: itemId,
@@ -99,6 +100,7 @@ export const AdminItemMaster = () => {
     setValuation(val.itemValuation)
     setStatus(val.issueStatus)
     setEdit(true)
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
   const deleteItem = async (val) => {
     try {
@@ -112,7 +114,7 @@ export const AdminItemMaster = () => {
         setItems(editedItems);
       }
     } catch (err) {
-      swal("Delete not succesfull", "Some unexpected error occured, please try again", "error")
+      swal("Delete not succesful", "Some unexpected error occured, please try again", "error")
       console.log(err)
     }
   }
@@ -144,11 +146,11 @@ export const AdminItemMaster = () => {
             { actionName: "Edit", actionCallback: (e) => editItems(e) },
             { actionName: "Delete", actionCallback: (val) => deleteItem(val) }
           ]}
-          noDataMessage={{title:"No items are present", message: "Use the Add Item button above to add an item"}}
-           />
+          noDataMessage={{ title: "No items are present", message: "Use the Add Item button above to add an item" }}
+        />
       </Row>
       {edit ? (
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-md-center" ref={scrollRef}>
           <Card className="w-50">
             <Card.Title className="m-3 bg-light text-dark p-2">
               Edit Item
@@ -171,7 +173,7 @@ export const AdminItemMaster = () => {
                 </Col>
               </Form.Group>
 
-             
+
               <Form.Group
                 as={Row}
                 className="mb-3 justify-content-md-center"
@@ -188,7 +190,7 @@ export const AdminItemMaster = () => {
                   </Form.Select>
                 </Col>
               </Form.Group>
-            
+
 
               <Form.Group
                 as={Row}
@@ -243,7 +245,7 @@ export const AdminItemMaster = () => {
                 controlId="make"
               >
                 <Form.Label column sm={2}>
-                  Issue Make
+                  Item Make
                 </Form.Label>
                 <Col sm={4}>
                   <Form.Select value={make} onChange={handleItemMake}>
@@ -274,7 +276,7 @@ export const AdminItemMaster = () => {
           </Card>
         </Row>
       ) : null}
-     
+
     </Container>
 
   );

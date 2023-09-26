@@ -272,7 +272,7 @@ namespace LMS.Data
                     EmployeeCardDetail newCard = new EmployeeCardDetail() { EmployeeId=e.EmployeeID, LoanId=_loanId, CardIssueDate=DateTime.Now };
                     _db.EmployeeCardDetails.Add(newCard);
                     _db.SaveChanges();
-                    _returnDate = new DateTime().AddYears(1);
+                    _returnDate = DateTime.Now.AddYears(1);
 
                 }
 

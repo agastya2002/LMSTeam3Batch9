@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TableComponent from "../Components/TableComponent";
 import responseFilter from "../Helpers/responseFilter";
 import axios from "axios";
@@ -9,7 +9,8 @@ import { Plus } from "react-bootstrap-icons";
 import NavbarAdmin from "../Components/NavbarAdmin";
 
 export const AdminLoanDataEdit = () => {
-  
+  const scrollRef = useRef(null);
+
   const [loanCards, setLoanCards] = useState([]);
   const [loanId, setLoanId] = useState("");
   const [loanType, setLoanType] = useState("furniture");
@@ -20,12 +21,12 @@ export const AdminLoanDataEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     var isDataValid = true
-    if(duration <= 0){
-      swal("Validation Failed","Please enter a Duration value greater than 0","error");
-      isDataValid=false;
+    if (duration <= 0) {
+      swal("Validation Failed", "Please enter a Duration value greater than 0", "error");
+      isDataValid = false;
     }
 
-    if(isDataValid===false){
+    if (isDataValid === false) {
       return;
     }
 
@@ -61,7 +62,7 @@ export const AdminLoanDataEdit = () => {
       }
     } catch (err) {
       swal(
-        "Edit not succesfull",
+        "Edit not succesful",
         "Some unexpected error occured, please try again",
         "error"
       );
@@ -101,6 +102,7 @@ export const AdminLoanDataEdit = () => {
     setDuration(val.durationInYears);
     setValuation(val.valuation);
     setEdit(true);
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const deleteLoan = async (val) => {
@@ -125,7 +127,7 @@ export const AdminLoanDataEdit = () => {
       }
     } catch (err) {
       swal(
-        "Delete not succesfull",
+        "Delete not succesful",
         "Some unexpected error occured, please try again",
         "error"
       );
@@ -165,11 +167,11 @@ export const AdminLoanDataEdit = () => {
             { actionName: "Edit", actionCallback: (e) => editLoan(e) },
             { actionName: "Delete", actionCallback: (e) => deleteLoan(e) },
           ]}
-          noDataMessage={{title:"No loan cards are present", message: "Use the Add Loan Card button above to add a loan card"}}
+          noDataMessage={{ title: "No loan cards are present", message: "Use the Add Loan Card button above to add a loan card" }}
         />
       </Row>
       {edit ? (
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-md-center" ref={scrollRef}>
           <Card className="w-50">
             <Card.Title className="m-3 bg-light text-dark p-2">
               Edit Loan
@@ -208,7 +210,7 @@ export const AdminLoanDataEdit = () => {
                   />
                 </Col>
               </Form.Group>
-             
+
               <Form.Group
                 as={Row}
                 className="mb-3 justify-content-md-center"
@@ -262,7 +264,7 @@ export const AdminLoanDataEdit = () => {
           </Card>
         </Row>
       ) : null}
-     
+
     </Container>
   );
 };
