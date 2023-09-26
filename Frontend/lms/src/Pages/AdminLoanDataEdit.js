@@ -19,6 +19,16 @@ export const AdminLoanDataEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    var isDataValid = true
+    if(duration <= 0){
+      swal("Validation Failed","Please enter a Duration value greater than 0","error");
+      isDataValid=false;
+    }
+
+    if(isDataValid===false){
+      return;
+    }
+
     const data = {
       loanId: loanId,
       loanType: loanType,

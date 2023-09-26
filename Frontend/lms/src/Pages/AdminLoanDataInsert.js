@@ -13,6 +13,23 @@ export const AdminLoanDataInsert = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        var isDataValid = true
+
+        if(employeeId.length===0){
+            swal("Validation Failed","Please enter Employee ID","error");
+            isDataValid=false;
+        }
+
+        if(duration <= 0){
+          swal("Validation Failed","Please enter a Duration value greater than 0","error");
+          isDataValid=false;
+        }
+    
+        if(isDataValid===false){
+          return;
+        }
+
         const data = {
             EmployeeId: employeeId,
             LoanType: loanType,

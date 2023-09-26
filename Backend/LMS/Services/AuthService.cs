@@ -17,16 +17,16 @@ namespace LMS.Services
     public class AuthService : IAuthService
     {
         private readonly IConfiguration _config;
-        private readonly IEmployeeProvider _employeeDataProvider;
-        public AuthService(IConfiguration config, IEmployeeProvider employeeDataProvider)
+        private readonly IEmployeeRepository _employeeDataRepository;
+        public AuthService(IConfiguration config, IEmployeeRepository employeeDataRepository)
         {
             _config = config;
-            _employeeDataProvider = employeeDataProvider;
+            _employeeDataRepository = employeeDataRepository;
         }
         public EmployeeCredential GetEmployeeDetail(EmployeeViewModel login)
         {
             EmployeeCredential employee = null;
-            employee = _employeeDataProvider.GetEmployeeDetail(login);
+            employee = _employeeDataRepository.GetEmployeeDetail(login);
             return employee;
         }
 
@@ -64,13 +64,13 @@ namespace LMS.Services
 
         public EmployeeCredential AuthenticateEmployee(EmployeeViewModel login)
         {
-            EmployeeCredential employee = _employeeDataProvider.GetEmployeeDetail(login);
+            EmployeeCredential employee = _employeeDataRepository.GetEmployeeDetail(login);
             return employee;
         }
 
         public string RegisterEmployee(RegisterViewModel e)
         {
-            return _employeeDataProvider.RegisterEmployee(e); 
+            return _employeeDataRepository.RegisterEmployee(e); 
         }
     }
 }

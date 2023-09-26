@@ -6,7 +6,7 @@ using LMS.Data;
 
 namespace Test
 {
-    public class EmployeeProvidersTest {
+    public class EmployeeRepositoryTest {
         
         //private List<LoanCardMaster> sampleLoans;
         private List<ItemMaster> sampleItems;
@@ -15,7 +15,7 @@ namespace Test
         //Mock<DbSet<LoanCardMaster>> mockSet;
         Mock<DbSet<ItemMaster>> mockSet;
         Mock<GisdbContext> mockAPIContext;
-        EmployeeProvider empRepo;
+        EmployeeRepository empRepo;
 
         [SetUp]
         public void Setup()
@@ -31,7 +31,7 @@ namespace Test
             var p = new DbContextOptions<GisdbContext>();
             mockAPIContext = new Mock<GisdbContext>(p);
             mockAPIContext.Setup(x => x.ItemMasters).Returns(mockSet.Object);
-            empRepo = new EmployeeProvider(mockAPIContext.Object);
+            empRepo = new EmployeeRepository(mockAPIContext.Object);
 
         }
 
